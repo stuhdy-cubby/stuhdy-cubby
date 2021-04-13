@@ -16,7 +16,7 @@ import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 const makeSchema = (allCourses) => new SimpleSchema({
   topic: String,
   course: { type: String, allowedValues: allCourses, optional: false },
-  location: String,
+  location: { type: String, defaultValue: 'ICSpace', label: 'Location' },
   sessionDate: { label: 'Session Date', type: Date, defaultValue: new Date() },
 });
 
