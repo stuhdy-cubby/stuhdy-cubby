@@ -17,7 +17,7 @@ const makeSchema = (allCourses) => new SimpleSchema({
   topic: String,
   course: { type: String, allowedValues: allCourses, optional: false },
   location: String,
-  sessionDate: Date,
+  sessionDate: { label: 'Session Date', type: Date, defaultValue: new Date() },
 });
 
 /** Renders the Page for adding a document. */
