@@ -13,7 +13,7 @@ class SessionsProfilesCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      session: String,
+      topic: String,
       profile: String,
       response: String,
     }, { tracker: Tracker });
