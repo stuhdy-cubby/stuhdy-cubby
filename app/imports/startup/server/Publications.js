@@ -1,6 +1,18 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
+import { Courses } from '../../api/courses/Courses';
+import { Sessions } from '../../api/sessions/Sessions';
+import { SessionsCourses } from '../../api/sessions/SessionsCourses';
+
+/** Define a publication to publish all courses. */
+Meteor.publish(Courses.userPublicationName, () => Courses.collection.find());
+
+/** Define a publication to publish all sessions. */
+Meteor.publish(Sessions.userPublicationName, () => Sessions.collection.find());
+
+/** Define a publication to publish all sessions courses. */
+Meteor.publish(SessionsCourses.userPublicationName, () => SessionsCourses.collection.find());
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
