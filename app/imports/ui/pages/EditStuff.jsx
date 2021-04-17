@@ -34,9 +34,9 @@ class EditStuff extends React.Component {
           <Header as="h2" textAlign="center">Edit Stuff</Header>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Segment>
-              <TextField name='name'/>
-              <NumField name='quantity' decimal={false}/>
-              <SelectField name='condition'/>
+              <TextField name='topic'/>
+              <TextField name='profile'/>
+              <TextField name='response'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
               <HiddenField name='owner' />

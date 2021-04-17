@@ -20,6 +20,7 @@ import Calendar from '../pages/Calendar';
 import UserProfile from '../pages/UserProfile';
 import AdminHome from '../pages/AdminHome';
 import Session from '../pages/Session';
+import SignupSession from '../pages/SignupSession';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -43,6 +44,7 @@ class App extends React.Component {
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
             <Route path="/admin-home" component={AdminHome}/>
             <Route path="/notfound" component={NotFound}/>
+            <ProtectedRoute path="/signupsession/:_id" component={SignupSession}/>
           </Switch>
           <Footer/>
         </div>
