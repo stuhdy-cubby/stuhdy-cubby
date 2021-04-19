@@ -16,6 +16,14 @@
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
   ],
 
+  "defaultSessions": [
+    { "topic": "Midterm/Exam/Test review", "description": "Review for upcoming midterm/exam/test" },
+    { "topic": "Homework assistance", "description": "Get assistance with homework"},
+    { "topic": "Team project", "description": "Meet for team project"},
+    { "topic": "Writing assignment", "description": "Get assistance with writing assignment"},
+    { "topic": "Study group", "description": "Get together to study"}
+  ],
+
   "defaultCourses": [
     { "name": "ICS 101/101A", "description": "Digital Tools for the Information World" },
     { "name": "ICS 102", "description": "Introduction to Data Science" },
