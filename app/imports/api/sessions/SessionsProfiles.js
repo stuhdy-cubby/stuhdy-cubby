@@ -14,6 +14,7 @@ class SessionsProfilesCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       topic: String,
+      course: String,
       profile: String,
       response: String,
     }, { tracker: Tracker });
