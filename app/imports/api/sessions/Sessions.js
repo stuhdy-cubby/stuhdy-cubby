@@ -3,19 +3,18 @@ import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
 /**
- * The SessionsProfilesCollection. It encapsulates state and variable values for session profiles courses.
+ * The SessionsCollection. It encapsulates state and variable values for session.
  */
-class SessionsProfilesCollection {
+class SessionsCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'SessionsProfilesCollection';
+    this.name = 'SessionsCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      topic: String,
-      profile: String,
-      response: String,
+      topic: { type: String, index: true, unique: true },
+      description: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
@@ -26,7 +25,7 @@ class SessionsProfilesCollection {
 }
 
 /**
- * The singleton instance of the SessionsProfilesCollection.
- * @type {SessionsProfilesCollection}
+ * The singleton instance of the SessionsCollection.
+ * @type {SessionsCollection}
  */
-export const SessionsProfiles = new SessionsProfilesCollection();
+export const Sessions = new SessionsCollection();
