@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Segment, Header, Form } from 'semantic-ui-react';
-import { AutoForm, TextField, DateField, SelectField, SubmitField, ErrorsField } from 'uniforms-semantic';
+import { AutoForm, TextField, DateField, SelectField, LongTextField, SubmitField, ErrorsField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
@@ -13,11 +13,12 @@ import { Sessions } from '../../api/sessions/Sessions';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
-const makeSchema = (allCourses) => new SimpleSchema({
-  topic: String,
+const makeSchema = (allCourses, allSessions) => new SimpleSchema({
+  topic: { type: String, allowedValues: allSessions, optional: false },
   course: { type: String, allowedValues: allCourses, optional: false },
   location: { type: String, defaultValue: 'ICSpace', label: 'Location' },
   sessionDate: { label: 'Session Date', type: Date, defaultValue: new Date() },
+  sessionNotes: { type: String, label: 'Session Notes' },
 });
 
 /** Renders the Page for adding a document. */
@@ -25,28 +26,25 @@ class AddSession extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    let insertError;
-    const { topic, course, location, sessionDate } = data;
-    Sessions.collection.insert({ topic }, (error) => { insertError = error; });
-    if (insertError) {
-      swal('Error', insertError.message, 'error');
-    } else {
-      SessionsCourses.collection.insert({ topic, course, location, sessionDate },
-        (error) => { insertError = error; });
-      if (insertError) {
-        swal('Error', insertError.message, 'error');
-      } else {
-        swal('Success', 'The stUHdy session was creacted');
-        formRef.reset();
-      }
-    }
+    const { topic, course, location, sessionDate, sessionNotes } = data;
+    const owner = Meteor.user().username;
+    SessionsCourses.collection.insert({ topic, course, location, sessionDate, sessionNotes, owner },
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'stUHdy session added successfully', 'success');
+          formRef.reset();
+        }
+      });
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
     const allCourses = _.pluck(Courses.collection.find().fetch(), 'name');
-    const formSchema = makeSchema(allCourses);
+    const allSessions = _.pluck(Sessions.collection.find().fetch(), 'topic');
+    const formSchema = makeSchema(allCourses, allSessions);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
       <Grid id="add-session-page" container centered>
@@ -55,11 +53,12 @@ class AddSession extends React.Component {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
               <Form.Group widths={'equal'}>
-                <TextField id='topic' name='topic' showInlineError={true} placeholder='Topic'/>
-                <SelectField name='course' showInlineError={true} placeholder='Course'/>
+                <SelectField id='topic' name='topic' showInlineError={true} placeholder='Topic'/>
+                <SelectField id='course' name='course' showInlineError={true} placeholder='Course'/>
                 <TextField id='location' name='location' showInlineError={true} placeholder='Location'/>
                 <DateField name='sessionDate' showInlineError={true}/>
               </Form.Group>
+              <LongTextField id='sessionNotes' name='sessionNotes' placeholder='Session notes'/>
               <SubmitField id='submit' value='Submit'/>
               <ErrorsField/>
             </Segment>
@@ -75,8 +74,9 @@ AddSession.propTypes = {
 };
 
 export default withTracker(() => {
-  const sub1 = Meteor.subscribe(Courses.userPublicationName);
+  const subCourses = Meteor.subscribe(Courses.userPublicationName);
+  const subSessions = Meteor.subscribe(Sessions.userPublicationName);
   return {
-    ready: sub1.ready(),
+    ready: subCourses.ready() && subSessions.ready(),
   };
 })(AddSession);
