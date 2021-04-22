@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment, Header, Form, Input } from 'semantic-ui-react';
+import { Grid, Segment, Header, Form, Dropdown } from 'semantic-ui-react';
 import { AutoForm, TextField, DateField, SelectField, LongTextField,
   HiddenField, SubmitField, ErrorsField } from 'uniforms-semantic';
 import swal from 'sweetalert';
@@ -14,8 +14,8 @@ import { Sessions } from '../../api/sessions/Sessions';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
-const makeSchema = (allCourses, allSessions) => new SimpleSchema({
-  topic: { type: String, allowedValues: allSessions, optional: false },
+const makeSchema = (allCourses) => new SimpleSchema({
+  topic: { type: String, optional: false },
   description: String,
   course: { type: String, allowedValues: allCourses, optional: false },
   location: { type: String, defaultValue: 'ICSpace', label: 'Location' },
@@ -26,15 +26,20 @@ const makeSchema = (allCourses, allSessions) => new SimpleSchema({
 /** Renders the Page for adding a document. */
 class AddSession extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.state = { description: '' };
+  state={
+    data: {
+      topic: '',
+      description: '',
+    },
   }
 
-  handleChange(e) {
-    this.setState({ description: e.target.value });
+  handleAddition = (e, { value }) => {
+    this.setState((prevState) => ({
+      options: [{ text: value, value }, ...prevState.options],
+    }));
   }
+
+  handleChange = (e, { value }) => this.setState({ value })
 
   /** On submit, insert the data. */
   submit(data, formRef) {
@@ -57,10 +62,16 @@ class AddSession extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
+    const { value } = this.state;
     const descrip = this.state.description;
     const allCourses = _.pluck(Courses.collection.find().fetch(), 'name');
     const allSessions = _.pluck(Sessions.collection.find().fetch(), 'topic');
-    const formSchema = makeSchema(allCourses, allSessions);
+    const sess = _.map(_.keys(allSessions), function (s) {
+      return { key: allSessions[s], text: allSessions[s], value: allSessions[s] };
+    });
+    console.log(allSessions);
+    console.log(sess);
+    const formSchema = makeSchema(allCourses);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
       <Grid id="add-session-page" container centered>
@@ -68,13 +79,13 @@ class AddSession extends React.Component {
           <Header as="h2" textAlign="center">Add Session</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <Input size='large' list='topics'
-                label='Topic' name='topics' placeholder='Choose topic...' onChange={this.handleChange}/>
-              <datalist id='topics'>
-                {allSessions.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </datalist>
+              <Dropdown
+                placeholder='Topics'
+                name='topic'
+                selection
+                options={sess}
+                value={value}
+              />
               <HiddenField name='topic' value={descrip} />
               <HiddenField name='description' value={descrip} />
               <Form.Group widths={'equal'}>

@@ -21,8 +21,7 @@
     { "topic": "Homework assistance", "description": "Get assistance with homework"},
     { "topic": "Team project", "description": "Meet for team project"},
     { "topic": "Writing assignment", "description": "Get assistance with writing assignment"},
-    { "topic": "Study group", "description": "Get together to study"},
-    { "topic": "Other", "description": "Other"}
+    { "topic": "Study group", "description": "Get together to study"}
   ],
 
   "defaultCourses": [
