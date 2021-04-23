@@ -60,6 +60,10 @@ class AddSession extends React.Component {
     const descrip = this.state.description;
     const allCourses = _.pluck(Courses.collection.find().fetch(), 'name');
     const allSessions = _.pluck(Sessions.collection.find().fetch(), 'topic');
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth()).padStart(2, '0');
+    const yyyy = today.getFullYear();
     const formSchema = makeSchema(allCourses);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
@@ -80,7 +84,7 @@ class AddSession extends React.Component {
               <Form.Group widths={'equal'}>
                 <SelectField id='course' name='course' showInlineError={true} placeholder='Course'/>
                 <TextField id='location' name='location' showInlineError={true} placeholder='Location'/>
-                <DateField name='sessionDate' showInlineError={true}/>
+                <DateField name='sessionDate' showInlineError={true} min={new Date(yyyy, mm, dd)}/>
               </Form.Group>
               <LongTextField id='sessionNotes' name='sessionNotes' placeholder='Session notes'/>
               <SubmitField id='submit' value='Submit'/>
