@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment, Header, Form, Dropdown } from 'semantic-ui-react';
+import { Grid, Segment, Header, Form, Input } from 'semantic-ui-react';
 import { AutoForm, TextField, DateField, SelectField, LongTextField,
   HiddenField, SubmitField, ErrorsField } from 'uniforms-semantic';
 import swal from 'sweetalert';
@@ -26,20 +26,15 @@ const makeSchema = (allCourses) => new SimpleSchema({
 /** Renders the Page for adding a document. */
 class AddSession extends React.Component {
 
-  state={
-    data: {
-      topic: '',
-      description: '',
-    },
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = { description: '' };
   }
 
-  handleAddition = (e, { value }) => {
-    this.setState((prevState) => ({
-      options: [{ text: value, value }, ...prevState.options],
-    }));
+  handleChange(e) {
+    this.setState({ description: e.target.value });
   }
-
-  handleChange = (e, { value }) => this.setState({ value })
 
   /** On submit, insert the data. */
   submit(data, formRef) {
@@ -62,15 +57,9 @@ class AddSession extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
-    const { value } = this.state;
     const descrip = this.state.description;
     const allCourses = _.pluck(Courses.collection.find().fetch(), 'name');
     const allSessions = _.pluck(Sessions.collection.find().fetch(), 'topic');
-    const sess = _.map(_.keys(allSessions), function (s) {
-      return { key: allSessions[s], text: allSessions[s], value: allSessions[s] };
-    });
-    console.log(allSessions);
-    console.log(sess);
     const formSchema = makeSchema(allCourses);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
@@ -79,13 +68,13 @@ class AddSession extends React.Component {
           <Header as="h2" textAlign="center">Add Session</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <Dropdown
-                placeholder='Topics'
-                name='topic'
-                selection
-                options={sess}
-                value={value}
-              />
+              <Input size='large' list='topics'
+                label='Topic' name='topics' placeholder='Select or Enter a topic ' onChange={this.handleChange}/>
+              <datalist id='topics'>
+                {allSessions.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </datalist>
               <HiddenField name='topic' value={descrip} />
               <HiddenField name='description' value={descrip} />
               <Form.Group widths={'equal'}>
