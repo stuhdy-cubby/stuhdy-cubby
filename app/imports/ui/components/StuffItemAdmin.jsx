@@ -7,10 +7,10 @@ class StuffItemAdmin extends React.Component {
   render() {
     return (
       <Table.Row>
-        <Table.Cell>{this.props.stuff.name}</Table.Cell>
-        <Table.Cell>{this.props.stuff.quantity}</Table.Cell>
-        <Table.Cell>{this.props.stuff.condition}</Table.Cell>
-        <Table.Cell>{this.props.stuff.owner}</Table.Cell>
+        <Table.Cell>{this.props.SessionsCourses.topic}</Table.Cell>
+        <Table.Cell>{this.props.SessionsCourses.course}</Table.Cell>
+        <Table.Cell>{this.props.SessionsCourses.sessionDate}</Table.Cell>
+        <Table.Cell>{this.props.SessionsCourses.owner}</Table.Cell>
       </Table.Row>
     );
   }
@@ -18,10 +18,10 @@ class StuffItemAdmin extends React.Component {
 
 // Require a document to be passed to this component.
 StuffItemAdmin.propTypes = {
-  stuff: PropTypes.shape({
-    name: PropTypes.string,
-    quantity: PropTypes.number,
-    condition: PropTypes.string,
+  SessionsCourses: PropTypes.shape({
+    topic: PropTypes.string,
+    course: PropTypes.string,
+    sessionDate: PropTypes.date,
     _id: PropTypes.string,
     owner: PropTypes.string,
   }).isRequired,
