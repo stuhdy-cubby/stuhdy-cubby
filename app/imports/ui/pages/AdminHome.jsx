@@ -41,18 +41,7 @@ class AdminHome extends React.Component {
           </Table.Header>
 
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>Session 1</Table.Cell>
-              <Table.Cell>September 14, 2013</Table.Cell>
-              <Table.Cell>Jane Doe</Table.Cell>
-              <Table.Cell>15</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Session 2</Table.Cell>
-              <Table.Cell>January 11, 2014</Table.Cell>
-              <Table.Cell>Jamie Harington</Table.Cell>
-              <Table.Cell>17</Table.Cell>
-            </Table.Row>
+            {this.props.stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
           </Table.Body>
         </Table>
 
@@ -72,18 +61,7 @@ class AdminHome extends React.Component {
           </Table.Header>
 
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>Session 1</Table.Cell>
-              <Table.Cell>September 14, 2013</Table.Cell>
-              <Table.Cell>Jane Doe</Table.Cell>
-              <Table.Cell>15</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Session 2</Table.Cell>
-              <Table.Cell>January 11, 2014</Table.Cell>
-              <Table.Cell>Jamie Harington</Table.Cell>
-              <Table.Cell>17</Table.Cell>
-            </Table.Row>
+            {this.props.stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
           </Table.Body>
         </Table>
       </Container>
