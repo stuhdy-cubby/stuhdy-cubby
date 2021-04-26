@@ -1,10 +1,11 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Table, Container, Button, Divider, Header } from 'semantic-ui-react';
+import { Table, Container, Button, Divider, Header, Menu } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Stuffs } from '../../api/stuff/Stuff';
 import StuffItemAdmin from '../components/StuffItemAdmin';
+import { NavLink } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class AdminHome extends React.Component {
@@ -28,7 +29,7 @@ class AdminHome extends React.Component {
 
         <h1>My Sessions</h1>
         <p>List of all your current and past sessions.</p>
-        <Button color='blue'>Add Session</Button>
+        <Button as={NavLink} exact to="/add" key='add' color='blue'>Add Sessions</Button>
         <Table striped singleLine selectable color='blue'>
           <Table.Header>
             <Table.Row>
