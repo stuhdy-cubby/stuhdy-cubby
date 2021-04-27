@@ -16,6 +16,7 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import Calendar from '../pages/Calendar';
+import LeaderboardPage from '../pages/LeaderboardPage';
 import UserProfile from '../pages/UserProfile';
 import AdminHome from '../pages/AdminHome';
 
@@ -35,6 +36,7 @@ class App extends React.Component {
             <ProtectedRoute path="/add" component={AddStuff}/>
             <ProtectedRoute path="/calendar" component={Calendar}/>
             <ProtectedRoute path="/addsession" component={AddSession}/>
+            <ProtectedRoute path="/leaderboard" component={LeaderboardPage}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <ProtectedRoute path="/profile" component={UserProfile}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
