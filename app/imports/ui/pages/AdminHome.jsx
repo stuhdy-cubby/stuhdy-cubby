@@ -1,55 +1,59 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Container, Table, Header, Loader, Divider, Button, Menu } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Table, Container, Button, Divider, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import StuffItemAdmin from '../components/StuffItemAdmin';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
+import ListSessionsAdmin from '../components/ListSessionsAdmin';
 
-/** A simple static component to render some text for the landing page. */
+/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class AdminHome extends React.Component {
+
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
+  // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container id="user-profile">
-        <h1>My Sessions</h1>
+      <Container>
+        <Divider hidden />
+        <Header as="h1">My Sessions</Header>
         <p>List of all your current and past sessions.</p>
-        <Button as={NavLink} exact to="/addsession" key='list' color='blue'>Add Session</Button>
-        <Table striped singleLine selectable color='blue'>
+        <Button as={NavLink} activeClassName="active" exact to="/addsession" key='list' color='blue'>Add Session</Button>
+        <Table striped selectable color='blue'>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Topic</Table.HeaderCell>
               <Table.HeaderCell>Course</Table.HeaderCell>
+              <Table.HeaderCell>Topic</Table.HeaderCell>
+              <Table.HeaderCell>Location</Table.HeaderCell>
               <Table.HeaderCell>Owner</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-
           <Table.Body>
-            {this.props.sessions.map((session) => <StuffItemAdmin key={session._id} sessions={session} />)}
+            {this.props.sessions.map((session) => <ListSessionsAdmin key={session._id} sessions={session} />)}
           </Table.Body>
         </Table>
 
-        <Divider hidden/>
-        <Divider clearing/>
-
-        <h1>All Sessions</h1>
+        <Divider hidden />
+        <Divider clearing />
+        <Divider hidden />
+        
+        <Header as="h1">All Sessions</Header>
         <p>List of all current and past sessions.</p>
-        <Table striped singleLine selectable color='brown'>
+        <Table striped selectable color='brown'>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Topic</Table.HeaderCell>
               <Table.HeaderCell>Course</Table.HeaderCell>
+              <Table.HeaderCell>Topic</Table.HeaderCell>
+              <Table.HeaderCell>Location</Table.HeaderCell>
               <Table.HeaderCell>Owner</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-
           <Table.Body>
-            {this.props.sessions.map((session) => <StuffItemAdmin key={session._id} session={session} />)}
+            {this.props.sessions.map((session) => <ListSessionsAdmin key={session._id} sessions={session} />)}
           </Table.Body>
         </Table>
       </Container>
@@ -57,6 +61,7 @@ class AdminHome extends React.Component {
   }
 }
 
+// Require an array of Stuff documents in the props.
 AdminHome.propTypes = {
   sessions: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
@@ -75,5 +80,3 @@ export default withTracker(() => {
     ready,
   };
 })(AdminHome);
-
-// export default AdminHome;
