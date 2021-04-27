@@ -36,19 +36,41 @@ class AddSession extends React.Component {
     this.setState({ description: e.target.value });
   }
 
-  /** On submit, insert the data. */
+  /** On submit, insert the data and sends email */
   submit(data, formRef) {
     const { topic, description, course, location, sessionDate, sessionNotes } = data;
+    const emailList = ['susankpma@gmail.com', 'susanm@hawaii.edu'];
+    const subjectLine = `New session for: ${topic}`;
     const owner = Meteor.user().username;
     if (Sessions.collection.find({ topic: topic }).count() === 0) {
       Sessions.collection.insert({ topic, description });
     }
     SessionsCourses.collection.insert({ topic, course, location, sessionDate, sessionNotes, owner },
-      (error) => {
+      (error, docsInserted) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
+          const emailMessage = `<b>Topic:</b> ${topic}<br/>
+    <b>Course:</b> ${course}<br/>
+    <b>Location:</b> ${location}<br/>
+    <b>Date and Time:</b> ${sessionDate}<br/>
+    <b>Notes:</b> ${sessionNotes}<br/>
+    <a href="/#/registersession/${docsInserted}">Register for this session</a>`;
           swal('Success', 'stUHdy session added successfully', 'success');
+          console.log(docsInserted);
+          /** Email registered users of new session */
+
+          _.each(emailList, function (n) {
+            console.log(n);
+            Meteor.call(
+              'sendEmail',
+              n,
+              'stuhdy-cubby@gmail.com',
+              subjectLine,
+              emailMessage,
+            );
+          });
+
           formRef.reset();
         }
       });
