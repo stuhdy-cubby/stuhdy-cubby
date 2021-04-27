@@ -30,7 +30,7 @@ class AdminHome extends React.Component {
           </Table.Header>
 
           <Table.Body>
-            {this.props.sessions.map((sessions) => <StuffItemAdmin key={sessions._id} sessions={sessions} />)}
+            {this.props.sessions.map((session) => <StuffItemAdmin key={session._id} sessions={session} />)}
           </Table.Body>
         </Table>
 
@@ -49,7 +49,7 @@ class AdminHome extends React.Component {
           </Table.Header>
 
           <Table.Body>
-            {this.props.sessions.map((sessions) => <StuffItemAdmin key={sessions._id} session={sessions} />)}
+            {this.props.sessions.map((session) => <StuffItemAdmin key={session._id} session={session} />)}
           </Table.Body>
         </Table>
       </Container>
