@@ -13,7 +13,7 @@ class ListSessions extends React.Component {
           <Table.Cell>{this.props.sessions.location}</Table.Cell>
           <Table.Cell>{this.props.sessions.sessionNotes}</Table.Cell>
           <Table.Cell>
-            <Link to={`/edit/${this.props.sessions._id}`}>Register</Link>
+            <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
           </Table.Cell>
         </Table.Row>
     );
