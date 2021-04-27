@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Card, Button, Divider } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -13,7 +14,7 @@ class Landing extends React.Component {
 
         <Divider hidden/>
 
-        <Button basic color='green' content='green'>Sign Up</Button>
+        <Button as={ NavLink } exact to="/signup" basic color='green'>Sign Up</Button>
 
         <Divider hidden/>
 
@@ -67,7 +68,7 @@ class Landing extends React.Component {
 
                 <Divider hidden/>
 
-                <Button basic color='green' content='green'>Start Collaborating</Button>
+                <Button as={ NavLink } exact to="/signup" basic color='green'>Start Collaborating</Button>
 
               </Card.Description>
             </Card.Content>
