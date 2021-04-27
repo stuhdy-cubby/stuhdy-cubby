@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader, Divider, Button, Menu } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Divider, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
@@ -40,7 +40,7 @@ class AdminHome extends React.Component {
         <Divider hidden />
         <Divider clearing />
         <Divider hidden />
-        
+
         <Header as="h1">All Sessions</Header>
         <p>List of all current and past sessions.</p>
         <Table striped selectable color='brown'>
