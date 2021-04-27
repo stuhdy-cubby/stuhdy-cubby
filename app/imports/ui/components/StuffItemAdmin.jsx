@@ -1,16 +1,16 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/ListStuffAdmin.jsx. */
 class StuffItemAdmin extends React.Component {
   render() {
     return (
       <Table.Row>
-        <Table.Cell>{this.props.stuff.name}</Table.Cell>
-        <Table.Cell>{this.props.stuff.quantity}</Table.Cell>
-        <Table.Cell>{this.props.stuff.condition}</Table.Cell>
-        <Table.Cell>{this.props.stuff.owner}</Table.Cell>
+        <Table.Cell>{this.props.sessions.topic}</Table.Cell>
+        <Table.Cell>{this.props.sessions.course}</Table.Cell>
+        <Table.Cell>{this.props.sessions.owner}</Table.Cell>
       </Table.Row>
     );
   }
@@ -18,13 +18,12 @@ class StuffItemAdmin extends React.Component {
 
 // Require a document to be passed to this component.
 StuffItemAdmin.propTypes = {
-  stuff: PropTypes.shape({
-    name: PropTypes.string,
-    quantity: PropTypes.number,
-    condition: PropTypes.string,
+  sessions: PropTypes.shape({
+    topic: PropTypes.string,
+    course: PropTypes.string,
     _id: PropTypes.string,
     owner: PropTypes.string,
   }).isRequired,
 };
 
-export default StuffItemAdmin;
+export default withRouter(StuffItemAdmin);
