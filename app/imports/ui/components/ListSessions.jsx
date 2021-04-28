@@ -15,7 +15,7 @@ class ListSessions extends React.Component {
         <Table.Cell>
           <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
         </Table.Cell>
-      </Table.Row>
+     </Table.Row>
     );
   }
 }
@@ -26,6 +26,7 @@ ListSessions.propTypes = {
     topic: PropTypes.string,
     course: PropTypes.string,
     location: PropTypes.string,
+    sessionDate: PropTypes.instanceOf(Date),
     sessionNotes: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
