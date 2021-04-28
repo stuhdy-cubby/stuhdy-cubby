@@ -27,7 +27,7 @@ class LeaderboardPage extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {this.props.profiles.map((Leaderboard) => <Leaderboard key={Leaderboard._id} stuff={Leaderboard}/>)}
+            {this.props.profiles.map((leaderboard) => <Leaderboard key={leaderboard._id} leaderboard={leaderboard}/>)}
           </Table.Body>
         </Table>
       </Container>

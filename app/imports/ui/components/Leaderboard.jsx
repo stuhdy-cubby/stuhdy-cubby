@@ -8,8 +8,8 @@ class LeaderBoard extends React.Component {
   render() {
     return (
       <Table.Row>
-        <Table.Cell>{this.props.stuff.name}</Table.Cell>
-        <Table.Cell>{this.props.stuff.points}</Table.Cell>
+        <Table.Cell>cell 1</Table.Cell>
+        <Table.Cell>cell 2</Table.Cell>
       </Table.Row>
     );
   }
