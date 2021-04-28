@@ -42,7 +42,7 @@ class App extends React.Component {
             <ProtectedRoute path="/profile" component={UserProfile}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
             <Route path="/notfound" component={NotFound}/>
-            <ProtectedRoute path="/registersession" component={RegisterSession}/>
+            <ProtectedRoute path="/registersession/:_id" component={RegisterSession}/>
           </Switch>
           <Footer/>
         </div>
