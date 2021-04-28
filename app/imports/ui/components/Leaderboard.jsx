@@ -7,10 +7,10 @@ import { withRouter } from 'react-router-dom';
 class LeaderBoard extends React.Component {
   render() {
     return (
-        <Table.Row>
-          <Table.Cell>{this.props.stuff.name}</Table.Cell>
-          <Table.Cell>{this.props.stuff.points}</Table.Cell>
-        </Table.Row>
+      <Table.Row>
+        <Table.Cell>{this.props.stuff.name}</Table.Cell>
+        <Table.Cell>{this.props.stuff.points}</Table.Cell>
+      </Table.Row>
     );
   }
 }

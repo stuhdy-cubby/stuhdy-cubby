@@ -7,15 +7,15 @@ import { withRouter, Link } from 'react-router-dom';
 class ListSessions extends React.Component {
   render() {
     return (
-        <Table.Row>
-          <Table.Cell>{this.props.sessions.topic}</Table.Cell>
-          <Table.Cell>{this.props.sessions.course}</Table.Cell>
-          <Table.Cell>{this.props.sessions.location}</Table.Cell>
-          <Table.Cell>{this.props.sessions.sessionNotes}</Table.Cell>
-          <Table.Cell>
-            <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
-          </Table.Cell>
-        </Table.Row>
+      <Table.Row>
+        <Table.Cell>{this.props.sessions.topic}</Table.Cell>
+        <Table.Cell>{this.props.sessions.course}</Table.Cell>
+        <Table.Cell>{this.props.sessions.location}</Table.Cell>
+        <Table.Cell>{this.props.sessions.sessionNotes}</Table.Cell>
+        <Table.Cell>
+          <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
+        </Table.Cell>
+      </Table.Row>
     );
   }
 }
@@ -27,6 +27,7 @@ ListSessions.propTypes = {
     course: PropTypes.string,
     location: PropTypes.string,
     sessionNotes: PropTypes.string,
+    _id: PropTypes.string,
   }).isRequired,
 };
 

@@ -17,20 +17,20 @@ class LeaderboardPage extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-        <Container id="my-dojo-page">
-          <Header as="h2" textAlign="center" inverted>Rankings</Header>
-          <Table celled striped>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>Points</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {this.props.profiles.map((Leaderboard) => <Leaderboard key={Leaderboard._id} stuff={Leaderboard}/>)}
-            </Table.Body>
-          </Table>
-        </Container>
+      <Container id="my-dojo-page">
+        <Header as="h2" textAlign="center" inverted>Rankings</Header>
+        <Table celled striped>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>Points</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {this.props.profiles.map((Leaderboard) => <Leaderboard key={Leaderboard._id} stuff={Leaderboard}/>)}
+          </Table.Body>
+        </Table>
+      </Container>
     );
   }
 }

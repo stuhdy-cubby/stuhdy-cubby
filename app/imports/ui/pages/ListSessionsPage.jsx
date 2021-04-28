@@ -17,23 +17,23 @@ class ListSessionsPage extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-        <Container>
-          <Header as="h2" textAlign="center">Sessions List</Header>
-          <Table celled>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Topic</Table.HeaderCell>
-                <Table.HeaderCell>Course</Table.HeaderCell>
-                <Table.HeaderCell>Location</Table.HeaderCell>
-                <Table.HeaderCell>Notes</Table.HeaderCell>
-                <Table.HeaderCell>Register</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} />)}
-            </Table.Body>
-          </Table>
-        </Container>
+      <Container id="list-session-page">
+        <Header as="h2" textAlign="center">Sessions List</Header>
+        <Table id="list-session-table" celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Topic</Table.HeaderCell>
+              <Table.HeaderCell>Course</Table.HeaderCell>
+              <Table.HeaderCell>Location</Table.HeaderCell>
+              <Table.HeaderCell>Notes</Table.HeaderCell>
+              <Table.HeaderCell>Register</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} />)}
+          </Table.Body>
+        </Table>
+      </Container>
     );
   }
 }
