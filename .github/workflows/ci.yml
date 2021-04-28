@@ -3,7 +3,7 @@ name: ci-meteor-application-template-react
 on:
   push:
     branches:
-      - master
+      - main
 
 defaults:
   run:
