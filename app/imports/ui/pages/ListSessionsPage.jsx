@@ -26,6 +26,7 @@ class ListSessionsPage extends React.Component {
                 <Table.HeaderCell>Course</Table.HeaderCell>
                 <Table.HeaderCell>Location</Table.HeaderCell>
                 <Table.HeaderCell>Notes</Table.HeaderCell>
+                <Table.HeaderCell>Date</Table.HeaderCell>
                 <Table.HeaderCell>Register</Table.HeaderCell>
               </Table.Row>
             </Table.Header>

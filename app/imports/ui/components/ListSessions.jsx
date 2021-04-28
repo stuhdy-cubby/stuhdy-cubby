@@ -12,6 +12,7 @@ class ListSessions extends React.Component {
           <Table.Cell>{this.props.sessions.course}</Table.Cell>
           <Table.Cell>{this.props.sessions.location}</Table.Cell>
           <Table.Cell>{this.props.sessions.sessionNotes}</Table.Cell>
+          <Table.Cell>{this.props.sessions.sessionDate.toLocaleDateString('en-US')}</Table.Cell>
           <Table.Cell>
             <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
           </Table.Cell>
@@ -26,6 +27,7 @@ ListSessions.propTypes = {
     topic: PropTypes.string,
     course: PropTypes.string,
     location: PropTypes.string,
+    sessionDate: PropTypes.instanceOf(Date),
     sessionNotes: PropTypes.string,
   }).isRequired,
 };
