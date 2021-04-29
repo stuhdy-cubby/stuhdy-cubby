@@ -9,6 +9,7 @@ import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 import { SessionsProfiles } from '../../api/sessions/SessionsProfiles';
+import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
 
 const formSchema = new SimpleSchema({
   topic: String,
@@ -29,12 +30,19 @@ class RegisterSession extends React.Component {
   submit(data) {
     const { topic, course, response } = data;
     const profile = Meteor.user().username;
+    const points = 1;
     SessionsProfiles.collection.insert({ topic, course, profile, response },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Successfully registered for session', 'success');
+          ProfilesPoints.collection.insert({ profile, topic, points }, (err) => {
+            if (err) {
+              swal('Error', err.message, 'error');
+            } else {
+              swal('Success', 'Successfully registered for session', 'success');
+            }
+          });
         }
       });
   }
