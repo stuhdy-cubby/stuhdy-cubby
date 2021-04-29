@@ -49,7 +49,7 @@ class Calendar extends React.Component {
             })
             .then((value) => {
               if (value === 'register' && info.event.url) {
-                window.location.href = `${info.event.url}`;
+                window.location.href = `#${info.event.url}`;
               }
             });
         }}
