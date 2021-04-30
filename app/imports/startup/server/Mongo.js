@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
+import { Profiles } from '../../api/profiles/Profiles';
 import { Courses } from '../../api/courses/Courses';
 import { Sessions } from '../../api/sessions/Sessions';
 
@@ -21,6 +22,11 @@ function addSession(data) {
   Sessions.collection.insert(data);
 }
 
+function addProfile(data) {
+  console.log(`  Adding profile: ${data.email} `);
+  Profiles.collection.insert(data);
+}
+
 // Initialize the StuffsCollection if empty.
 if (Stuffs.collection.find().count() === 0) {
   if (Meteor.settings.defaultData) {
@@ -40,5 +46,12 @@ if (Sessions.collection.find().count() === 0) {
   if (Meteor.settings.defaultSessions) {
     console.log('Creating default sessions.');
     Meteor.settings.defaultSessions.map(data => addSession(data));
+  }
+}
+
+if (Profiles.collection.find().count() === 0) {
+  if (Meteor.settings.defaultProfiles) {
+    console.log('Creating default profiles.');
+    Meteor.settings.defaultProfiles.map(data => addProfile(data));
   }
 }
