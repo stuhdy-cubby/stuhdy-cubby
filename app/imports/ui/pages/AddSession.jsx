@@ -9,6 +9,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
+import { Profiles } from '../../api/profiles/Profiles';
 import { Courses } from '../../api/courses/Courses';
 import { Sessions } from '../../api/sessions/Sessions';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
@@ -39,7 +40,8 @@ class AddSession extends React.Component {
   /** On submit, insert the data and sends email */
   submit(data, formRef) {
     const { topic, description, course, location, sessionDate, sessionNotes } = data;
-    const emailList = ['susankpma@gmail.com', 'susanm@hawaii.edu'];
+    // const emailList = ['susankpma@gmail.com', 'susanm@hawaii.edu'];
+    const emailList = _.pluck(Profiles.collection.find().fetch(), 'email');
     const subjectLine = `New session for: ${topic}`;
     const owner = Meteor.user().username;
     if (Sessions.collection.find({ topic: topic }).count() === 0) {
@@ -51,11 +53,11 @@ class AddSession extends React.Component {
           swal('Error', error.message, 'error');
         } else {
           const emailMessage = `<b>Topic:</b> ${topic}<br/>
-    <b>Course:</b> ${course}<br/>
-    <b>Location:</b> ${location}<br/>
-    <b>Date and Time:</b> ${sessionDate}<br/>
-    <b>Notes:</b> ${sessionNotes}<br/>
-    <a href="/#/registersession/${docsInserted}">Register for this session</a>`;
+            <b>Course:</b> ${course}<br/>
+            <b>Location:</b> ${location}<br/>
+            <b>Date and Time:</b> ${sessionDate}<br/>
+            <b>Notes:</b> ${sessionNotes}<br/>
+            <a href="/#/registersession/${docsInserted}">Register for this session</a>`;
           swal('Success', 'stUHdy session added successfully', 'success');
           console.log(docsInserted);
           /** Email registered users of new session */
