@@ -40,8 +40,8 @@ class AddSession extends React.Component {
   /** On submit, insert the data and sends email */
   submit(data, formRef) {
     const { topic, description, course, location, sessionDate, sessionNotes } = data;
-    // const emailList = ['susankpma@gmail.com', 'susanm@hawaii.edu'];
     const emailList = _.pluck(Profiles.collection.find().fetch(), 'email');
+    console.log(emailList);
     const subjectLine = `New session for: ${topic}`;
     const owner = Meteor.user().username;
     if (Sessions.collection.find({ topic: topic }).count() === 0) {
@@ -57,7 +57,7 @@ class AddSession extends React.Component {
             <b>Location:</b> ${location}<br/>
             <b>Date and Time:</b> ${sessionDate}<br/>
             <b>Notes:</b> ${sessionNotes}<br/>
-            <a href="/#/registersession/${docsInserted}">Register for this session</a>`;
+            <a href="https://stuhdy-cubby.xyz/#/registersession/${docsInserted}">Register for this session</a>`;
           swal('Success', 'stUHdy session added successfully', 'success');
           console.log(docsInserted);
           /** Email registered users of new session */
@@ -128,7 +128,8 @@ AddSession.propTypes = {
 export default withTracker(() => {
   const subCourses = Meteor.subscribe(Courses.userPublicationName);
   const subSessions = Meteor.subscribe(Sessions.userPublicationName);
+  const subProfiles = Meteor.subscribe(Profiles.userPublicationName);
   return {
-    ready: subCourses.ready() && subSessions.ready(),
+    ready: subCourses.ready() && subSessions.ready() && subProfiles.ready(),
   };
 })(AddSession);
