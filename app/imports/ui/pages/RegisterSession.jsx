@@ -29,6 +29,7 @@ class RegisterSession extends React.Component {
   // On successful submit, insert the data.
   submit(data) {
     const { topic, course, response } = data;
+    const session = topic;
     const profile = Meteor.user().username;
     const points = 1;
     SessionsProfiles.collection.insert({ topic, course, profile, response },
@@ -36,7 +37,7 @@ class RegisterSession extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          ProfilesPoints.collection.insert({ profile, topic, points }, (err) => {
+          ProfilesPoints.collection.insert({ profile, session, points }, (err) => {
             if (err) {
               swal('Error', err.message, 'error');
             } else {
