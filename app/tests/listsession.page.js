@@ -14,7 +14,7 @@ class ListsessionPage {
   /** Checks that the page has at least two rows. */
   async hasTable(testController) {
     const cardCount = Selector('#list-session-table').exists;
-    await testController.expect(cardCount).gte(0);
+    await testController.expect(cardCount).ok;
   }
 }
 
