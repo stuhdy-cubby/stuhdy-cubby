@@ -1,1 +1,6 @@
-
+.addsession-background {
+  background: url('images/icspace.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 600px;
+  padding-top: 50px;
+}
