@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader } from 'semantic-ui-react';
+import { Loader, Card, Container } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
@@ -17,23 +17,16 @@ class ListSessionsPage extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container id="list-session-page">
-        <Header as="h2" textAlign="center">Sessions List</Header>
-        <Table id="list-session-table" celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Topic</Table.HeaderCell>
-              <Table.HeaderCell>Course</Table.HeaderCell>
-              <Table.HeaderCell>Location</Table.HeaderCell>
-              <Table.HeaderCell>Notes</Table.HeaderCell>
-              <Table.HeaderCell>Register</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
+        <Container id="sessions list">
+          <div className="ui segment">
+            <h1 className="ui center aligned header">
+              Register for a Session!
+            </h1>
+          </div>
+          <Card.Group centered>
             {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} />)}
-          </Table.Body>
-        </Table>
-      </Container>
+          </Card.Group>
+        </Container>
     );
   }
 }
