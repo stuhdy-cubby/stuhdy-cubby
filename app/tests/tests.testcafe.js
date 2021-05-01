@@ -29,5 +29,5 @@ test('Test List Sessions page', async (testController) => {
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoListSessionPage(testController);
   await listsessionPage.isDisplayed(testController);
-  //await listsessionPage.hasTable(testController);
+  await listsessionPage.hasTable(testController);
 });
