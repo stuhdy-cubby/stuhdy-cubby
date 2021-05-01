@@ -56,24 +56,26 @@ class RegisterSession extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     return (
-      <Grid container centered>
-        <Grid.Column>
-          <Header as="h2" textAlign="center">Register for Session</Header>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
-            <Segment>
-              <TextField name='topic' readOnly={true}/>
-              <TextField name='course' readOnly={true}/>
-              <TextField name='location' readOnly={true}/>
-              <DateField name='sessionDate' readOnly={true}/>
-              <TextField name='sessionNotes' readOnly={true}/>
-              <TextField label='Created by' name='owner' readOnly={true}/>
-              <TextField name='response'/>
-              <SubmitField value='Submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
-        </Grid.Column>
-      </Grid>
+      <div className='registersession-background'>
+        <Grid container centered>
+          <Grid.Column color={'yellow'}>
+            <Header as="h2" inverted textAlign="center">Register for Session</Header>
+            <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
+              <Segment>
+                <TextField name='topic' readOnly={true}/>
+                <TextField name='course' readOnly={true}/>
+                <TextField name='location' readOnly={true}/>
+                <DateField name='sessionDate' readOnly={true}/>
+                <TextField name='sessionNotes' readOnly={true}/>
+                <TextField label='Created by' name='owner' readOnly={true}/>
+                <TextField name='response'/>
+                <SubmitField value='Submit'/>
+                <ErrorsField/>
+              </Segment>
+            </AutoForm>
+          </Grid.Column>
+        </Grid>
+      </div>
     );
   }
 }
