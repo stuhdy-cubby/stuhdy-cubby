@@ -25,7 +25,7 @@ class ListSessionsPage extends React.Component {
           </h1>
         </div>
         <Card.Group centered>
-          {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} sessionsProfiles={this.props.sessionsProfiles.filter(p => (p.sessionId === sessions._id))} />)}
+          {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} sessionsProfiles={this.props.sessionsProfiles.filter(p => (p.topic === sessions._id))} />)}
         </Card.Group>
       </Container>
     );

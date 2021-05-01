@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Feed } from 'semantic-ui-react';
+import { Card, Button, Feed, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import SessionsProfiles from './SessionsProfiles';
@@ -17,6 +17,12 @@ class ListSessions extends React.Component {
             <Card.Description>{this.props.sessions.sessionNotes}</Card.Description>
           </Card.Content>
           <Card.Content extra>
+            <Header as={'h5'}>
+              Session created by: {this.props.sessions.owner}
+            </Header>
+          </Card.Content>
+          <Card.Content extra>
+            Participants
             <Feed>
               {this.props.sessionsProfiles.map((p, index) => <SessionsProfiles key={index} sessionsProfiles={p} />)}
             </Feed>
@@ -50,6 +56,7 @@ ListSessions.propTypes = {
     location: PropTypes.string,
     sessionDate: PropTypes.instanceOf(Date),
     sessionNotes: PropTypes.string,
+    owner: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
   sessionsProfiles: PropTypes.array.isRequired,
