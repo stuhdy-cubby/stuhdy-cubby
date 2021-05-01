@@ -40,6 +40,10 @@ class NavBar {
   async gotoListSessionPage(testController) {
     await testController.click('#navbar-list-session');
   }
+
+  async gotoAddSessionPage(testController) {
+    await testController.click('#navbar-list-session');
+  }
 }
 
 export const navBar = new NavBar();
