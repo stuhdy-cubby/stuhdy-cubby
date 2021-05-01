@@ -11,11 +11,11 @@
 
   "defaultProfiles": [
     { "email": "ysales@hawaii.edu", "firstName": "Yhanessa Anne", "lastName": "Sales",
-      "bio": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii. I expect to graduate in Spring, 2023.", "picture": "https://yhanessaanne.github.io/images/gitpic.jpg"},
+      "bio": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii. I expect to graduate in Spring, 2023.", "picture": "https://yhanessaanne.github.io/images/gitpic.jpg", "points": 3},
     { "email": "cbramos6@hawaii.edu", "firstName": "Christine", "lastName": "Ramos",
-      "bio": "I am studying for a B.S. in Computer Engineering at the University of Hawaii at Manoa. I expect to graduate in the coming Fall, Fall 2021. ", "picture": "https://christinebramos.github.io/images/IMG_3344.jpg" },
+      "bio": "I am studying for a B.S. in Computer Engineering at the University of Hawaii at Manoa. I expect to graduate in the coming Fall, Fall 2021. ", "picture": "https://christinebramos.github.io/images/IMG_3344.jpg", "points": 7 },
     { "email": "susanm@hawaii.edu", "firstName": "Susan", "lastName": "Ma",
-      "bio": "I am second degree part-time student pursuing a B.S. in Computer Science. My expected graduation is Fall 2024. ", "picture": "https://susankpma.github.io/images/susan.jpeg" }
+      "bio": "I am second degree part-time student pursuing a B.S. in Computer Science. My expected graduation is Fall 2024. ", "picture": "https://susankpma.github.io/images/susan.jpeg", "points": 12 }
   ],
 
   "defaultData": [

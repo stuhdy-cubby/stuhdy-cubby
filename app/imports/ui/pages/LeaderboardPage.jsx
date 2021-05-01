@@ -17,9 +17,9 @@ class LeaderboardPage extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-      <Container id="my-dojo-page">
-        <Header as="h2" textAlign="center" inverted>Rankings</Header>
-        <Table celled striped>
+      <Container>
+        <Header as="h2" textAlign="center" inverted>Points Accumulated</Header>
+        <Table>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Name</Table.HeaderCell>
