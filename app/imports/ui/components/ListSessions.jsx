@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Card, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
@@ -7,15 +7,31 @@ import { withRouter, Link } from 'react-router-dom';
 class ListSessions extends React.Component {
   render() {
     return (
-      <Table.Row>
-        <Table.Cell>{this.props.sessions.topic}</Table.Cell>
-        <Table.Cell>{this.props.sessions.course}</Table.Cell>
-        <Table.Cell>{this.props.sessions.location}</Table.Cell>
-        <Table.Cell>{this.props.sessions.sessionNotes}</Table.Cell>
-        <Table.Cell>
-          <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
-        </Table.Cell>
-     </Table.Row>
+        <Card.Group>
+          <Card>
+            <Card.Content>
+              <Card.Header>{this.props.sessions.topic}</Card.Header>
+              <Card.Meta>{this.props.sessions.course}</Card.Meta>
+              <Card.Meta>{this.props.sessions.location}</Card.Meta>
+              <Card.Description>{this.props.sessions.sessionNotes}</Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <Button basic color='green'>
+                <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
+              </Button>
+            </Card.Content>
+          </Card>
+        </Card.Group>
+
+        // <Table.Row>
+        //   <Table.Cell>{this.props.sessions.topic}</Table.Cell>
+        // <Table.Cell>{this.props.sessions.course}</Table.Cell>
+        // <Table.Cell>{this.props.sessions.location}</Table.Cell>
+        // <Table.Cell>{this.props.sessions.sessionNotes}</Table.Cell>
+        // <Table.Cell>
+        //  <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
+        // </Table.Cell>
+        // </Table.Row>
     );
   }
 }
