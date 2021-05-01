@@ -57,7 +57,7 @@ class RegisterSession extends React.Component {
   renderPage() {
     return (
       <div className='registersession-background'>
-        <Grid container centered>
+        <Grid container centered columns={2}>
           <Grid.Column color={'yellow'}>
             <Header as="h2" inverted textAlign="center">Register for Session</Header>
             <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
