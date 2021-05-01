@@ -9,7 +9,7 @@ import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 import { SessionsProfiles } from '../../api/sessions/SessionsProfiles';
-import { Profiles } from '../../api/profiles/Profiles';
+import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
 
 const formSchema = new SimpleSchema({
   topic: String,
@@ -33,21 +33,20 @@ class RegisterSession extends React.Component {
     const profile = Meteor.user().username;
     const points = 1;
     SessionsProfiles.collection.insert({ topic, course, profile, response },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          Profiles.collection.insert({ profile, session, points }, (err) => {
-            if (err) {
-              swal('Error', err.message, 'error');
-            } else {
-              swal('Success', 'Successfully registered for session', 'success');
-              Profiles.collection.update(profile._id, { $inc: { points: 1 } });
-
-            }
-          });
-        }
-      });
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            ProfilesPoints.collection.insert({ profile, session, points }, (err) => {
+              if (err) {
+                swal('Error', err.message, 'error');
+              } else {
+                swal('Success', 'Successfully registered for session', 'success');
+                ProfilesPoints.collection.update(profile._id, { $inc: { points: 1 } });
+              }
+            });
+          }
+        });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -58,24 +57,24 @@ class RegisterSession extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     return (
-      <Grid container centered>
-        <Grid.Column>
-          <Header as="h2" textAlign="center">Register for Session</Header>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
-            <Segment>
-              <TextField name='topic' readOnly={true}/>
-              <TextField name='course' readOnly={true}/>
-              <TextField name='location' readOnly={true}/>
-              <DateField name='sessionDate' readOnly={true}/>
-              <TextField name='sessionNotes' readOnly={true}/>
-              <TextField label='Created by' name='owner' readOnly={true}/>
-              <TextField name='response'/>
-              <SubmitField value='Submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
-        </Grid.Column>
-      </Grid>
+        <Grid container centered>
+          <Grid.Column>
+            <Header as="h2" textAlign="center">Register for Session</Header>
+            <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
+              <Segment>
+                <TextField name='topic' readOnly={true}/>
+                <TextField name='course' readOnly={true}/>
+                <TextField name='location' readOnly={true}/>
+                <DateField name='sessionDate' readOnly={true}/>
+                <TextField name='sessionNotes' readOnly={true}/>
+                <TextField label='Created by' name='owner' readOnly={true}/>
+                <TextField name='response'/>
+                <SubmitField value='Submit'/>
+                <ErrorsField/>
+              </Segment>
+            </AutoForm>
+          </Grid.Column>
+        </Grid>
     );
   }
 }
