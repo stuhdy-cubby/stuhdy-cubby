@@ -16,11 +16,9 @@ class ListSessions extends React.Component {
               <Card.Description>{this.props.sessions.sessionNotes}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <div className='ui one button'>
                 <Button basic color='green'>
                   <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
                 </Button>
-              </div>
             </Card.Content>
           </Card>
         </Card.Group>
