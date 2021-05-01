@@ -13,6 +13,7 @@ import { Profiles } from '../../api/profiles/Profiles';
 import { Courses } from '../../api/courses/Courses';
 import { Sessions } from '../../api/sessions/Sessions';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
+import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const makeSchema = (allCourses) => new SimpleSchema({
@@ -44,6 +45,9 @@ class AddSession extends React.Component {
     console.log(emailList);
     const subjectLine = `New session for: ${topic}`;
     const owner = Meteor.user().username;
+    const profile = Meteor.user().username;
+    const points = 1;
+    const session = topic;
     if (Sessions.collection.find({ topic: topic }).count() === 0) {
       Sessions.collection.insert({ topic, description });
     }
@@ -52,6 +56,7 @@ class AddSession extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
+          ProfilesPoints.collection.insert({ profile, session, points });
           const emailMessage = `<b>Topic:</b> ${topic}<br/>
             <b>Course:</b> ${course}<br/>
             <b>Location:</b> ${location}<br/>
