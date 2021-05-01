@@ -28,8 +28,9 @@ class RegisterSession extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { topic, course, response } = data;
-    const session = topic;
+    const { course, response } = data;
+    const topic = this.props.doc._id;
+    const session = this.props.doc._id;
     const profile = Meteor.user().username;
     const points = 1;
     SessionsProfiles.collection.insert({ topic, course, profile, response },
@@ -55,6 +56,7 @@ class RegisterSession extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
+    console.log(this.props.doc._id);
     return (
       <div className='registersession-background'>
         <Grid container centered columns={2}>
