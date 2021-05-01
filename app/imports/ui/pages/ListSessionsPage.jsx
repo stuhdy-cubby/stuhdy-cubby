@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Header, Loader, Card, Grid, Container } from 'semantic-ui-react';
+import { Loader, Card, Container } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
