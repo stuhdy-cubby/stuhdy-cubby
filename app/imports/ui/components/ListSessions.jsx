@@ -8,32 +8,32 @@ import SessionsProfiles from './SessionsProfiles';
 class ListSessions extends React.Component {
   render() {
     return (
-      <Card.Group>
-        <Card>
-          <Card.Content>
-            <Card.Header>{this.props.sessions.topic}</Card.Header>
-            <Card.Meta>{this.props.sessions.course}</Card.Meta>
-            <Card.Meta>{this.props.sessions.location}</Card.Meta>
-            <Card.Description>{this.props.sessions.sessionNotes}</Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <Header as={'h5'}>
-              Session created by: {this.props.sessions.owner}
-            </Header>
-          </Card.Content>
-          <Card.Content extra>
-            Participants
-            <Feed>
-              {this.props.sessionsProfiles.map((p, index) => <SessionsProfiles key={index} sessionsProfiles={p} />)}
-            </Feed>
-          </Card.Content>
-          <Card.Content extra>
-            <Button basic color='green'>
-              <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
-            </Button>
-          </Card.Content>
-        </Card>
-      </Card.Group>
+        <Card.Group>
+          <Card>
+            <Card.Content>
+              <Card.Header>{this.props.sessions.topic}</Card.Header>
+              <Card.Meta>{this.props.sessions.course}</Card.Meta>
+              <Card.Meta>{this.props.sessions.location}</Card.Meta>
+              <Card.Description>{this.props.sessions.sessionNotes}</Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <Header as={'h5'}>
+                Session created by: {this.props.sessions.owner}
+              </Header>
+            </Card.Content>
+            <Card.Content extra>
+              Participants
+              <Feed>
+                {this.props.sessionsProfiles.map((p, index) => <SessionsProfiles key={index} sessionsProfiles={p} />)}
+              </Feed>
+            </Card.Content>
+            <Card.Content extra>
+              <Button basic color='green'>
+                <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
+              </Button>
+            </Card.Content>
+          </Card>
+        </Card.Group>
     );
   }
 }
