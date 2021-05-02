@@ -1,81 +1,55 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Loader, Card, Image, Divider } from 'semantic-ui-react';
+import { Container, Divider, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { _ } from 'meteor/underscore';
 import { Profiles } from '../../api/profiles/Profiles';
+import ProfileInfo from './ProfileInfo';
+import ListSessions from '../components/ListSessions';
+import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 
-/** Returns the Profile and associated Projects and Interests associated with the passed user email. */
-function getProfileData(email) {
-  const data = Profiles.collection.findOne({ email });
-  const firstname = _.pluck(Profiles.collection.find({ profile: email }).fetch(), 'firstName');
-  const lastname = _.pluck(Profiles.collection.find({ profile: email }).fetch(), 'lastName');
-  return _.extend({ }, data, { firstname, lastname });
-}
-
-/** Component for layout out a Profile Card. */
-const MakeCard = (props) => (
-  <Card>
-    <Card.Content>
-      <Image floated='right' circular src={props.profile.picture} />
-      <Card.Header>{props.profile.firstName} {props.profile.lastName}</Card.Header>
-      <Card.Meta>
-        <span>{props.profile.email}</span>
-      </Card.Meta>
-      <Divider clearing />
-      <Card.Description>
-        Institution: {props.profile.institution}
-      </Card.Description>
-      <Card.Description>
-        Major: {props.profile.major}
-      </Card.Description>
-      <Card.Description>
-        Class Standing: {props.profile.standing}
-      </Card.Description>
-      <Divider hidden />
-      <Card.Description>
-        {props.profile.bio}
-      </Card.Description>
-    </Card.Content>
-  </Card>
-);
-
-MakeCard.propTypes = {
-  profile: PropTypes.object.isRequired,
-};
-
-/** Renders the Profile Collection as a set of Cards. */
 class UserProfile extends React.Component {
 
-  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
+  // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+    return (this.props.ready1) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
-  /** Render the page once subscriptions have been received. */
+  // Render the page once subscriptions have been received.
   renderPage() {
-    const emails = _.pluck(Profiles.collection.find().fetch(), 'email');
-    const profileData = emails.map(email => getProfileData(email));
     return (
-      <Container id="profiles-page">
-        <Card.Group>
-          {_.map(profileData, (profile, index) => <MakeCard key={index} profile={profile}/>)}
-        </Card.Group>
+      <Container id="user-profile">
+        <Divider hidden />
+        {this.props.profiles.map((profiles) => <ProfileInfo key={profiles._id} profiles={profiles} />)}
+        {this.props.sessions.map((sessions) => <ProfileInfo key={sessions._id} sessions={sessions} />)}
       </Container>
     );
   }
 }
 
+// Require an array of Stuff documents in the props.
 UserProfile.propTypes = {
-  ready: PropTypes.bool.isRequired,
+  profiles: PropTypes.array.isRequired,
+  sessions: PropTypes.array.isRequired,
+  ready1: PropTypes.bool.isRequired,
+  ready2: PropTypes.bool.isRequired,
 };
 
-/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+// withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  // Ensure that minimongo is populated with all collections prior to running render().
-  const sub = Meteor.subscribe(Profiles.userPublicationName);
+  // Get access to Stuff documents.
+  const subscription1 = Meteor.subscribe(Profiles.userPublicationName);
+  const subscription2 = Meteor.subscribe(SessionsCourses.userPublicationName);
+  // Determine if the subscription is ready
+  const ready1 = subscription1.ready();
+  const ready2 = subscription2.ready();
+  // Get the Stuff documents
+  const profiles = Profiles.collection.find({}).fetch();
+  const sessions = SessionsCourses.collection.find({}).fetch();
   return {
-    ready: sub.ready(),
+    profiles,
+    sessions,
+    ready1,
+    ready2,
   };
 })(UserProfile);
