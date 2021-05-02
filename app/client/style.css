@@ -1,1 +1,6 @@
-
+.listsessions-background {
+  background: url('images/listsessions.png') no-repeat center center fixed;
+  background-size: cover;
+  height: 700px;
+  padding-top: 30px;
+}

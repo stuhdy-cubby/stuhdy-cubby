@@ -17,6 +17,7 @@ class ListSessionsPage extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
+        <div className='listsessions-background'>
         <Container id="sessions list">
           <Segment>
             <Header as='h1' textAlign="center" color='green'>
@@ -27,6 +28,7 @@ class ListSessionsPage extends React.Component {
             {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} />)}
           </Card.Group>
         </Container>
+        </div>
     );
   }
 }
