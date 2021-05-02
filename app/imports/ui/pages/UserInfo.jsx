@@ -5,6 +5,8 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Profiles } from '../../api/profiles/Profiles';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -64,6 +66,7 @@ class UserInfo extends React.Component {
               <SelectField name='institution'/>
               <SelectField name='major'/>
               <SelectField name='standing'/>
+              <TextField name='bio' />
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>
@@ -74,4 +77,19 @@ class UserInfo extends React.Component {
   }
 }
 
-export default UserInfo;
+// Require a document to be passed to this component.
+UserInfo.propTypes = {
+  profiles: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string,
+    institution: PropTypes.string,
+    major: PropTypes.string,
+    standing: PropTypes.string,
+    bio: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+};
+
+// Wrap this component in withRouter since we use the <Link> React Router element.
+export default withRouter(UserInfo);
