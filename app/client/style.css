@@ -1,1 +1,17 @@
+.listsessions-background {
+  background: url('images/listsessions.png') no-repeat center center fixed;
+}
 
+.addsession-background {
+  background: url('images/icspace.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 600px;
+  padding-top: 50px;
+}
+
+.registersession-background {
+  background: url('images/register.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 700px;
+  padding-top: 30px;
+}
