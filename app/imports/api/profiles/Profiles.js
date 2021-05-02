@@ -18,6 +18,9 @@ class ProfilesCollection {
       lastName: { type: String, optional: true },
       bio: { type: String, optional: true },
       picture: { type: String, optional: true },
+      institution: { type: String, optional: true },
+      major: { type: String, optional: true },
+      standing: { type: String, optional: true },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
