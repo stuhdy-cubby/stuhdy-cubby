@@ -17,16 +17,16 @@ class ListSessionsPage extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-        <Container id="sessions list">
-          <div className="ui segment">
-            <h1 className="ui center aligned header">
+      <Container id="sessions list">
+        <div className="ui segment">
+          <h1 className="ui center aligned header">
               Register for a Session!
-            </h1>
-          </div>
-          <Card.Group centered>
-            {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} />)}
-          </Card.Group>
-        </Container>
+          </h1>
+        </div>
+        <Card.Group centered>
+          {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} />)}
+        </Card.Group>
+      </Container>
     );
   }
 }

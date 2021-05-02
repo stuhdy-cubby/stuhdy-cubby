@@ -13,18 +13,15 @@ class AddsessionPage {
 
   async addSession(testController) {
     // Select topic
-    // const topicsSelector = Selector('#topicInput');
-    // const topicOption = topicsSelector.find('#Team project');
-    // await testController.click(topicsSelector);
-    // await testController.click(topicOption);
     const topicOption = 'Team project';
     await testController.typeText('#topicInput', topicOption);
 
     // Select course
     const courseSelector = Selector('#course');
-    const courseOption = courseSelector.find('#ICS 314');
+    const courseOption = courseSelector.find('option');
     await testController.click(courseSelector);
-    await testController.click(courseOption);
+    await testController.click(courseOption.withText('ICS 314'));
+    await testController.expect(courseSelector.value).eql('ICS 314');
 
     const notes = 'Team meet up';
     await testController.typeText('#sessionNotes', notes);
