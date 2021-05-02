@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Loader, Card, Image } from 'semantic-ui-react';
+import { Container, Loader, Card, Image, Divider } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
@@ -23,6 +23,17 @@ const MakeCard = (props) => (
       <Card.Meta>
         <span>{props.profile.email}</span>
       </Card.Meta>
+      <Divider clearing />
+      <Card.Description>
+        Institution: {props.profile.institution}
+      </Card.Description>
+      <Card.Description>
+        Major: {props.profile.major}
+      </Card.Description>
+      <Card.Description>
+        Class Standing: {props.profile.standing}
+      </Card.Description>
+      <Divider hidden />
       <Card.Description>
         {props.profile.bio}
       </Card.Description>
