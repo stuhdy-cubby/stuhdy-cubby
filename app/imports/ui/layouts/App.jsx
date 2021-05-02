@@ -8,9 +8,9 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListSessions from '../pages/ListSessionsPage';
-import AddStuff from '../pages/AddStuff';
+import UserInfo from '../pages/UserInfo';
 import AddSession from '../pages/AddSession';
-import EditStuff from '../pages/EditStuff';
+import EditProfile from '../pages/EditProfile';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -20,6 +20,7 @@ import LeaderboardPage from '../pages/LeaderboardPage';
 import UserProfile from '../pages/UserProfile';
 import AdminHome from '../pages/AdminHome';
 import RegisterSession from '../pages/RegisterSession';
+import ViewProfiles from '../pages/ViewProfiles';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -34,12 +35,13 @@ class App extends React.Component {
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <ProtectedRoute path="/list" component={ListSessions}/>
-            <ProtectedRoute path="/add" component={AddStuff}/>
+            <ProtectedRoute path="/createprofile" component={UserInfo}/>
             <ProtectedRoute path="/calendar" component={Calendar}/>
             <ProtectedRoute path="/addsession" component={AddSession}/>
             <ProtectedRoute path="/leaderboard" component={LeaderboardPage}/>
-            <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
+            <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
             <ProtectedRoute path="/profile" component={UserProfile}/>
+            <ProtectedRoute path="/viewprofiles" component={ViewProfiles}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
             <Route path="/notfound" component={NotFound}/>
             <ProtectedRoute path="/registersession/:_id" component={RegisterSession}/>
