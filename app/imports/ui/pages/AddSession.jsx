@@ -96,32 +96,39 @@ class AddSession extends React.Component {
     const formSchema = makeSchema(allCourses);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
-      <Grid id="add-session-page" container centered>
-        <Grid.Column>
-          <Header as="h2" textAlign="center">Add Session</Header>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
-            <Segment>
-              <Input size='large' list='topics'
-                label='Topic' name='topics' placeholder='Select or Enter a topic ' onChange={this.handleChange}/>
-              <datalist id='topics'>
-                {allSessions.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </datalist>
-              <HiddenField name='topic' value={descrip} />
-              <HiddenField name='description' value={descrip} />
-              <Form.Group widths={'equal'}>
-                <SelectField id='course' name='course' showInlineError={true} placeholder='Course'/>
-                <TextField id='location' name='location' showInlineError={true} placeholder='Location'/>
-                <DateField name='sessionDate' showInlineError={true} min={new Date(yyyy, mm, dd)}/>
-              </Form.Group>
-              <LongTextField id='sessionNotes' name='sessionNotes' placeholder='Session notes'/>
-              <SubmitField id='submit' value='Submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
-        </Grid.Column>
-      </Grid>
+      <div className='addsession-background'>
+        <Grid id="add-session-page" container centered>
+          <Grid.Column color={'green'}>
+            <Header as="h2" inverted textAlign="center">Add Session</Header>
+            <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
+              <Segment>
+                <Input size='large' list='topics'
+                  label={{
+                    as: 'a',
+                    color: 'teal',
+                    content: 'Topic *',
+                    icon: 'book',
+                  }} name='topics' placeholder='Select or Enter a topic ' onChange={this.handleChange}/>
+                <datalist id='topics'>
+                  {allSessions.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </datalist>
+                <HiddenField name='topic' value={descrip} />
+                <HiddenField name='description' value={descrip} />
+                <Form.Group widths={'equal'}>
+                  <SelectField id='course' name='course' showInlineError={true} placeholder='Course'/>
+                  <TextField id='location' name='location' showInlineError={true} placeholder='Location'/>
+                  <DateField name='sessionDate' showInlineError={true} min={new Date(yyyy, mm, dd)}/>
+                </Form.Group>
+                <LongTextField id='sessionNotes' name='sessionNotes' placeholder='Session notes'/>
+                <SubmitField id='submit' value='Submit'/>
+                <ErrorsField/>
+              </Segment>
+            </AutoForm>
+          </Grid.Column>
+        </Grid>
+      </div>
     );
   }
 }
