@@ -58,20 +58,20 @@ class RegisterSession extends React.Component {
   renderPage() {
     console.log(this.props.doc._id);
     return (
-      <div className='registersession-background'>
+      <div className='registersession-background' id='register-session-page'>
         <Grid container centered columns={2}>
           <Grid.Column color={'yellow'}>
             <Header as="h2" inverted textAlign="center">Register for Session</Header>
             <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
-                <TextField name='topic' readOnly={true}/>
-                <TextField name='course' readOnly={true}/>
-                <TextField name='location' readOnly={true}/>
-                <DateField name='sessionDate' readOnly={true}/>
-                <TextField name='sessionNotes' readOnly={true}/>
-                <TextField label='Created by' name='owner' readOnly={true}/>
-                <TextField name='response'/>
-                <SubmitField value='Submit'/>
+                <TextField id='topic' name='topic' readOnly={true}/>
+                <TextField id='course' name='course' readOnly={true}/>
+                <TextField id='location' name='location' readOnly={true}/>
+                <DateField id='sessionDate' name='sessionDate' readOnly={true}/>
+                <TextField id='sessionNotes' name='sessionNotes' readOnly={true}/>
+                <TextField id='createdBy' label='Created by' name='owner' readOnly={true}/>
+                <TextField id='response' name='response'/>
+                <SubmitField id='submit' value='Submit'/>
                 <ErrorsField/>
               </Segment>
             </AutoForm>

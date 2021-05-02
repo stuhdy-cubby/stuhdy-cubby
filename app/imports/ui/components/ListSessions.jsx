@@ -16,7 +16,7 @@ class ListSessions extends React.Component {
               <Card.Description>{this.props.sessions.sessionNotes}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <Button basic color='green'>
+              <Button basic color='green' id="register-form-button">
                 <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
               </Button>
             </Card.Content>
