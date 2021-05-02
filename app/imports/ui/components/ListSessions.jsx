@@ -8,7 +8,7 @@ import SessionsProfiles from './SessionsProfiles';
 class ListSessions extends React.Component {
   render() {
     return (
-          <Card color='green'>
+          <Card>
             <Card.Content>
               <Card.Header>{this.props.sessions.topic}</Card.Header>
               <Card.Meta>{this.props.sessions.course}</Card.Meta>
@@ -32,7 +32,6 @@ class ListSessions extends React.Component {
               </Button>
             </Card.Content>
           </Card>
-        </Card.Group>
     );
   }
 }
