@@ -7,8 +7,7 @@ import { withRouter, Link } from 'react-router-dom';
 class ListSessions extends React.Component {
   render() {
     return (
-        <Card.Group>
-          <Card>
+          <Card color='green'>
             <Card.Content>
               <Card.Header>{this.props.sessions.topic}</Card.Header>
               <Card.Meta>{this.props.sessions.course}</Card.Meta>
@@ -21,17 +20,6 @@ class ListSessions extends React.Component {
               </Button>
             </Card.Content>
           </Card>
-        </Card.Group>
-
-        // <Table.Row>
-        //   <Table.Cell>{this.props.sessions.topic}</Table.Cell>
-        // <Table.Cell>{this.props.sessions.course}</Table.Cell>
-        // <Table.Cell>{this.props.sessions.location}</Table.Cell>
-        // <Table.Cell>{this.props.sessions.sessionNotes}</Table.Cell>
-        // <Table.Cell>
-        //  <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
-        // </Table.Cell>
-        // </Table.Row>
     );
   }
 }

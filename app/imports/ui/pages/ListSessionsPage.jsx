@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Header, Loader, Card, Grid, Container } from 'semantic-ui-react';
+import { Header, Loader, Card , Container, Segment } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
@@ -18,11 +18,11 @@ class ListSessionsPage extends React.Component {
   renderPage() {
     return (
         <Container id="sessions list">
-          <div className="ui segment">
-            <h1 className="ui center aligned header">
+          <Segment>
+            <Header as 'h1' textAlign="center" color='green'>
               Register for a Session!
-            </h1>
-          </div>
+            </Header>
+          </Segment>
           <Card.Group centered>
             {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} />)}
           </Card.Group>
