@@ -8,7 +8,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListSessions from '../pages/ListSessionsPage';
-import AddStuff from '../pages/AddStuff';
+import UserInfo from '../pages/UserInfo';
 import AddSession from '../pages/AddSession';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
@@ -34,7 +34,7 @@ class App extends React.Component {
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <ProtectedRoute path="/list" component={ListSessions}/>
-            <ProtectedRoute path="/add" component={AddStuff}/>
+            <ProtectedRoute path="/registerprofile" component={UserInfo}/>
             <ProtectedRoute path="/calendar" component={Calendar}/>
             <ProtectedRoute path="/addsession" component={AddSession}/>
             <ProtectedRoute path="/leaderboard" component={LeaderboardPage}/>

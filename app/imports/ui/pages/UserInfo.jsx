@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
+import { Grid, Segment, Header, Divider } from 'semantic-ui-react';
+import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -9,12 +9,23 @@ import { Profiles } from '../../api/profiles/Profiles';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  firstname: String,
-  lastname: Number,
-  email: String,
-  institution: String,
-  major: String,
-  standing: String,
+  email: { type: String, index: true, unique: true },
+  firstName: { type: String },
+  lastName: { type: String },
+  bio: { type: String, optional: true },
+  picture: { type: String, optional: true },
+  institution: {
+    type: String,
+    allowedValues: ['University of Hawaii at Manoa', 'University of Hawaii West Oahu'],
+  },
+  major: {
+    type: String,
+    allowedValues: ['Computer Science', 'Computer Engineering'],
+  },
+  standing: {
+    type: String,
+    allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Other'],
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -24,9 +35,9 @@ class UserInfo extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { name, quantity, condition } = data;
+    const { firstName, lastName, email, institution, major, standing, bio } = data;
     const owner = Meteor.user().username;
-    Profiles.collection.insert({ name, quantity, condition, owner },
+    Profiles.collection.insert({ firstName, lastName, email, institution, major, standing, bio, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -43,12 +54,16 @@ class UserInfo extends React.Component {
     return (
       <Grid container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center">Add Stuff</Header>
+          <Divider hidden />
+          <Header as="h2" textAlign="center">Create Profile</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <TextField name='name'/>
-              <NumField name='quantity' decimal={false}/>
-              <SelectField name='condition'/>
+              <TextField name='firstName'/>
+              <TextField name='lastName' />
+              <TextField name='email' />
+              <SelectField name='institution'/>
+              <SelectField name='major'/>
+              <SelectField name='standing'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>
