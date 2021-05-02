@@ -13,6 +13,7 @@ import { Profiles } from '../../api/profiles/Profiles';
 import { Courses } from '../../api/courses/Courses';
 import { Sessions } from '../../api/sessions/Sessions';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
+import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const makeSchema = (allCourses) => new SimpleSchema({
@@ -44,6 +45,9 @@ class AddSession extends React.Component {
     console.log(emailList);
     const subjectLine = `New session for: ${topic}`;
     const owner = Meteor.user().username;
+    const profile = Meteor.user().username;
+    const points = 1;
+    const session = topic;
     if (Sessions.collection.find({ topic: topic }).count() === 0) {
       Sessions.collection.insert({ topic, description });
     }
@@ -52,6 +56,7 @@ class AddSession extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
+          ProfilesPoints.collection.insert({ profile, session, points });
           const emailMessage = `<b>Topic:</b> ${topic}<br/>
             <b>Course:</b> ${course}<br/>
             <b>Location:</b> ${location}<br/>
@@ -91,32 +96,39 @@ class AddSession extends React.Component {
     const formSchema = makeSchema(allCourses);
     const bridge = new SimpleSchema2Bridge(formSchema);
     return (
-      <Grid id="add-session-page" container centered>
-        <Grid.Column>
-          <Header as="h2" textAlign="center">Add Session</Header>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
-            <Segment>
-              <Input size='large' list='topics'
-                label='Topic' name='topics' placeholder='Select or Enter a topic ' onChange={this.handleChange}/>
-              <datalist id='topics'>
-                {allSessions.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </datalist>
-              <HiddenField name='topic' value={descrip} />
-              <HiddenField name='description' value={descrip} />
-              <Form.Group widths={'equal'}>
-                <SelectField id='course' name='course' showInlineError={true} placeholder='Course'/>
-                <TextField id='location' name='location' showInlineError={true} placeholder='Location'/>
-                <DateField name='sessionDate' showInlineError={true} min={new Date(yyyy, mm, dd)}/>
-              </Form.Group>
-              <LongTextField id='sessionNotes' name='sessionNotes' placeholder='Session notes'/>
-              <SubmitField id='submit' value='Submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
-        </Grid.Column>
-      </Grid>
+      <div className='addsession-background'>
+        <Grid id="add-session-page" container centered>
+          <Grid.Column color={'green'}>
+            <Header as="h2" inverted textAlign="center">Add Session</Header>
+            <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
+              <Segment>
+                <Input size='large' list='topics'
+                  label={{
+                    as: 'a',
+                    color: 'teal',
+                    content: 'Topic *',
+                    icon: 'book',
+                  }} name='topics' placeholder='Select or Enter a topic ' onChange={this.handleChange}/>
+                <datalist id='topics'>
+                  {allSessions.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </datalist>
+                <HiddenField name='topic' value={descrip} />
+                <HiddenField name='description' value={descrip} />
+                <Form.Group widths={'equal'}>
+                  <SelectField id='course' name='course' showInlineError={true} placeholder='Course'/>
+                  <TextField id='location' name='location' showInlineError={true} placeholder='Location'/>
+                  <DateField name='sessionDate' showInlineError={true} min={new Date(yyyy, mm, dd)}/>
+                </Form.Group>
+                <LongTextField id='sessionNotes' name='sessionNotes' placeholder='Session notes'/>
+                <SubmitField id='submit' value='Submit'/>
+                <ErrorsField/>
+              </Segment>
+            </AutoForm>
+          </Grid.Column>
+        </Grid>
+      </div>
     );
   }
 }

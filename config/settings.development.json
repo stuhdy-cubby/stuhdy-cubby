@@ -2,10 +2,13 @@
   "monti": {
     "appId": "TjA4xcxpqFfvkRHEM",
     "appSecret": "0efb0e77-3079-4b10-a938-dea2f1bb25c4"
-},
+  },
 
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "ysales@hawaii.edu", "password": "changeme", "role": "admin" },
+    { "email": "cbramos6@hawaii.edu", "password": "changeme", "role": "admin" },
+    { "email": "susanm@hawaii.edu", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" }
   ],
 
@@ -15,7 +18,11 @@
     { "email": "cbramos6@hawaii.edu", "firstName": "Christine", "lastName": "Ramos",
       "bio": "I am studying for a B.S. in Computer Engineering at the University of Hawaii at Manoa. I expect to graduate in the coming Fall, Fall 2021. ", "picture": "https://christinebramos.github.io/images/IMG_3344.jpg", "points": 7 },
     { "email": "susanm@hawaii.edu", "firstName": "Susan", "lastName": "Ma",
-      "bio": "I am second degree part-time student pursuing a B.S. in Computer Science. My expected graduation is Fall 2024. ", "picture": "https://susankpma.github.io/images/susan.jpeg", "points": 12 }
+      "bio": "I am second degree part-time student pursuing a B.S. in Computer Science. My expected graduation is Fall 2024. ", "picture": "https://susankpma.github.io/images/susan.jpeg", "points": 12 },
+    { "email": "admin@foo.com", "firstName": "Admin", "lastName": "Astrator",
+      "bio": "I am the admin for this project.", "picture": "https://react.semantic-ui.com/images/avatar/large/molly.png" },
+    { "email": "john@foo.com", "firstName": "John", "lastName": "Fu",
+      "bio": "I am a sophomore in Computer Science.", "picture": "https://react.semantic-ui.com/images/avatar/large/elliot.jpg" }
   ],
 
   "defaultData": [
@@ -99,3 +106,10 @@
   ]
 
 }
+
+
+
+
+
+
+

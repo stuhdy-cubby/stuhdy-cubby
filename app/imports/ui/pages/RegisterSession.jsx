@@ -30,8 +30,9 @@ class RegisterSession extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { topic, course, response } = data;
-    const session = topic;
+    const { course, response } = data;
+    const topic = this.props.doc._id;
+    const session = this.props.doc._id;
     const profile = Meteor.user().username;
     const points = 1;
     SessionsProfiles.collection.insert({ topic, course, profile, response },
@@ -59,10 +60,12 @@ class RegisterSession extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
+    console.log(this.props.doc._id);
     return (
-        <Grid container centered>
-          <Grid.Column>
-            <Header as="h2" textAlign="center">Register for Session</Header>
+      <div className='registersession-background'>
+        <Grid container centered columns={2}>
+          <Grid.Column color={'yellow'}>
+            <Header as="h2" inverted textAlign="center">Register for Session</Header>
             <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='topic' readOnly={true}/>
@@ -78,6 +81,7 @@ class RegisterSession extends React.Component {
             </AutoForm>
           </Grid.Column>
         </Grid>
+      </div>
     );
   }
 }

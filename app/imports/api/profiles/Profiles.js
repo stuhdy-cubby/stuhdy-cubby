@@ -19,6 +19,18 @@ class ProfilesCollection {
       bio: { type: String, optional: true },
       picture: { type: String, optional: true },
       points: { type: Number, optional: true },
+      institution: {
+        type: String,
+        allowedValues: ['University of Hawaii at Manoa', 'University of Hawaii West Oahu'],
+        optional: true },
+      major: {
+        type: String,
+        allowedValues: ['Computer Science', 'Computer Engineering'],
+        optional: true },
+      standing: {
+        type: String,
+        allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Other'],
+        optional: true },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
