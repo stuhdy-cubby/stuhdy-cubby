@@ -19,7 +19,7 @@ class ListSessionsPage extends React.Component {
     return (
         <Container id="sessions list">
           <Segment>
-            <Header as 'h1' textAlign="center" color='green'>
+            <Header as='h1' textAlign="center" color='green'>
               Register for a Session!
             </Header>
           </Segment>
