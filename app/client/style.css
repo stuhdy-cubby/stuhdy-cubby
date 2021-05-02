@@ -18,3 +18,19 @@
   height: 700px;
   padding-top: 30px;
 }
+
+.fc .fc-daygrid-day-number {
+  color: #149414;
+}
+
+.fc .fc-col-header-cell-cushion {
+  color: #149414;
+}
+
+.fc .fc-toolbar-title {
+  color: #149414;
+}
+
+.fc-scrollgrid.fc-scrollgrid-liquid {
+  background: #b8d8be;
+}
