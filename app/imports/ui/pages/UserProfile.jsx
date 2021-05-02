@@ -1,90 +1,70 @@
 import React from 'react';
-import { Button, Card, Container, Divider, Grid, Image } from 'semantic-ui-react';
+import { Meteor } from 'meteor/meteor';
+import { Container, Loader, Card, Image } from 'semantic-ui-react';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { _ } from 'meteor/underscore';
+import { Profiles } from '../../api/profiles/Profiles';
 
-/** A simple static component to render some text for the landing page. */
+/** Returns the Profile and associated Projects and Interests associated with the passed user email. */
+function getProfileData(email) {
+  const data = Profiles.collection.findOne({ email });
+  const firstname = _.pluck(Profiles.collection.find({ profile: email }).fetch(), 'firstName');
+  const lastname = _.pluck(Profiles.collection.find({ profile: email }).fetch(), 'lastName');
+  return _.extend({ }, data, { firstname, lastname });
+}
+
+/** Component for layout out a Profile Card. */
+const MakeCard = (props) => (
+  <Card>
+    <Card.Content>
+      <Image floated='right' circular src={props.profile.picture} />
+      <Card.Header>{props.profile.firstName} {props.profile.lastName}</Card.Header>
+      <Card.Meta>
+        <span>{props.profile.email}</span>
+      </Card.Meta>
+      <Card.Description>
+        {props.profile.bio}
+      </Card.Description>
+    </Card.Content>
+  </Card>
+);
+
+MakeCard.propTypes = {
+  profile: PropTypes.object.isRequired,
+};
+
+/** Renders the Profile Collection as a set of Cards. */
 class UserProfile extends React.Component {
+
+  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  /** Render the page once subscriptions have been received. */
+  renderPage() {
+    const emails = _.pluck(Profiles.collection.find().fetch(), 'email');
+    const profileData = emails.map(email => getProfileData(email));
     return (
-      <Container id="user-profile">
-        <Grid container padded>
-          <Grid.Column width={4}>
-            <Image rounded src='https://react.semantic-ui.com/images/wireframe/image.png' />
-            <h2>John Doe</h2>
-            <p>johndoe@hawaii.edu</p>
-            <Button fluid basic color='gray'><strong>Edit Profile</strong></Button>
-            <Divider clearing />
-            <p><strong>Institution: </strong>University of Hawaii at Manoa</p>
-            <p><strong>Major: </strong>Information & Computer Sciences</p>
-            <p><strong>Class Standing: </strong>Junior</p>
-          </Grid.Column>
-
-          <Grid.Column width={9}>
-            <Card.Group>
-              <Card fluid>
-                <Card.Content>
-                  <Card.Header>Enrolled Courses</Card.Header>
-                  <Card.Description>
-                    <p>ICS 314 - Software Engineering I</p>
-                    <p>ICS 321 - Databases Systems I</p>
-                    <p>ICS 332 - Operating Systems</p>
-                    <p>ICS 355 - Security and Trust I</p>
-                  </Card.Description>
-                </Card.Content>
-              </Card>
-
-              <Card fluid>
-                <Card.Content>
-                  <Card.Header>Previously Taken Courses</Card.Header>
-                  <Card.Description>
-                    <p>ICS 101 - Tools for the Info World</p>
-                    <p>ICS 141 - Discrete Math for CS I</p>
-                    <p>ICS 211 - Intro to Computer Science II</p>
-                    <p>ICS 212 - Program Structure</p>
-                    <p>ICS 222 - Basic Concepts of Comp. Sci.</p>
-                    <p>ICS 241 - Discrete Mathematics II</p>
-                    <p>ICS 311 - Algorithms</p>
-                    <p>ICS 312 - Machine-Lvl & Systems Programming</p>
-                  </Card.Description>
-                </Card.Content>
-              </Card>
-
-              <Card fluid>
-                <Card.Content>
-                  <Card.Header>Highly Skilled In</Card.Header>
-
-                  <Card.Description>
-                    <p>Programming Languages: HTML/CSS, C, C++, Python, Javascript</p>
-                  </Card.Description>
-                </Card.Content>
-              </Card>
-
-              <Card fluid>
-                <Card.Content>
-                  <Card.Header>Needs Help With</Card.Header>
-
-                  <Card.Description>
-                    <p>ICS 332 - Operating Systems</p>
-                    <p>ICS 355 - Security and Trust I</p>
-                  </Card.Description>
-                </Card.Content>
-              </Card>
-            </Card.Group>
-          </Grid.Column>
-
-          <Grid.Column width={3}>
-            <h3>Interests</h3>
-            <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-            <Divider clearing />
-            <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-            <Divider clearing />
-            <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-            <Divider clearing />
-            <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-          </Grid.Column>
-        </Grid>
+      <Container id="profiles-page">
+        <Card.Group>
+          {_.map(profileData, (profile, index) => <MakeCard key={index} profile={profile}/>)}
+        </Card.Group>
       </Container>
     );
   }
 }
 
-export default UserProfile;
+UserProfile.propTypes = {
+  ready: PropTypes.bool.isRequired,
+};
+
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(() => {
+  // Ensure that minimongo is populated with all collections prior to running render().
+  const sub = Meteor.subscribe(Profiles.userPublicationName);
+  return {
+    ready: sub.ready(),
+  };
+})(UserProfile);
