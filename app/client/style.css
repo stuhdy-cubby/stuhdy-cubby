@@ -1,5 +1,8 @@
 .listsessions-background {
   background: url('images/listsessions.png') no-repeat center center fixed;
+  background-size: cover;
+  height: 600px;
+  padding-top: 50px;
 }
 
 .addsession-background {
