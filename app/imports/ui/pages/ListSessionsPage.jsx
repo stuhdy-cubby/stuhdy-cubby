@@ -4,6 +4,7 @@ import { Loader, Card, Container } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
+import { SessionsProfiles } from '../../api/sessions/SessionsProfiles';
 import ListSessions from '../components/ListSessions';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
@@ -25,6 +26,7 @@ class ListSessionsPage extends React.Component {
         </div>
         <Card.Group centered>
           {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} />)}
+          {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} sessionsProfiles={this.props.sessionsProfiles.filter(p => (p.topic === sessions._id))} />)}
         </Card.Group>
       </Container>
     );
@@ -34,6 +36,7 @@ class ListSessionsPage extends React.Component {
 // Require an array of Stuff documents in the props.
 ListSessionsPage.propTypes = {
   sessions: PropTypes.array.isRequired,
+  sessionsProfiles: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -41,12 +44,15 @@ ListSessionsPage.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(SessionsCourses.userPublicationName);
+  const sub2 = Meteor.subscribe(SessionsProfiles.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && sub2.ready();
   // Get the Stuff documents
   const sessions = SessionsCourses.collection.find({}).fetch();
+  const sessionsProfiles = SessionsProfiles.collection.find({}).fetch();
   return {
     sessions,
+    sessionsProfiles,
     ready,
   };
 })(ListSessionsPage);
