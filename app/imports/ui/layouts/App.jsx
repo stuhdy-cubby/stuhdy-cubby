@@ -10,7 +10,7 @@ import Landing from '../pages/Landing';
 import ListSessions from '../pages/ListSessionsPage';
 import UserInfo from '../pages/UserInfo';
 import AddSession from '../pages/AddSession';
-import EditStuff from '../pages/EditStuff';
+import EditProfile from '../pages/EditProfile';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -40,7 +40,7 @@ class App extends React.Component {
             <ProtectedRoute path="/calendar" component={Calendar}/>
             <ProtectedRoute path="/addsession" component={AddSession}/>
             <ProtectedRoute path="/leaderboard" component={LeaderboardPage}/>
-            <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
+            <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
             <ProtectedRoute path="/profile" component={UserProfile}/>
             <ProtectedRoute path="/viewprofiles" component={ViewProfiles}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
