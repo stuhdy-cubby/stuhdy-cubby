@@ -20,6 +20,7 @@ import LeaderboardPage from '../pages/LeaderboardPage';
 import UserProfile from '../pages/UserProfile';
 import AdminHome from '../pages/AdminHome';
 import RegisterSession from '../pages/RegisterSession';
+import ViewProfiles from '../pages/ViewProfiles';
 // import UserProfile2 from '../pages/UserProfile2';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -41,6 +42,7 @@ class App extends React.Component {
             <ProtectedRoute path="/leaderboard" component={LeaderboardPage}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <ProtectedRoute path="/profile" component={UserProfile}/>
+            <ProtectedRoute path="/viewprofiles" component={ViewProfiles}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
             <Route path="/notfound" component={NotFound}/>
             <ProtectedRoute path="/registersession/:_id" component={RegisterSession}/>
