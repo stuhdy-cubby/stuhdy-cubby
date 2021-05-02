@@ -19,7 +19,8 @@ import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
 const makeSchema = (allCourses) => new SimpleSchema({
   topic: { type: String, optional: false },
   description: String,
-  course: { type: String, allowedValues: allCourses, optional: false },
+  course: { type: Array, label: 'Courses', optional: false },
+  'course.$': { type: String, allowedValues: allCourses },
   location: { type: String, defaultValue: 'ICSpace', label: 'Location' },
   sessionDate: { label: 'Session Date', type: Date, defaultValue: new Date() },
   sessionNotes: { type: String, label: 'Session Notes' },
@@ -87,7 +88,15 @@ class AddSession extends React.Component {
   render() {
     let fRef = null;
     const descrip = this.state.description;
-    const allCourses = _.pluck(Courses.collection.find().fetch(), 'name');
+    // const allCourses = _.pluck(Courses.collection.find().fetch(), 'name');
+    const courseList = _.pluck(Courses.collection.find().fetch(), 'name');
+    const allCourses = _.map(courseList, (val, index) => ({
+      key: index,
+      label: val,
+      id: val,
+      value: val,
+    }));
+    console.log(allCourses);
     const allSessions = _.pluck(Sessions.collection.find().fetch(), 'topic');
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -108,16 +117,16 @@ class AddSession extends React.Component {
                     color: 'teal',
                     content: 'Topic *',
                     icon: 'book',
-                  }} name='topics' placeholder='Select or Enter a topic ' onChange={this.handleChange}/>
+                  }} name='topics' id='topicInput' placeholder='Select or Enter a topic ' onChange={this.handleChange}/>
                 <datalist id='topics'>
                   {allSessions.map((option) => (
-                    <option key={option} value={option}>{option}</option>
+                    <option key={option} id={option} value={option}>{option}</option>
                   ))}
                 </datalist>
                 <HiddenField name='topic' value={descrip} />
                 <HiddenField name='description' value={descrip} />
                 <Form.Group widths={'equal'}>
-                  <SelectField id='course' name='course' showInlineError={true} placeholder='Course'/>
+                  <SelectField id='course' options={allCourses} name='course' showInlineError={true} placeholder='Course'/>
                   <TextField id='location' name='location' showInlineError={true} placeholder='Location'/>
                   <DateField name='sessionDate' showInlineError={true} min={new Date(yyyy, mm, dd)}/>
                 </Form.Group>

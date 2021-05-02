@@ -33,10 +33,10 @@ test('Test List Sessions page', async (testController) => {
   await listsessionPage.hasTable(testController);
 });
 
-test('Test Add Session page', async (testController) => {
+test.only('Test Add Session page', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
-  await navBar.gotoListSessionPage(testController);
+  await navBar.gotoAddSessionPage(testController);
   await addsessionPage.isDisplayed(testController);
-  await addsessionPage.hasTable(testController);
+  await addsessionPage.addSession(testController);
 });

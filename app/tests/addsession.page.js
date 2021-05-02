@@ -13,10 +13,12 @@ class AddsessionPage {
 
   async addSession(testController) {
     // Select topic
-    const topicSelector = Selector('#topics');
-    const topicOption = topicSelector.find('#Team project');
-    await testController.click(topicSelector);
-    await testController.click(topicOption);
+    // const topicsSelector = Selector('#topicInput');
+    // const topicOption = topicsSelector.find('#Team project');
+    // await testController.click(topicsSelector);
+    // await testController.click(topicOption);
+    const topicOption = 'Team project';
+    await testController.typeText('#topicInput', topicOption);
 
     // Select course
     const courseSelector = Selector('#course');
@@ -25,7 +27,7 @@ class AddsessionPage {
     await testController.click(courseOption);
 
     const notes = 'Team meet up';
-    await testController.typeText('sessionNotes', notes);
+    await testController.typeText('#sessionNotes', notes);
 
     await testController.click('#submit');
     await testController.click(Selector('.swal-button--confirm'));

@@ -42,7 +42,7 @@ class NavBar {
   }
 
   async gotoAddSessionPage(testController) {
-    await testController.click('#navbar-list-session');
+    await testController.click('#navbar-add-session');
   }
 }
 
