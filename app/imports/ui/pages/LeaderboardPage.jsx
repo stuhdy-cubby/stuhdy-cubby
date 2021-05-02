@@ -4,7 +4,8 @@ import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Leaderboard from '../components/Leaderboard';
-import { Profiles } from '../../api/profiles/Profiles';
+import { Profiles} from '../../api/profiles/Profiles';
+import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class LeaderboardPage extends React.Component {
@@ -18,7 +19,7 @@ class LeaderboardPage extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center" inverted>Points Accumulated</Header>
+        <Header as="h2" textAlign="center">Leaderboard</Header>
         <Table>
           <Table.Header>
             <Table.Row>
@@ -44,10 +45,10 @@ LeaderboardPage.propTypes = {
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Profiles.userPublicationName);
+  const subscription = Meteor.subscribe(ProfilesPoints.userPublicationName);
   return {
     /** get collection and sort by points */
-    profiles: Profiles.collection.find({}, { sort: { points: -1 } }).fetch(),
+    profiles: ProfilesPoints.collection.find({}, { sort: { points: -1 } }).fetch(),
     ready: subscription.ready(),
   };
 })(LeaderboardPage);

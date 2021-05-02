@@ -8,7 +8,7 @@ class LeaderBoard extends React.Component {
   render() {
     return (
       <Table.Row>
-        <Table.Cell>{this.props.leaderboard.firstName}</Table.Cell>
+        <Table.Cell>{this.props.leaderboard.profile}</Table.Cell>
         <Table.Cell>{this.props.leaderboard.points}</Table.Cell>
       </Table.Row>
     );
