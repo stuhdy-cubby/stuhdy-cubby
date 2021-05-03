@@ -7,11 +7,9 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { _ } from 'meteor/underscore';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 import { SessionsProfiles } from '../../api/sessions/SessionsProfiles';
 import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
-import { Profiles } from '../../api/profiles/Profiles';
 
 const formSchema = new SimpleSchema({
   topic: String,
@@ -46,7 +44,6 @@ class RegisterSession extends React.Component {
                 swal('Error', err.message, 'error');
               } else {
                 swal('Success', 'Successfully registered for session', 'success');
-                Profiles.collection.update(profile._id, { $inc: { points: 1 } });
               }
             });
           }
