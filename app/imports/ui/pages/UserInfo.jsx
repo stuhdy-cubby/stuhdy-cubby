@@ -58,6 +58,7 @@ class UserInfo extends React.Component {
         <Grid.Column>
           <Divider hidden />
           <Header as="h2" textAlign="center">Create Profile</Header>
+          <Divider hidden />
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
               <TextField name='firstName'/>

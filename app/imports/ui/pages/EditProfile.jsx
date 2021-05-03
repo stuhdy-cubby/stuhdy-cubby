@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Divider } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
@@ -31,16 +31,18 @@ class EditProfile extends React.Component {
     return (
       <Grid container centered>
         <Grid.Column>
+          <Divider hidden />
           <Header as="h2" textAlign="center">Edit Profile</Header>
+          <Divider hidden />
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Segment>
-              <TextField name='firstName'/>
-              <TextField name='lastName' />
-              <TextField name='email' />
-              <SelectField name='institution'/>
-              <SelectField name='major'/>
-              <SelectField name='standing'/>
-              <TextField name='bio' />
+              <TextField name='firstName' required/>
+              <TextField name='lastName' required/>
+              <TextField name='email' required/>
+              <SelectField name='institution' required/>
+              <SelectField name='major' required/>
+              <SelectField name='standing' required/>
+              <TextField name='bio' required/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>

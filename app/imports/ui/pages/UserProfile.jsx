@@ -5,7 +5,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Profiles } from '../../api/profiles/Profiles';
 import ProfileInfo from './ProfileInfo';
-import ListSessions from '../components/ListSessions';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 
 class UserProfile extends React.Component {

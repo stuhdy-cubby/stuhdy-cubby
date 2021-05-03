@@ -10,7 +10,7 @@ class ProfileInfo extends React.Component {
       <Container id="user-profile">
         <Grid container padded='horizontally'>
           <Grid.Column width={4}>
-            <Image floated='left' size='medium' rounded src={this.props.profiles.picture} />
+            <Image floated='left' size='medium' circular src={this.props.profiles.picture} />
             <Header as='h2'>{this.props.profiles.firstName} {this.props.profiles.lastName}</Header>
             <p>{this.props.profiles.email}</p>
 
