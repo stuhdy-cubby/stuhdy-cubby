@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 import { Container, Divider, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -16,11 +17,13 @@ class UserProfile extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    const user = Meteor.user().username;
+    console.log(user);
+    const userData = Profiles.collection.find({ email: user }).fetch();
     return (
       <Container id="user-profile">
         <Divider hidden />
-        {this.props.profiles.map((profiles) => <ProfileInfo key={profiles._id} profiles={profiles} />)}
-        {this.props.sessions.map((sessions) => <ProfileInfo key={sessions._id} sessions={sessions} />)}
+        {_.map(userData, (profiles) => <ProfileInfo key={profiles._id} profiles={profiles} sessions={this.props.sessions.filter(s => (s.owner === profiles.email))}/>)}
       </Container>
     );
   }

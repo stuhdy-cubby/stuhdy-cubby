@@ -1,12 +1,12 @@
 import React from 'react';
-import { Grid, Segment, Header, Divider } from 'semantic-ui-react';
+import { Grid, Segment, Header, Divider, Button } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { Profiles } from '../../api/profiles/Profiles';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -68,7 +68,7 @@ class UserInfo extends React.Component {
               <SelectField name='major'/>
               <SelectField name='standing'/>
               <TextField name='bio' />
-              <SubmitField value='Submit'/>
+              <SubmitField value='Submit' as={NavLink} activeClassName="active" exact to="/profile"/>
               <ErrorsField/>
             </Segment>
           </AutoForm>

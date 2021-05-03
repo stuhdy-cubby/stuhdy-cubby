@@ -1,4 +1,5 @@
 import React from 'react';
+import { _ } from 'meteor/underscore';
 import { Button, Card, Container, Divider, Grid, Header, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
@@ -64,6 +65,12 @@ class ProfileInfo extends React.Component {
 
             <p><strong>Non-technical</strong></p>
             <p>List of non-technical interests.</p>
+
+            <h3>Sessions</h3>
+            {_.map(this.props.sessions, (s) => <p id={s}>{s.topic}</p>)}
+
+            <Divider clearing />
+
           </Grid.Column>
         </Grid>
       </Container>
@@ -84,6 +91,7 @@ ProfileInfo.propTypes = {
     picture: PropTypes.object,
     _id: PropTypes.string,
   }).isRequired,
+  sessions: PropTypes.array.isRequired,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
