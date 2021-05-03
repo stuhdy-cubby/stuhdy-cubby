@@ -1,4 +1,5 @@
 import React from 'react';
+import { _ } from 'meteor/underscore';
 import { Button, Card, Container, Divider, Grid, Header, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
@@ -10,7 +11,7 @@ class ProfileInfo extends React.Component {
       <Container id="user-profile">
         <Grid container padded='horizontally'>
           <Grid.Column width={4}>
-            <Image floated='left' size='medium' rounded src={this.props.profiles.picture} />
+            <Image floated='left' size='medium' circular src={this.props.profiles.picture} />
             <Header as='h2'>{this.props.profiles.firstName} {this.props.profiles.lastName}</Header>
             <p>{this.props.profiles.email}</p>
 
@@ -43,7 +44,7 @@ class ProfileInfo extends React.Component {
               <Card fluid>
                 <Card.Content>
                   <Card.Header>Skills</Card.Header>
-                  <Card.Description></Card.Description>
+                  <Card.Description>{this.props.profiles.skills}</Card.Description>
                 </Card.Content>
               </Card>
               <Card fluid>
@@ -57,13 +58,16 @@ class ProfileInfo extends React.Component {
 
           <Grid.Column width={3}>
             <h3>Interests</h3>
-            <p><strong>Technical</strong></p>
-            <p>List of technical interests.</p>
+            <p>{this.props.profiles.interests}</p>
 
             <Divider clearing />
 
-            <p><strong>Non-technical</strong></p>
-            <p>List of non-technical interests.</p>
+            <h3>Sessions</h3>
+            {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}</p>)}
+            {_.map(this.props.sessions, (s) => <p id={s}><strong>Course: </strong>{s.course}</p>)}
+            {_.map(this.props.sessions, (s) => <p id={s}><strong>Location: </strong>{s.location}</p>)}
+            <Divider clearing />
+
           </Grid.Column>
         </Grid>
       </Container>
@@ -82,8 +86,11 @@ ProfileInfo.propTypes = {
     standing: PropTypes.string,
     bio: PropTypes.string,
     picture: PropTypes.object,
+    interests: PropTypes.string,
+    skills: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
+  sessions: PropTypes.array.isRequired,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
