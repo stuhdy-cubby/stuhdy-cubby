@@ -42,7 +42,10 @@ class RegisterSession extends React.Component {
             if (err) {
               swal('Error', err.message, 'error');
             } else {
-              swal('Success', 'Successfully registered for session', 'success');
+              swal('Success', 'Successfully registered for session', 'success')
+                .then(function () {
+                  window.location.href = '#/list';
+                });
             }
           });
         }
