@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment, Divider } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Divider, Checkbox, Button } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
@@ -15,8 +15,9 @@ class EditProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { firstName, lastName, email, institution, major, standing, bio, _id } = data;
-    Profiles.collection.update(_id, { $set: { firstName, lastName, email, institution, major, standing, bio } }, (error) => (error ?
+    const owner = Meteor.user().username;
+    const { firstName, lastName, email, institution, major, standing, bio, _id, interests, skills } = data;
+    Profiles.collection.update(_id, { $set: { firstName, lastName, email, institution, major, standing, bio, owner, interests, skills } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   }
@@ -36,13 +37,75 @@ class EditProfile extends React.Component {
           <Divider hidden />
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Segment>
-              <TextField name='firstName' required/>
-              <TextField name='lastName' required/>
-              <TextField name='email' required/>
-              <SelectField name='institution' required/>
-              <SelectField name='major' required/>
-              <SelectField name='standing' required/>
-              <TextField name='bio' required/>
+              <TextField name='firstName'/>
+              <TextField name='lastName' />
+              <TextField name='email' />
+              <SelectField name='institution'/>
+              <SelectField name='major'/>
+              <SelectField name='standing'/>
+              <TextField name='bio' />
+
+              <Divider hidden />
+              <Divider clearing />
+              <Divider hidden />
+
+              <p><strong>Interests</strong></p>
+              <p>Select all that apply.</p>
+              <Grid columns='three'>
+                <Grid.Row>
+                  <Grid.Column width={3}>
+                    <Checkbox label={<label>Art</label>} />
+                    <Divider hidden />
+                    <Checkbox label={<label>Culinary Arts</label>} />
+                  </Grid.Column>
+                  <Grid.Column width={3}>
+                    <Checkbox label={<label>Music</label>} />
+                    <Divider hidden />
+                    <Checkbox label={<label>Athletics</label>} />
+                  </Grid.Column>
+                  <Grid.Column width={3}>
+                    <Checkbox label={<label>Creative Media</label>} />
+                    <Divider hidden />
+                    <Checkbox label={<label>Technology</label>} />
+                  </Grid.Column>
+                  <Grid.Column width={3}>
+                    <Checkbox label={<label>Other</label>} />
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+
+              <Divider hidden />
+              <Divider clearing />
+              <Divider hidden />
+
+              <p><strong>Skills</strong></p>
+              <p>Select all that apply.</p>
+              <Grid columns='three'>
+                <Grid.Row>
+                  <Grid.Column width={2}>
+                    <Checkbox label={<label>Javascript</label>} />
+                    <Divider hidden />
+                    <Checkbox label={<label>Java</label>} />
+                  </Grid.Column>
+                  <Grid.Column width={2}>
+                    <Checkbox label={<label>HTML</label>} />
+                    <Divider hidden />
+                    <Checkbox label={<label>CSS</label>} />
+                  </Grid.Column>
+                  <Grid.Column width={2}>
+                    <Checkbox label={<label>C</label>} />
+                    <Divider hidden />
+                    <Checkbox label={<label>C++</label>} />
+                  </Grid.Column>
+                  <Grid.Column width={2}>
+                    <Checkbox label={<label>Other</label>}/>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+
+              <Divider hidden />
+              <Divider hidden />
+
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>

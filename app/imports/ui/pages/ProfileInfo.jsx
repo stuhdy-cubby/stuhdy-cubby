@@ -44,7 +44,7 @@ class ProfileInfo extends React.Component {
               <Card fluid>
                 <Card.Content>
                   <Card.Header>Skills</Card.Header>
-                  <Card.Description></Card.Description>
+                  <Card.Description>{this.props.profiles.skills}</Card.Description>
                 </Card.Content>
               </Card>
               <Card fluid>
@@ -58,13 +58,9 @@ class ProfileInfo extends React.Component {
 
           <Grid.Column width={3}>
             <h3>Interests</h3>
-            <p><strong>Technical</strong></p>
-            <p>List of technical interests.</p>
+            <p>{this.props.profiles.interests}</p>
 
             <Divider clearing />
-
-            <p><strong>Non-technical</strong></p>
-            <p>List of non-technical interests.</p>
 
             <h3>Sessions</h3>
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}</p>)}
@@ -90,6 +86,8 @@ ProfileInfo.propTypes = {
     standing: PropTypes.string,
     bio: PropTypes.string,
     picture: PropTypes.object,
+    interests: PropTypes.string,
+    skills: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
   sessions: PropTypes.array.isRequired,

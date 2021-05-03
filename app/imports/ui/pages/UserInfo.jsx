@@ -29,10 +29,16 @@ const formSchema = new SimpleSchema({
     type: String,
     allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Other'],
   },
-  interests: { type: String },
+  interests: {
+    type: String,
+    optional: true,
+  },
   // enrolledCourses: { type: String },
   // previouslyEnrolledCourses: { type: String },
-  skills: { type: String },
+  skills: {
+    type: String,
+    optional: true,
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
