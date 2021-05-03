@@ -13,7 +13,7 @@ class ProfilesCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      email: { type: String, index: true, unique: true },
+      email: { type: String, index: true, unique: true, optional: true },
       firstName: { type: String, optional: true },
       lastName: { type: String, optional: true },
       bio: { type: String, optional: true },
@@ -31,6 +31,16 @@ class ProfilesCollection {
         type: String,
         allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Other'],
         optional: true },
+      interests: {
+        type: String,
+        optional: true,
+      },
+      // enrolledCourses: { type: String },
+      // previouslyEnrolledCourses: { type: String },
+      skills: {
+        type: String,
+        optional: true,
+      },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
