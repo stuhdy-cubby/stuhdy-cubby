@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Button, Feed, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
+import SessionsProfiles from './SessionsProfiles';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class ListSessions extends React.Component {
@@ -44,8 +45,10 @@ ListSessions.propTypes = {
     location: PropTypes.string,
     sessionDate: PropTypes.instanceOf(Date),
     sessionNotes: PropTypes.string,
+    owner: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
+  sessionsProfiles: PropTypes.array.isRequired,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
