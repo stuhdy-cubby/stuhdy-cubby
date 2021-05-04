@@ -50,23 +50,9 @@ class RegisterSession extends React.Component {
           });
         }
       });
-    (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            ProfilesPoints.collection.insert({ profile, session, points},
-            (err) => {
-              if (err) {
-                swal('Error', err.message, 'error');
-              } else {
-                swal('Success', 'Successfully registered for session', 'success');
-              }
-            });
-          }
-        });
   }
 
-// If the subscription(s) have been received, render the page, otherwise show a loading icon.
+  // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
