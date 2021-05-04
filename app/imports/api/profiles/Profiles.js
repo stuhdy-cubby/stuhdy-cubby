@@ -5,6 +5,12 @@ import { Tracker } from 'meteor/tracker';
 /**
  * The ProfilesCollection. It encapsulates state and variable values for profile.
  */
+
+const ProfileDataValues = {
+  interests: ['Art', 'Culinary Arts', 'Music', 'Athletics', 'Creative Media', 'Technology', 'Other'],
+  skills: ['Javascript', 'Java', 'HTML', 'CSS', 'C', 'C++', 'Other'],
+};
+
 class ProfilesCollection {
   constructor() {
     // The name of this collection.
@@ -13,11 +19,12 @@ class ProfilesCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      email: { type: String, index: true, unique: true },
+      email: { type: String, index: true, unique: true, optional: true },
       firstName: { type: String, optional: true },
       lastName: { type: String, optional: true },
       bio: { type: String, optional: true },
       picture: { type: String, optional: true },
+      points: { type: Number, optional: true },
       institution: {
         type: String,
         allowedValues: ['University of Hawaii at Manoa', 'University of Hawaii West Oahu'],
@@ -30,6 +37,12 @@ class ProfilesCollection {
         type: String,
         allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Other'],
         optional: true },
+      interests: { type: Array, optional: true },
+      'interests.$': { type: String, allowedValues: ProfileDataValues.interests },
+      // enrolledCourses: { type: String },
+      // previouslyEnrolledCourses: { type: String },
+      skills: { type: Array, optional: true },
+      'skills.$': { type: String, allowedValues: ProfileDataValues.skills },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
