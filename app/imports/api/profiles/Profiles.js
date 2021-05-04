@@ -5,6 +5,7 @@ import { Tracker } from 'meteor/tracker';
 /**
  * The ProfilesCollection. It encapsulates state and variable values for profile.
  */
+
 const ProfileDataValues = {
   interests: ['Art', 'Culinary Arts', 'Music', 'Athletics', 'Creative Media', 'Technology', 'Other'],
   skills: ['Javascript', 'Java', 'HTML', 'CSS', 'C', 'C++', 'Other'],
@@ -23,6 +24,7 @@ class ProfilesCollection {
       lastName: { type: String, optional: true },
       bio: { type: String, optional: true },
       picture: { type: String, optional: true },
+      points: { type: Number, optional: true },
       institution: {
         type: String,
         allowedValues: ['University of Hawaii at Manoa', 'University of Hawaii West Oahu'],

@@ -7,7 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
 import { _ } from 'meteor/underscore';
-import { Loader } from 'semantic-ui-react';
+import { Container, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 
@@ -30,7 +30,8 @@ class Calendar extends React.Component {
     });
     console.log(allEvents);
     return (
-      <FullCalendar
+        <Container id="calendar">
+        <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         eventColor='#378006'
@@ -54,6 +55,7 @@ class Calendar extends React.Component {
             });
         }}
       />
+        </Container>
     );
   }
 }
