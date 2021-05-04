@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Header, Loader, Card , Container, Segment } from 'semantic-ui-react';
+import { Header, Loader, Card, Container, Segment } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
@@ -18,7 +18,7 @@ class ListSessionsPage extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-        <div className='listsessions-background'>
+      <div className='listsessions-background'>
         <Container id="sessions list">
           <Segment>
             <Header as='h1' textAlign="center" color='green'>
@@ -29,7 +29,7 @@ class ListSessionsPage extends React.Component {
             {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} sessionsProfiles={this.props.sessionsProfiles.filter(p => (p.topic === sessions._id))} />)}
           </Card.Group>
         </Container>
-        </div>
+      </div>
     );
   }
 }
