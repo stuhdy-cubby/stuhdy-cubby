@@ -34,11 +34,11 @@ class RegisterSession extends React.Component {
     const profile = Meteor.user().username;
     const points = 1;
     SessionsProfiles.collection.insert({ topic, course, profile, response },
-    (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            ProfilesPoints.collection.insert({ profile, session, points},
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          ProfilesPoints.collection.insert({ profile, session, points },
             (err) => {
               if (err) {
                 swal('Error', err.message, 'error');
@@ -46,18 +46,18 @@ class RegisterSession extends React.Component {
                 swal('Success', 'Successfully registered for session', 'success');
               }
             });
-          }
-        });
+        }
+      });
   }
 
-// If the subscription(s) have been received, render the page, otherwise show a loading icon.
+  // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
-    console.log(this.props.doc._id);
+    // console.log(this.props.doc._id);
     return (
       <div className='registersession-background'>
         <Grid container centered columns={2}>
@@ -83,7 +83,7 @@ class RegisterSession extends React.Component {
   }
 }
 
-// Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
+// Require the presence of a Sessions document in the props object. Uniforms adds 'model' to the props, which we use.
 RegisterSession.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
@@ -94,7 +94,7 @@ RegisterSession.propTypes = {
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
-  // Get access to Stuff documents.
+  // Get access to SessionsCourses documents.
   const subscription = Meteor.subscribe(SessionsCourses.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();

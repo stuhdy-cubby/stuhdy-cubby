@@ -48,7 +48,7 @@ class LeaderboardPage extends React.Component {
   }
 }
 
-/** Require an array of Stuff documents in the props. */
+/** Require an array of Profiles documents in the props. */
 LeaderboardPage.propTypes = {
   profiles: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
@@ -56,7 +56,7 @@ LeaderboardPage.propTypes = {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to ProfilesPoints documents.
   const subscription = Meteor.subscribe(ProfilesPoints.userPublicationName);
   return {
     /** get collection and sort by points */

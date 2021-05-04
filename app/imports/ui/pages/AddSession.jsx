@@ -42,7 +42,7 @@ class AddSession extends React.Component {
   submit(data, formRef) {
     const { topic, description, course, location, sessionDate, sessionNotes } = data;
     const emailList = _.pluck(Profiles.collection.find().fetch(), 'email');
-    console.log(emailList);
+    // console.log(emailList);
     const subjectLine = `New session for: ${topic}`;
     const owner = Meteor.user().username;
     const profile = Meteor.user().username;
@@ -64,11 +64,11 @@ class AddSession extends React.Component {
             <b>Notes:</b> ${sessionNotes}<br/>
             <a href="https://stuhdy-cubby.xyz/#/registersession/${docsInserted}">Register for this session</a>`;
           swal('Success', 'stUHdy session added successfully', 'success');
-          console.log(docsInserted);
+          // console.log(docsInserted);
           /** Email registered users of new session */
 
           _.each(emailList, function (n) {
-            console.log(n);
+            // console.log(n);
             Meteor.call(
               'sendEmail',
               n,

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import SessionsProfiles from './SessionsProfiles';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a single row in the List Sessions table. See pages/ListSessionsPage.jsx. */
 class ListSessions extends React.Component {
   render() {
     return (

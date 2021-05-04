@@ -3,7 +3,7 @@ import { Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a single row in the Leaderboard table. See pages/LeaderboardPage.jsx. */
 class LeaderBoard extends React.Component {
   render() {
     return (

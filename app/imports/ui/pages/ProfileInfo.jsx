@@ -4,7 +4,7 @@ import { Button, Card, Container, Divider, Grid, Header, Image } from 'semantic-
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a single row in the List Profiles table. See pages/ViewProfiles.jsx. */
 class ProfileInfo extends React.Component {
   render() {
     return (

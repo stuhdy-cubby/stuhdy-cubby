@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
 import ListSessionsAdmin from '../components/ListSessionsAdmin';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+/** Renders a table containing all of the Sessions documents. Use <ListSessionsAdmin> to render each row. */
 class AdminHome extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -69,11 +69,11 @@ AdminHome.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to SessionsCourses documents.
   const subscription = Meteor.subscribe(SessionsCourses.adminPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
-  // Get the Stuff documents
+  // Get the Sessions documents
   const sessions = SessionsCourses.collection.find({}).fetch();
   return {
     sessions,

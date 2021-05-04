@@ -28,7 +28,7 @@ class Calendar extends React.Component {
         url: `/registersession/${k[keys]._id}`,
       };
     });
-    console.log(allEvents);
+    // console.log(allEvents);
     return (
       <Container id="calendar">
         <FullCalendar
