@@ -5,6 +5,11 @@ import { Tracker } from 'meteor/tracker';
 /**
  * The ProfilesCollection. It encapsulates state and variable values for profile.
  */
+const ProfileDataValues = {
+  interests: ['Art', 'Culinary Arts', 'Music', 'Athletics', 'Creative Media', 'Technology', 'Other'],
+  skills: ['Javascript', 'Java', 'HTML', 'CSS', 'C', 'C++', 'Other'],
+};
+
 class ProfilesCollection {
   constructor() {
     // The name of this collection.
@@ -30,16 +35,12 @@ class ProfilesCollection {
         type: String,
         allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Other'],
         optional: true },
-      interests: {
-        type: String,
-        optional: true,
-      },
+      interests: { type: Array, optional: true },
+      'interests.$': { type: String, allowedValues: ProfileDataValues.interests },
       // enrolledCourses: { type: String },
       // previouslyEnrolledCourses: { type: String },
-      skills: {
-        type: String,
-        optional: true,
-      },
+      skills: { type: Array, optional: true },
+      'skills.$': { type: String, allowedValues: ProfileDataValues.skills },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

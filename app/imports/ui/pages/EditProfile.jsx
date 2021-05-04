@@ -12,14 +12,42 @@ const bridge = new SimpleSchema2Bridge(Profiles.schema);
 
 /** Renders the Page for editing a single document. */
 class EditProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { checkedInterests: [], checkedSkills: [], checked: false };
+    this.handleCheckInterest = this.handleCheckInterest.bind(this);
+    this.handleCheckSkills = this.handleCheckSkills.bind(this);
+  }
+
+  handleCheckInterest = id => () => {
+    const { checkedInterests } = this.state;
+    const result = checkedInterests.includes(id)
+      ? checkedInterests.filter(x => x !== id)
+      : [...checkedInterests, id];
+    this.setState({ checkedInterests: result }, () => {
+      console.log(this.state.checkedInterests);
+    });
+  };
+
+  handleCheckSkills = id => () => {
+    const { checkedSkills } = this.state;
+    const result = checkedSkills.includes(id)
+      ? checkedSkills.filter(x => x !== id)
+      : [...checkedSkills, id];
+    this.setState({ checkedSkills: result }, () => {
+      console.log(this.state.checkedSkills);
+    });
+  };
 
   // On successful submit, insert the data.
   submit(data) {
     const owner = Meteor.user().username;
-    const { firstName, lastName, email, institution, major, standing, bio, _id, interests, skills } = data;
+    const interests = this.state.checkedInterests;
+    const skills = this.state.checkedSkills;
+    const { firstName, lastName, email, institution, major, standing, bio, _id } = data;
     Profiles.collection.update(_id, { $set: { firstName, lastName, email, institution, major, standing, bio, owner, interests, skills } }, (error) => (error ?
       swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
+      swal('Success', 'Profile updated successfully', 'success')));
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -29,6 +57,26 @@ class EditProfile extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
+    const { checkedInterests, checkedSkills, checked } = this.state;
+
+    // initial populate
+    if (checked === false) {
+      if (this.props.doc.interests === undefined) {
+        console.log('no interests');
+      } else {
+        this.setState({ checkedInterests: this.props.doc.interests });
+      }
+
+      if (this.props.doc.skills === undefined) {
+        console.log('no skills');
+      } else {
+        this.setState({ checkedSkills: this.props.doc.skills });
+      }
+      this.setState({ checked: true });
+    }
+
+    // populate checkedInterests
+    // populate checkedSkills
     return (
       <Grid container centered>
         <Grid.Column>
@@ -54,22 +102,29 @@ class EditProfile extends React.Component {
               <Grid columns='three'>
                 <Grid.Row>
                   <Grid.Column width={3}>
-                    <Checkbox label={<label>Art</label>} />
+                    <Checkbox label={<label>Art</label>} onChange={this.handleCheckInterest('Art')}
+                      checked={checkedInterests.includes('Art')} />
                     <Divider hidden />
-                    <Checkbox label={<label>Culinary Arts</label>} />
+                    <Checkbox label={<label>Culinary Arts</label>} onChange={this.handleCheckInterest('Culinary Arts')}
+                      checked={checkedInterests.includes('Culinary Arts')} />
                   </Grid.Column>
                   <Grid.Column width={3}>
-                    <Checkbox label={<label>Music</label>} />
+                    <Checkbox label={<label>Music</label>} onChange={this.handleCheckInterest('Music')}
+                      checked={checkedInterests.includes('Music')}/>
                     <Divider hidden />
-                    <Checkbox label={<label>Athletics</label>} />
+                    <Checkbox label={<label>Athletics</label>} onChange={this.handleCheckInterest('Athletics')}
+                      checked={checkedInterests.includes('Athletics')} />
                   </Grid.Column>
                   <Grid.Column width={3}>
-                    <Checkbox label={<label>Creative Media</label>} />
+                    <Checkbox label={<label>Creative Media</label>} onChange={this.handleCheckInterest('Creative Media')}
+                      checked={checkedInterests.includes('Creative Media')} />
                     <Divider hidden />
-                    <Checkbox label={<label>Technology</label>} />
+                    <Checkbox label={<label>Technology</label>} onChange={this.handleCheckInterest('Technology')}
+                      checked={checkedInterests.includes('Technology')} />
                   </Grid.Column>
                   <Grid.Column width={3}>
-                    <Checkbox label={<label>Other</label>} />
+                    <Checkbox label={<label>Other</label>} onChange={this.handleCheckInterest('Other')}
+                      checked={checkedInterests.includes('Other')} />
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
@@ -83,22 +138,29 @@ class EditProfile extends React.Component {
               <Grid columns='three'>
                 <Grid.Row>
                   <Grid.Column width={2}>
-                    <Checkbox label={<label>Javascript</label>} />
+                    <Checkbox label={<label>Javascript</label>} onChange={this.handleCheckSkills('Javascript')}
+                      checked={checkedSkills.includes('Javascript')} />
                     <Divider hidden />
-                    <Checkbox label={<label>Java</label>} />
+                    <Checkbox label={<label>Java</label>} onChange={this.handleCheckSkills('Java')}
+                      checked={checkedSkills.includes('Java')}/>
                   </Grid.Column>
                   <Grid.Column width={2}>
-                    <Checkbox label={<label>HTML</label>} />
+                    <Checkbox label={<label>HTML</label>} onChange={this.handleCheckSkills('HTML')}
+                      checked={checkedSkills.includes('HTML')} />
                     <Divider hidden />
-                    <Checkbox label={<label>CSS</label>} />
+                    <Checkbox label={<label>CSS</label>} onChange={this.handleCheckSkills('CSS')}
+                      checked={checkedSkills.includes('CSS')}/>
                   </Grid.Column>
                   <Grid.Column width={2}>
-                    <Checkbox label={<label>C</label>} />
+                    <Checkbox label={<label>C</label>} onChange={this.handleCheckSkills('C')}
+                      checked={checkedSkills.includes('C')}/>
                     <Divider hidden />
-                    <Checkbox label={<label>C++</label>} />
+                    <Checkbox label={<label>C++</label>} onChange={this.handleCheckSkills('C++')}
+                      checked={checkedSkills.includes('C++')}/>
                   </Grid.Column>
                   <Grid.Column width={2}>
-                    <Checkbox label={<label>Other</label>}/>
+                    <Checkbox label={<label>Other</label>} onChange={this.handleCheckSkills('Other')}
+                      checked={checkedSkills.includes('Other')}/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
