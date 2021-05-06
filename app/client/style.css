@@ -19,6 +19,13 @@
   padding-top: 30px;
 }
 
+.leaderboard {
+  background: url('images/uhmanoa.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  height: 600px;
+  padding-top: 50px;
+}
+
 .fc .fc-daygrid-day-number {
   color: #149414;
 }
