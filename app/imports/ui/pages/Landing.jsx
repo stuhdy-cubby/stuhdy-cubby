@@ -1,80 +1,65 @@
 import React from 'react';
-import { Container, Card, Button, Divider } from 'semantic-ui-react';
+import { Container, Card, Button, Divider, Grid } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   render() {
     return (
-      <Container id='landing-page' verticalAlign='middle' textAlign='center'>
+      <div>
+        <div className='landing-page-background'>
+          <Divider hidden/>
+          <Divider hidden/>
+          <Divider hidden/>
+          <Divider hidden/>
+          <Divider hidden/>
 
-        <Divider hidden/>
-
-        <h1>Collaboration and learning all in one place.</h1>
-
-        <Divider hidden/>
-
-        <Button as={ NavLink } exact to="/signup" basic color='green'>Sign Up</Button>
-
-        <Divider hidden/>
-
-        <Card.Group>
-          <Card fluid>
-            <Card.Content>
-              <Card.Header>Networking Made Easy</Card.Header>
-              <Card.Description>
-                <p>
-                  Sign up and create a profile!
-                </p>
-                <p>
-                  Meet fellow University of Hawaii at Manoa students through live study sessions now.
-                </p>
-              </Card.Description>
-            </Card.Content>
-          </Card>
+          <h1>Collaboration and learning all in one place.</h1>
 
           <Divider hidden/>
 
-          <Card fluid>
-            <Card.Content>
-              <Card.Header>Gain Points and Earn Rewards</Card.Header>
-              <Card.Description>
-                <p>
-                  Become a sensei or grasshopper and earn rewards!
-                </p>
-                <p>
-                  By participating in study sessions, you can gain points and fun rewards. The more points you receive, the better the reward!
-                </p>
-              </Card.Description>
-            </Card.Content>
-          </Card>
+          <Button as={ NavLink } exact to="/signup" size='large' color='teal'>Start Collaborating</Button>
 
           <Divider hidden/>
+        </div>
+        <Container verticalAlign='middle'>
+          <Divider hidden/>
+          <Divider hidden/>
+          <Grid columns='two'>
+            <Grid.Row>
+              <Grid.Column>
+                <Card fluid>
+                  <Card.Content>
+                    <Card.Header textAlign='center'>Networking Made Easy</Card.Header>
+                    <Card.Description>
+                      <ul>
+                        <li>Meet fellow students through live work and study sessions now!</li>
+                        <li>Schedule one or more sessions to start collaborating and growing your network!</li>
+                      </ul>
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
 
-          <Card fluid>
-            <Card.Content>
-              <Card.Header>Live Study Sessions</Card.Header>
-
-              <Card.Description>
-                <p>
-                  Need help? Want company and motivation? Study with fellow students that are enrolled in the same classes!
-                </p>
-                <p>
-                  Schedule study sessions in advance or start collaborating with students ASAP!
-                </p>
-                <p>
-                  Collaborative learning has never been easier.
-                </p>
-
-                <Divider hidden/>
-
-                <Button as={ NavLink } exact to="/signup" basic color='green'>Start Collaborating</Button>
-
-              </Card.Description>
-            </Card.Content>
-          </Card>
-        </Card.Group>
-      </Container>
+              <Grid.Column>
+                <Card fluid>
+                  <Card.Content>
+                    <Card.Header textAlign='center'>Gain Points and Earn Rewards</Card.Header>
+                    <Card.Description>
+                      <ul>
+                        <li>Become a sensei or grasshopper and earn rewards!</li>
+                        <li>By participating in study sessions, you can gain points and fun rewards. The more points you receive, the better the reward!</li>
+                      </ul>
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+          <Divider hidden />
+          <Divider hidden />
+        </Container>
+      </div>
     );
   }
 }
