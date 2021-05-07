@@ -14,7 +14,8 @@ class ProfilesCoursesCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       profile: String,
-      course: String,
+      courses: { type: Array, optional: true },
+      'courses.$': { type: String },
       role: {
         type: String,
         allowedValues: ['sensei', 'grasshopper'],
