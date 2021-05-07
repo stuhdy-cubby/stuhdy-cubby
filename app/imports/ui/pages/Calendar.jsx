@@ -30,6 +30,7 @@ class Calendar extends React.Component {
     });
     console.log(allEvents);
     return (
+        <div className='calendar'>
       <Container id="calendar">
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
@@ -56,6 +57,7 @@ class Calendar extends React.Component {
           }}
         />
       </Container>
+        </div>
     );
   }
 }
