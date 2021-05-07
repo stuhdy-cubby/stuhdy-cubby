@@ -36,6 +36,11 @@
   padding-top: 50px;
 }
 
+.calendar {
+  background: url('images/rainbow.jpeg') no-repeat center center fixed;
+  background-size: cover;
+}
+
 .fc .fc-daygrid-day-number {
   color: #149414;
 }
