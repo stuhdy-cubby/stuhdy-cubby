@@ -30,32 +30,34 @@ class Calendar extends React.Component {
     });
     console.log(allEvents);
     return (
-        <Container id="calendar">
+        <div className='calendar'>
+      <Container id="calendar">
         <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        eventColor='#378006'
-        events={allEvents}
-        eventClick={function (info) {
-          info.jsEvent.preventDefault();
-          swal(`Register for Session:\n${info.event.title}`,
-            {
-              buttons: {
-                register: {
-                  text: 'Register',
-                  value: 'register',
+          plugins={[dayGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          eventColor='#378006'
+          events={allEvents}
+          eventClick={function (info) {
+            info.jsEvent.preventDefault();
+            swal(`Register for Session:\n${info.event.title}`,
+              {
+                buttons: {
+                  register: {
+                    text: 'Register',
+                    value: 'register',
+                  },
+                  ok: true,
                 },
-                ok: true,
-              },
-            })
-            .then((value) => {
-              if (value === 'register' && info.event.url) {
-                window.location.href = `#${info.event.url}`;
-              }
-            });
-        }}
-      />
-        </Container>
+              })
+              .then((value) => {
+                if (value === 'register' && info.event.url) {
+                  window.location.href = `#${info.event.url}`;
+                }
+              });
+          }}
+        />
+      </Container>
+        </div>
     );
   }
 }

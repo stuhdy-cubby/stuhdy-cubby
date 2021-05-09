@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Loader, Card, Image } from 'semantic-ui-react';
+import { Container, Loader, Card, Image, Divider } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
@@ -48,6 +48,7 @@ class UserProfile extends React.Component {
     const profileData = emails.map(email => getProfileData(email));
     return (
       <Container id="profiles-page">
+        <Divider hidden/>
         <Card.Group>
           {_.map(profileData, (profile, index) => <MakeCard key={index} profile={profile}/>)}
         </Card.Group>

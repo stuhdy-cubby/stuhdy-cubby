@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment, Header, Divider, Checkbox, FormField } from 'semantic-ui-react';
+import { Grid, Segment, Header, Divider, Checkbox } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -7,7 +7,6 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { GraphQLIncludeDirective } from 'graphql';
 import { Profiles } from '../../api/profiles/Profiles';
 
 // Create a schema to specify the structure of the data to appear in the form.
