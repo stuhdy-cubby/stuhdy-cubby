@@ -29,25 +29,25 @@ class LeaderboardPage extends React.Component {
       return { profile: s, points: personObj[s] };
     }), 'points').reverse();
     return (
-        <div className="leaderboard">
-          <Container>
-            <Header as="h1" textAlign="center" block>Leaderboard
-              <Icon name="trophy"/>
-            </Header>
-            <Segment textAlign="center" size="large" inverted color='olive'>Climb up to the top of the leaderboard to win rewards! Register for a study session today!</Segment>
-            <Table className="ui green table">
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Profile</Table.HeaderCell>
-                  <Table.HeaderCell>Points</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {profilePoints.map((leaderboard) => <Leaderboard key={leaderboard.profile} leaderboard={leaderboard}/>)}
-              </Table.Body>
-            </Table>
-          </Container>
-        </div>
+      <div className="leaderboard">
+        <Container>
+          <Header as="h1" textAlign="center" block>Leaderboard
+            <Icon name="trophy"/>
+          </Header>
+          <Segment textAlign="center" size="large" inverted color='olive'>Climb up to the top of the leaderboard to win rewards! Register for a study session today!</Segment>
+          <Table className="ui green table">
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Profile</Table.HeaderCell>
+                <Table.HeaderCell>Points</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {profilePoints.map((leaderboard) => <Leaderboard key={leaderboard.profile} leaderboard={leaderboard}/>)}
+            </Table.Body>
+          </Table>
+        </Container>
+      </div>
     );
   }
 }
