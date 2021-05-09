@@ -41,8 +41,10 @@ class ProfileInfo extends React.Component {
               </Card>
               <Card fluid>
                 <Card.Content>
-                  <Card.Header>Previously Taken Courses</Card.Header>
-                  <Card.Description></Card.Description>
+                  <Card.Header>Sensei Courses</Card.Header>
+                  <Card.Description>
+                    {_.map(this.props.profiles.senseicourses, (c) => <p>{c}</p>)}
+                  </Card.Description>
                 </Card.Content>
               </Card>
               <Card fluid>
@@ -54,7 +56,9 @@ class ProfileInfo extends React.Component {
               <Card fluid>
                 <Card.Content>
                   <Card.Header>Needs Help With</Card.Header>
-                  <Card.Description></Card.Description>
+                  <Card.Description>
+                    {_.map(this.props.profiles.grasshoppercourses, (g) => <p>{g}</p>)}
+                  </Card.Description>
                 </Card.Content>
               </Card>
             </Card.Group>
@@ -92,6 +96,8 @@ ProfileInfo.propTypes = {
     picture: PropTypes.object,
     interests: PropTypes.string,
     skills: PropTypes.string,
+    senseicourses: PropTypes.string,
+    grasshoppercourses: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
   sessions: PropTypes.array.isRequired,
