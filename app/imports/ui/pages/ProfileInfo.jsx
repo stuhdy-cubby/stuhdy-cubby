@@ -48,7 +48,7 @@ class ProfileInfo extends React.Component {
               <Card fluid>
                 <Card.Content>
                   <Card.Header>Skills</Card.Header>
-                  <Card.Description>{this.props.profiles.skills}</Card.Description>
+                  <Card.Description>{_.map(this.props.profiles.skills, (s) => <p>{s}</p>)}</Card.Description>
                 </Card.Content>
               </Card>
               <Card fluid>
@@ -62,7 +62,7 @@ class ProfileInfo extends React.Component {
 
           <Grid.Column width={3}>
             <h3>Interests</h3>
-            <p>{this.props.profiles.interests}</p>
+            {_.map(this.props.profiles.interests, (i) => <p>{i}</p>)}
 
             <Divider clearing />
 
