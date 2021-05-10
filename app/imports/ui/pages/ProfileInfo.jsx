@@ -34,7 +34,7 @@ class ProfileInfo extends React.Component {
                   <Card.Header>Courses</Card.Header>
                   <Card.Description>
                     <Button as={NavLink} activeClassName="active"
-                      exact to={`/editprofilecourses/${this.props.profiles._id}`} key='editcourses'
+                      exact to={`/profilecourses/${this.props.profiles._id}`} key='profilecourses'
                       color='gray' fluid basic>Edit Courses</Button>
                   </Card.Description>
                 </Card.Content>
