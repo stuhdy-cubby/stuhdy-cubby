@@ -8,6 +8,8 @@ import SessionsProfiles from './SessionsProfiles';
 /** Renders a single row in the List Sessions table. See pages/ListSessionsPage.jsx. */
 class ListSessions extends React.Component {
   render() {
+    const curDateTime = new Date();
+    console.log(curDateTime);
     return (
       <Card>
         <Card.Content>
@@ -15,7 +17,7 @@ class ListSessions extends React.Component {
           <Card.Meta>{this.props.sessions.course}</Card.Meta>
           <Card.Meta>{this.props.sessions.location}</Card.Meta>
           <Card.Meta>
-            {moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY HH:mm A')}
+            {moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY hh:mm A')}
 
           </Card.Meta>
           <Card.Description>{this.props.sessions.sessionNotes}</Card.Description>
@@ -32,9 +34,10 @@ class ListSessions extends React.Component {
           </Feed>
         </Card.Content>
         <Card.Content extra>
-          <Button basic color='green'>
+          {curDateTime > this.props.sessions.sessionDate ? <Button basic color='green'>
             <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
-          </Button>
+          </Button> : '' }
+
         </Card.Content>
       </Card>
     );
