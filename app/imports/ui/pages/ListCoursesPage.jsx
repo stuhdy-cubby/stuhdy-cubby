@@ -7,7 +7,7 @@ import { _ } from 'meteor/underscore';
 import { Profiles } from '../../api/profiles/Profiles';
 import { Courses } from '../../api/courses/Courses';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+/** Renders a table containing all of the list courses documents. */
 class ListCoursesPage extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -49,7 +49,7 @@ class ListCoursesPage extends React.Component {
   }
 }
 
-// Require an array of Stuff documents in the props.
+// Require an array of profiles and courses documents in the props.
 ListCoursesPage.propTypes = {
   profiles: PropTypes.array.isRequired,
   courses: PropTypes.array.isRequired,

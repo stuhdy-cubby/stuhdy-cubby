@@ -7,7 +7,7 @@ import { _ } from 'meteor/underscore';
 import Leaderboard from '../components/Leaderboard';
 import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+/** Renders a table containing all of the profiles points documents. Use <Leaderboard> to render each row. */
 class LeaderboardPage extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */

@@ -67,7 +67,7 @@ class AdminHome extends React.Component {
   }
 }
 
-// Require an array of Stuff documents in the props.
+// Require an array of sessions, sessionsprofiles documents in the props.
 AdminHome.propTypes = {
   sessions: PropTypes.array.isRequired,
   sessionsProfiles: PropTypes.array.isRequired,
@@ -76,12 +76,12 @@ AdminHome.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to the sessionscourses and sessionsprofiles documents.
   const subscription = Meteor.subscribe(SessionsCourses.userPublicationName);
   const sub2 = Meteor.subscribe(SessionsProfiles.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready() && sub2.ready();
-  // Get the Stuff documents
+  // Get the sessionscourses and sessionsprofiles documents
   const sessions = SessionsCourses.collection.find({}).fetch();
   const sessionsProfiles = SessionsProfiles.collection.find({}).fetch();
   return {

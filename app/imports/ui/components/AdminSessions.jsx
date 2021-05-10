@@ -4,7 +4,7 @@ import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a single row in the List Sessions Admin table. */
 class AdminSessions extends React.Component {
   render() {
     return (
