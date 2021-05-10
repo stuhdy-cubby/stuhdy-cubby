@@ -83,7 +83,9 @@ const MakeCard = (props) => (
                     <p><strong>Skills: </strong></p>
                   </Grid.Column>
                   <Grid.Column width={10}>
-                    <p>{props.profile.skills}</p>
+                    <p>
+                      {_.map(props.profile.skills, (s, index) => ((props.profile.skills.length - 1 === index) ? `${s}` : `${s}, `))}
+                    </p>
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
@@ -91,7 +93,9 @@ const MakeCard = (props) => (
                     <p><strong>Interests: </strong></p>
                   </Grid.Column>
                   <Grid.Column width={10}>
-                    <p>{props.profile.interests}</p>
+                    <p>
+                      {_.map(props.profile.interests, (i, index) => ((props.profile.interests.length - 1 === index) ? `${i}` : `${i}, `))}
+                    </p>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
