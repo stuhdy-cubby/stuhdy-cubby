@@ -10,39 +10,41 @@ import { Roles } from 'meteor/alanning:roles';
 class NavBar extends React.Component {
   render() {
     return (
-      <Menu attached="top" borderless>
-        <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Header as={'h1'}>stUHdy cubby</Header>
-        </Menu.Item>
-        {this.props.currentUser ? (
-          [<Menu.Item as={NavLink} activeClassName="active" exact to="/" key='home'>Home</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list' id="navbar-list-session">Sessions List</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/calendar" key='calendar' id="navbar-calendar">Calendar</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/addsession" key='addsession' id="navbar-add-session">Add Session</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/leaderboard" key='leaderboard' id="navbar-leaderboard">Leaderboard</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/viewprofiles" key='viewprofiles' id="navbar-viewprofiles">Profiles</Menu.Item>]
-        ) : ''}
-        {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-          <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin' id="navbar-admin">Admin</Menu.Item>
-        ) : ''}
-        <Menu.Item position="right">
-          {this.props.currentUser === '' ? (
-            <Dropdown id="login-dropdown" text="Login" pointing="top right" icon={'user'}>
-              <Dropdown.Menu>
-                <Dropdown.Item id="login-dropdown-sign-in" icon="user" text="Sign In" as={NavLink} exact to="/signin"/>
-                <Dropdown.Item id="login-dropdown-sign-up" icon="add user" text="Sign Up" as={NavLink} exact to="/signup"/>
-              </Dropdown.Menu>
-            </Dropdown>
-          ) : (
-            <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={'user'}>
-              <Dropdown.Menu>
-                <Dropdown.Item id="user-profile" text="View Profile" as={NavLink} exact to="/profile"/>
-                <Dropdown.Item id="navbar-sign-out" icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
-              </Dropdown.Menu>
-            </Dropdown>
-          )}
-        </Menu.Item>
-      </Menu>
+      <div className='navbar'>
+        <Menu attached="top" borderless>
+          <Menu.Item as={NavLink} activeClassName="" exact to="/">
+            <Header as={'h3'}>stUHdy cubby</Header>
+          </Menu.Item>
+          {this.props.currentUser ? (
+            [<Menu.Item as={NavLink} activeClassName="active" exact to="/" key='home'>Home</Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list' id="navbar-list-session">Sessions List</Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/calendar" key='calendar' id="navbar-calendar">Calendar</Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/addsession" key='addsession' id="navbar-add-session">Add Session</Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/leaderboard" key='leaderboard' id="navbar-leaderboard">Leaderboard</Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/viewprofiles" key='viewprofiles' id="navbar-viewprofiles">Profiles</Menu.Item>]
+          ) : ''}
+          {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+            <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin' id="navbar-admin">Admin</Menu.Item>
+          ) : ''}
+          <Menu.Item position="right">
+            {this.props.currentUser === '' ? (
+              <Dropdown id="login-dropdown" text="Login" pointing="top right" icon={'user'}>
+                <Dropdown.Menu>
+                  <Dropdown.Item id="login-dropdown-sign-in" icon="user" text="Sign In" as={NavLink} exact to="/signin"/>
+                  <Dropdown.Item id="login-dropdown-sign-up" icon="add user" text="Sign Up" as={NavLink} exact to="/signup"/>
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : (
+              <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={'user'}>
+                <Dropdown.Menu>
+                  <Dropdown.Item id="user-profile" text="View Profile" as={NavLink} exact to="/profile"/>
+                  <Dropdown.Item id="navbar-sign-out" icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
+                </Dropdown.Menu>
+              </Dropdown>
+            )}
+          </Menu.Item>
+        </Menu>
+      </div>
     );
   }
 }
