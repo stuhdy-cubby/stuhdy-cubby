@@ -16,7 +16,7 @@ function getProfileData(email) {
 
 /** Component for layout out a Profile Card. */
 const MakeCard = (props) => (
-  <Card>
+  <Card color='teal'>
     <Card.Content>
       <Image floated='right' circular src={props.profile.picture} />
       <Card.Header>{props.profile.firstName} {props.profile.lastName}</Card.Header>
