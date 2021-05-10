@@ -35,7 +35,7 @@ class ProfileInfo extends React.Component {
                   <Card.Description>
                     <Button as={NavLink} activeClassName="active"
                       exact to={`/profilecourses/${this.props.profiles._id}`} key='profilecourses'
-                      color='gray' fluid basic>Edit Courses</Button>
+                      color='gray' fluid>Edit Courses</Button>
                   </Card.Description>
                 </Card.Content>
               </Card>
@@ -49,16 +49,16 @@ class ProfileInfo extends React.Component {
               </Card>
               <Card fluid>
                 <Card.Content>
-                  <Card.Header>Skills</Card.Header>
-                  <Card.Description>{_.map(this.props.profiles.skills, (s) => <p>{s}</p>)}</Card.Description>
+                  <Card.Header>Grasshopper Courses</Card.Header>
+                  <Card.Description>
+                    {_.map(this.props.profiles.grasshoppercourses, (g) => <p>{g}</p>)}
+                  </Card.Description>
                 </Card.Content>
               </Card>
               <Card fluid>
                 <Card.Content>
-                  <Card.Header>Needs Help With</Card.Header>
-                  <Card.Description>
-                    {_.map(this.props.profiles.grasshoppercourses, (g) => <p>{g}</p>)}
-                  </Card.Description>
+                  <Card.Header>Skills</Card.Header>
+                  <Card.Description>{_.map(this.props.profiles.skills, (s) => <p>{s}</p>)}</Card.Description>
                 </Card.Content>
               </Card>
             </Card.Group>
