@@ -71,20 +71,18 @@ class UserInfo extends React.Component {
   };
 
   // On submit, insert the data.
-  submit(data, formRef) {
+  submit(data) {
     const interests = this.state.checkedInterests;
     const skills = this.state.checkedSkills;
     const { firstName, lastName, email, institution, major, standing, picture, bio } = data;
     const owner = Meteor.user().username;
-    Profiles.collection.insert({ firstName, lastName, email, institution, major, standing, picture, bio, owner, interests, skills },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Profile successfully added', 'success');
-          formRef.reset();
-        }
-      });
+    Profiles.collection.insert({ firstName, lastName, email, institution, major, standing, picture, bio, owner, interests, skills }, (error) => (error ?
+      swal('Error', error.message, 'error') :
+      swal('Success', 'Profile created successfully', 'success')
+        .then(function () {
+          window.location.href = '#/profile';
+        })
+    ));
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
