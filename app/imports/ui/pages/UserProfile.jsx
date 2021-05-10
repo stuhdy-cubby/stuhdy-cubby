@@ -21,7 +21,7 @@ class UserProfile extends React.Component {
     console.log(user);
     const userData = Profiles.collection.find({ email: user }).fetch();
     return (
-      <Container id="user-profile">
+      <Container>
         <Divider hidden />
         {_.map(userData, (profiles) => <ProfileInfo key={profiles._id} profiles={profiles} sessions={this.props.sessions.filter(s => (s.owner === profiles.email))}/>)}
       </Container>

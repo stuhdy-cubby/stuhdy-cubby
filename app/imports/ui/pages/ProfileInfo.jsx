@@ -15,7 +15,7 @@ class ProfileInfo extends React.Component {
             <Header as='h2'>{this.props.profiles.firstName} {this.props.profiles.lastName}</Header>
             <p>{this.props.profiles.email}</p>
 
-            <Button as={NavLink} activeClassName="active" exact to={`/edit/${this.props.profiles._id}`} key='edit' color='gray' fluid basic>Edit Profile</Button>
+            <Button as={NavLink} activeClassName="active" exact to={`/edit/${this.props.profiles._id}`} key='edit' color='teal' fluid basic>Edit Profile</Button>
 
             <Divider clearing />
 
