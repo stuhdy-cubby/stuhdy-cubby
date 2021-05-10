@@ -21,7 +21,8 @@ class AdminHome extends React.Component {
   renderPage() {
     const user = Meteor.user().username;
     console.log(user);
-    const userData = SessionsCourses.collection.find({ email: user }).fetch();
+    const userData = SessionsCourses.collection.find({ owner: user }).fetch();
+    console.log(userData);
     return (
       <Container>
         <Divider hidden />
@@ -38,7 +39,7 @@ class AdminHome extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {_.map(userData, (profiles) => <ListSessionsAdmin key={profiles._id} profiles={profiles} sessions={this.props.sessions.filter(s => (s.owner === profiles.email))}/>)}
+            {_.map(userData, (mysession) => <ListSessionsAdmin key={mysession._id} profiles={mysession} sessions={mysession}/>)}
           </Table.Body>
         </Table>
 
