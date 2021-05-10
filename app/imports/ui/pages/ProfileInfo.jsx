@@ -66,10 +66,11 @@ class ProfileInfo extends React.Component {
 
             <h3>Sessions</h3>
             <Divider clearing />
-            {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}</p>)}
-            {_.map(this.props.sessions, (s) => <p id={s}><strong>Course: </strong>{s.course}</p>)}
-            {_.map(this.props.sessions, (s) => <p id={s}><strong>Location: </strong>{s.location}</p>)}
-
+            {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}<br/>
+              <strong>Course: </strong>{s.course}<br/>
+              <strong>Location: </strong>{s.location}
+              <hr style={{ width: '10em' }}/>
+            </p>)}
           </Grid.Column>
         </Grid>
       </Container>
