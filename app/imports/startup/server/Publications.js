@@ -3,7 +3,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { Courses } from '../../api/courses/Courses';
 import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesCourses } from '../../api/profiles/ProfilesCourses';
 import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
 import { Sessions } from '../../api/sessions/Sessions';
 import { SessionsCourses } from '../../api/sessions/SessionsCourses';
@@ -14,9 +13,6 @@ Meteor.publish(Courses.userPublicationName, () => Courses.collection.find());
 
 /** Define a publication to publish all profiles. */
 Meteor.publish(Profiles.userPublicationName, () => Profiles.collection.find());
-
-/** Define a publication to publish this collection. */
-Meteor.publish(ProfilesCourses.userPublicationName, () => ProfilesCourses.collection.find());
 
 /** Define a publication to publish this collection. */
 Meteor.publish(ProfilesPoints.userPublicationName, () => ProfilesPoints.collection.find());
