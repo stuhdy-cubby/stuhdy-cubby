@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment, Header } from 'semantic-ui-react';
+import { Grid, Segment, Header, Divider } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -47,13 +47,20 @@ class ProfileCourses extends React.Component {
     return (
       <Grid container centered>
         <Grid.Column>
+          <Divider hidden />
           <Header as="h2" textAlign="center">Edit Courses</Header>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Segment>
               <Header as={'h3'}>Sensei Courses</Header>
-              <MultiSelectField label='Sensei Courses' name='senseicourses' showInlineError={true} placeholder={'Select Courses'}/>
+              <p>Courses you have previously taken and are willing to provide help with.</p>
+              <Divider hidden />
+              <MultiSelectField label='Courses' name='senseicourses' showInlineError={true} placeholder={'Select Courses'}/>
+
               <Header as={'h3'}>Grasshopper Courses</Header>
-              <MultiSelectField label='Grasshopper Courses' name='grasshoppercourses' showInlineError={true} placeholder={'Select Courses'}/>
+              <p>Courses you are currently taking and seek help with.</p>
+              <Divider hidden />
+              <MultiSelectField label='Courses' name='grasshoppercourses' showInlineError={true} placeholder={'Select Courses'}/>
+              <Divider hidden />
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>
