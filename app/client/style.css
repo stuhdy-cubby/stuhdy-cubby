@@ -58,5 +58,7 @@
 }
 
 .listcourses-background {
-  height: 1000px;
+  background: url('images/classroom.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 1200px;
 }

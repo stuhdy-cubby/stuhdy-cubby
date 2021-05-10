@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Header, Loader, Container, Card } from 'semantic-ui-react';
+import { Header, Loader, Container, Card, Image, Segment } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
@@ -20,20 +20,24 @@ class ListCoursesPage extends React.Component {
     return (
       <div className='listcourses-background'>
         <Container id="course-list">
-
-          <Header as='h1' textAlign="center" color='yellow'>
+          <Segment>
+            <Header as='h1' textAlign="center" color='yellow'>
               Courses
-          </Header>
-
+            </Header>
+          </Segment>
           <Card.Group itemsPerRow={6}>
-
             {_.map(this.props.courses, (c) => <Card key={c._id}>
               <Card.Content>
-                <Card.Header>{c.name} - {c.description}</Card.Header>
+                <Card.Header>{c.name}</Card.Header>
+                <Card.Description>{c.description}</Card.Description>
               </Card.Content>
-              <Card.Content extra>
-                        Sensei
-                {this.props.profiles.senseicourses}
+              <Card.Content>
+                <Card.Header>Senseis</Card.Header>
+                {_.map(this.props.profiles, (p) => ((_.contains(p.senseicourses, c.name)) ? <Image key={p._id} circular size='mini' src={p.picture} alt={p.firstName}/> : ''))}
+              </Card.Content>
+              <Card.Content>
+                <Card.Header>Grasshoppers</Card.Header>
+                {_.map(this.props.profiles, (p) => ((_.contains(p.grasshoppercourses, c.name)) ? <Image key={p._id} circular size='mini' src={p.picture}/> : ''))}
               </Card.Content>
             </Card>)}
 
