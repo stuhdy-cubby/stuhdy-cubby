@@ -44,13 +44,8 @@ class ProfileInfo extends React.Component {
                   <Card.Header>Sensei Courses</Card.Header>
                   <Card.Description>
                     {_.map(this.props.profiles.senseicourses, (c) => <p>{c}</p>)}
-                  </Card.Description>
-                </Card.Content>
-              </Card>
-              <Card fluid>
-                <Card.Content>
-                  <Card.Header>Grasshopper Courses</Card.Header>
-                  <Card.Description>
+                    <Divider clearing />
+                    <Header>Grasshopper Courses</Header>
                     {_.map(this.props.profiles.grasshoppercourses, (g) => <p>{g}</p>)}
                   </Card.Description>
                 </Card.Content>
@@ -66,15 +61,14 @@ class ProfileInfo extends React.Component {
 
           <Grid.Column width={3}>
             <h3>Interests</h3>
+            <Divider clearing />
             {_.map(this.props.profiles.interests, (i) => <p>{i}</p>)}
 
-            <Divider clearing />
-
             <h3>Sessions</h3>
+            <Divider clearing />
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}</p>)}
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Course: </strong>{s.course}</p>)}
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Location: </strong>{s.location}</p>)}
-            <Divider clearing />
 
           </Grid.Column>
         </Grid>
