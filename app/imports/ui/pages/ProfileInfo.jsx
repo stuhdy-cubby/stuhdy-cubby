@@ -35,7 +35,7 @@ class ProfileInfo extends React.Component {
                   <Card.Description>
                     <Button as={NavLink} activeClassName="active"
                       exact to={`/profilecourses/${this.props.profiles._id}`} key='profilecourses'
-                      color='gray' fluid basic>Edit Courses</Button>
+                      color='gray' fluid>Edit Courses</Button>
                   </Card.Description>
                 </Card.Content>
               </Card>
@@ -44,6 +44,9 @@ class ProfileInfo extends React.Component {
                   <Card.Header>Sensei Courses</Card.Header>
                   <Card.Description>
                     {_.map(this.props.profiles.senseicourses, (c) => <p>{c}</p>)}
+                    <Divider clearing />
+                    <Header>Grasshopper Courses</Header>
+                    {_.map(this.props.profiles.grasshoppercourses, (g) => <p>{g}</p>)}
                   </Card.Description>
                 </Card.Content>
               </Card>
@@ -53,28 +56,19 @@ class ProfileInfo extends React.Component {
                   <Card.Description>{_.map(this.props.profiles.skills, (s) => <p>{s}</p>)}</Card.Description>
                 </Card.Content>
               </Card>
-              <Card fluid>
-                <Card.Content>
-                  <Card.Header>Needs Help With</Card.Header>
-                  <Card.Description>
-                    {_.map(this.props.profiles.grasshoppercourses, (g) => <p>{g}</p>)}
-                  </Card.Description>
-                </Card.Content>
-              </Card>
             </Card.Group>
           </Grid.Column>
 
           <Grid.Column width={3}>
             <h3>Interests</h3>
+            <Divider clearing />
             {_.map(this.props.profiles.interests, (i) => <p>{i}</p>)}
 
-            <Divider clearing />
-
             <h3>Sessions</h3>
+            <Divider clearing />
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}</p>)}
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Course: </strong>{s.course}</p>)}
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Location: </strong>{s.location}</p>)}
-            <Divider clearing />
 
           </Grid.Column>
         </Grid>
