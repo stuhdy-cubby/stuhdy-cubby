@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button, Feed, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
+import moment from 'moment';
 import SessionsProfiles from './SessionsProfiles';
 
 /** Renders a single row in the List Sessions table. See pages/ListSessionsPage.jsx. */
@@ -13,6 +14,10 @@ class ListSessions extends React.Component {
           <Card.Header>{this.props.sessions.topic}</Card.Header>
           <Card.Meta>{this.props.sessions.course}</Card.Meta>
           <Card.Meta>{this.props.sessions.location}</Card.Meta>
+          <Card.Meta>
+            {moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY HH:mm A')}
+
+          </Card.Meta>
           <Card.Description>{this.props.sessions.sessionNotes}</Card.Description>
         </Card.Content>
         <Card.Content extra>

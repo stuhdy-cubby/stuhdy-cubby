@@ -86,9 +86,11 @@ class AddSession extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
+    const email = Meteor.user().username;
     const descrip = this.state.description;
-    const allCourses = _.pluck(Courses.collection.find().fetch(), 'name');
     const allSessions = _.pluck(Sessions.collection.find().fetch(), 'topic');
+    const userCourses = _.pluck(Profiles.collection.find({ email: email }).fetch(), 'grasshoppercourses');
+    const allCourses = userCourses[0];
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth()).padStart(2, '0');

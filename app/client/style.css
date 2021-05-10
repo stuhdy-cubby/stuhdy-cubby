@@ -19,6 +19,28 @@
   padding-top: 30px;
 }
 
+.landing-page-background {
+  background: url('images/study-table.jpg') no-repeat center center;
+  background-size: cover;
+  height: 400px;
+  padding-top: 30px;
+  text-align: center;
+  text-shadow: 2px 2px 4px #3d3535;
+  color: white;
+}
+
+.leaderboard {
+  background: url('images/uhmanoa.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  height: 600px;
+  padding-top: 50px;
+}
+
+.calendar {
+  background: url('images/rainbow.jpeg') no-repeat center center fixed;
+  background-size: cover;
+}
+
 .fc .fc-daygrid-day-number {
   color: #149414;
 }
@@ -33,4 +55,10 @@
 
 .fc-scrollgrid.fc-scrollgrid-liquid {
   background: #b8d8be;
+}
+
+.listcourses-background {
+  background: url('images/classroom.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 1200px;
 }
