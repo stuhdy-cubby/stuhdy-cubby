@@ -56,11 +56,12 @@ test('Test List Sessions page', async (testController) => {
   await listsessionPage.hasCard(testController);
 });
 
-test('Test Register Sessions page', async (testController) => {
+test.only('Test Register Sessions page', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoListSessionPage(testController);
   await listsessionPage.clickRegister(testController);
+  await listsessionPage.isDisplayed(testController);
   await registersessionPage.isDisplayed(testController);
   await registersessionPage.registerSession(testController);
 });
