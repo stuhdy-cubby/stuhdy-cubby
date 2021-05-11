@@ -49,7 +49,17 @@ class UserProfilePage {
   async editCourse(testController) {
     await testController.click('#editcourses');
 
-    await testController.typeText('#senseicourses', 'ICS 241');
+    const senseiSelector = Selector('#senseicourses');
+    const senseiOption = senseiSelector.find('span');
+    await testController.click(senseiSelector);
+    await testController.click(senseiOption.withText('ICS 241'));
+    await testController.pressKey('esc');
+
+    const grasshopperSelector = Selector('#grasshoppercourses');
+    const grasshopperOption = grasshopperSelector.find('span');
+    await testController.click(grasshopperSelector);
+    await testController.click(grasshopperOption.withText('ICS 314'));
+    await testController.pressKey('esc');
 
     await testController.click('#submit');
   }

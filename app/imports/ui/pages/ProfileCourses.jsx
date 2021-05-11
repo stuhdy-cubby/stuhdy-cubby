@@ -54,14 +54,14 @@ class ProfileCourses extends React.Component {
               <Header as={'h3'}>Sensei Courses</Header>
               <p>Courses you have previously taken and are willing to provide help with.</p>
               <Divider hidden />
-              <MultiSelectField id={'senseicourses'} label='Courses' name='senseicourses' showInlineError={true} placeholder={'Select Courses'}/>
+              <MultiSelectField id='senseicourses' label='Courses' name='senseicourses' showInlineError={true} placeholder={'Select Courses'}/>
 
               <Header as={'h3'}>Grasshopper Courses</Header>
               <p>Courses you are currently taking and seek help with.</p>
               <Divider hidden />
               <MultiSelectField id='grasshoppercourses' label='Courses' name='grasshoppercourses' showInlineError={true} placeholder={'Select Courses'}/>
               <Divider hidden />
-              <SubmitField value='Submit'/>
+              <SubmitField id='submit' value='Submit'/>
               <ErrorsField/>
             </Segment>
           </AutoForm>

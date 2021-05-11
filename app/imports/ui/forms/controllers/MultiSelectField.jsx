@@ -32,7 +32,7 @@ import { _ } from 'meteor/underscore';
  */
 
 /* eslint react/prop-types: 0 */
-const renderDropdown = ({ allowedValues, disabled, placeholder, onChange, transform, value,id }) => {
+const renderDropdown = ({ allowedValues, disabled, placeholder, onChange, transform, value, id }) => {
   // console.log('renderMultiSelect value=%o allowedValues=%o', value, allowedValues);
   const options = _.map(allowedValues, (val, index) => ({
     key: index,
@@ -74,6 +74,7 @@ const MultiSelect = ({
       onChange,
       transform,
       value,
+      id,
     })}
     {!!(error && showInlineError) && <div className="ui red basic pointing label">{errorMessage}</div>}
   </div>
