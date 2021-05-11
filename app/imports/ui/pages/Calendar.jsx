@@ -20,6 +20,7 @@ class Calendar extends React.Component {
   renderPage() {
     // const allEvents = this.props.sessions.map((s) => [{ title: s.topic, start: '2021-04-10', allDay: false }]);
     const k = this.props.sessions;
+    const curDateTime = new Date();
     const allEvents = _.map(_.keys(k), function (keys) {
       return {
         title: `${k[keys].topic}\n${k[keys].course}`,
@@ -28,34 +29,39 @@ class Calendar extends React.Component {
         url: `/registersession/${k[keys]._id}`,
       };
     });
-    console.log(allEvents);
+    // console.log(allEvents);
     return (
-      <Container id="calendar">
-        <FullCalendar
-          plugins={[dayGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
-          eventColor='#378006'
-          events={allEvents}
-          eventClick={function (info) {
-            info.jsEvent.preventDefault();
-            swal(`Register for Session:\n${info.event.title}`,
-              {
-                buttons: {
-                  register: {
-                    text: 'Register',
-                    value: 'register',
+      <div className='calendar'>
+        <Container id="calendar">
+          <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            eventColor='#378006'
+            events={allEvents}
+            eventClick={function (info) {
+              info.jsEvent.preventDefault();
+              swal(`Register for Session:\n${info.event.title}`,
+                {
+                  buttons: {
+                    register: {
+                      text: 'Register',
+                      value: 'register',
+                    },
+                    ok: true,
                   },
-                  ok: true,
-                },
-              })
-              .then((value) => {
-                if (value === 'register' && info.event.url) {
-                  window.location.href = `#${info.event.url}`;
-                }
-              });
-          }}
-        />
-      </Container>
+                })
+                .then((value) => {
+                  if (value === 'register' && info.event.url && moment(curDateTime).isBefore(info.event.start)) {
+                    window.location.href = `#${info.event.url}`;
+                  }
+                  if (value === 'register' && info.event.url && moment(curDateTime).isAfter(info.event.start)) {
+                    swal('Error', 'Session is no longer accepting registrations', 'error');
+                  }
+                });
+            }}
+          />
+        </Container>
+      </div>
     );
   }
 }

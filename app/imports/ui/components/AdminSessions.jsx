@@ -1,24 +1,25 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
+import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-/** Renders a single row in the List Sessions admin table. See pages/AdminHome.jsx. */
-class ListSessionsAdmin extends React.Component {
+/** Renders a single row in the List Sessions Admin table. */
+class AdminSessions extends React.Component {
   render() {
     return (
       <Table.Row>
-        <Table.Cell>{this.props.sessions.course}</Table.Cell>
-        <Table.Cell>{this.props.sessions.topic}</Table.Cell>
-        <Table.Cell>{this.props.sessions.location}</Table.Cell>
-        <Table.Cell>{this.props.sessions.owner}</Table.Cell>
+        {_.map(this.props.sessions, (s) => <Table.Cell id={s}>{s.course}</Table.Cell>)}
+        {_.map(this.props.sessions, (s) => <Table.Cell id={s}>{s.topic}</Table.Cell>)}
+        {_.map(this.props.sessions, (s) => <Table.Cell id={s}>{s.location}</Table.Cell>)}
+        {_.map(this.props.sessions, (s) => <Table.Cell id={s}>{s.owner}</Table.Cell>)}
       </Table.Row>
     );
   }
 }
 
 // Require a document to be passed to this component.
-ListSessionsAdmin.propTypes = {
+AdminSessions.propTypes = {
   sessions: PropTypes.shape({
     topic: PropTypes.string,
     course: PropTypes.string,
@@ -29,4 +30,4 @@ ListSessionsAdmin.propTypes = {
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(ListSessionsAdmin);
+export default withRouter(AdminSessions);

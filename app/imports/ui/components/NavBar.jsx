@@ -9,11 +9,10 @@ import { Roles } from 'meteor/alanning:roles';
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
-    const menuStyle = { marginBottom: '10px' };
     return (
-      <Menu style={menuStyle} attached="top" borderless>
+      <Menu attached="top" borderless>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Header as={'h1'}>stUHdy cubby</Header>
+          <Header as={'h3'}>stUHdy cubby</Header>
         </Menu.Item>
         {this.props.currentUser ? (
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/" key='home'>Home</Menu.Item>,
@@ -21,6 +20,7 @@ class NavBar extends React.Component {
             <Menu.Item as={NavLink} activeClassName="active" exact to="/calendar" key='calendar' id="navbar-calendar">Calendar</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/addsession" key='addsession' id="navbar-add-session">Add Session</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/leaderboard" key='leaderboard' id="navbar-leaderboard">Leaderboard</Menu.Item>,
+            <Menu.Item as={NavLink} activeClassName="active" exact to="/listcourses" key='listcourses' id="navbar-list-courses">Courses List</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/viewprofiles" key='viewprofiles' id="navbar-viewprofiles">Profiles</Menu.Item>]
         ) : ''}
         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
@@ -28,7 +28,7 @@ class NavBar extends React.Component {
         ) : ''}
         <Menu.Item position="right">
           {this.props.currentUser === '' ? (
-            <Dropdown id="login-dropdown" text="Login" pointing="top right" icon={'user'}>
+            <Dropdown id="login-dropdown" icon="user" text="Login" pointing="top right">
               <Dropdown.Menu>
                 <Dropdown.Item id="login-dropdown-sign-in" icon="user" text="Sign In" as={NavLink} exact to="/signin"/>
                 <Dropdown.Item id="login-dropdown-sign-up" icon="add user" text="Sign Up" as={NavLink} exact to="/signup"/>

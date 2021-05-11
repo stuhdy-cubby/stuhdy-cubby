@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment, Divider, Checkbox, Button } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Divider, Checkbox } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
@@ -18,6 +18,9 @@ class EditProfile extends React.Component {
     this.handleCheckInterest = this.handleCheckInterest.bind(this);
     this.handleCheckSkills = this.handleCheckSkills.bind(this);
   }
+
+  // code adapted from https://stackoverflow.com/questions/60611907/
+  // how-to-set-the-handler-for-multiple-checkboxes-in-react by keikai
 
   handleCheckInterest = id => () => {
     const { checkedInterests } = this.state;
@@ -47,7 +50,11 @@ class EditProfile extends React.Component {
     const { firstName, lastName, email, institution, major, standing, bio, _id } = data;
     Profiles.collection.update(_id, { $set: { firstName, lastName, email, institution, major, standing, bio, owner, interests, skills } }, (error) => (error ?
       swal('Error', error.message, 'error') :
-      swal('Success', 'Profile updated successfully', 'success')));
+      swal('Success', 'Profile updated successfully', 'success')
+        .then(function () {
+          window.location.href = '#/profile';
+        })
+    ));
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -61,22 +68,15 @@ class EditProfile extends React.Component {
 
     // initial populate
     if (checked === false) {
-      if (this.props.doc.interests === undefined) {
-        console.log('no interests');
-      } else {
+      if (this.props.doc.interests !== undefined) {
         this.setState({ checkedInterests: this.props.doc.interests });
       }
 
-      if (this.props.doc.skills === undefined) {
-        console.log('no skills');
-      } else {
+      if (this.props.doc.skills !== undefined) {
         this.setState({ checkedSkills: this.props.doc.skills });
       }
       this.setState({ checked: true });
     }
-
-    // populate checkedInterests
-    // populate checkedSkills
     return (
       <Grid container centered>
         <Grid.Column>
@@ -178,7 +178,7 @@ class EditProfile extends React.Component {
   }
 }
 
-// Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
+// Require the presence of a Profiles document in the props object. Uniforms adds 'model' to the props, which we use.
 EditProfile.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
@@ -189,7 +189,7 @@ EditProfile.propTypes = {
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
-  // Get access to Stuff documents.
+  // Get access to Profiles documents.
   const subscription = Meteor.subscribe(Profiles.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();

@@ -38,16 +38,14 @@ class RegisterSession extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          ProfilesPoints.collection.insert({ profile, session, points }, (err) => {
-            if (err) {
-              swal('Error', err.message, 'error');
-            } else {
-              swal('Success', 'Successfully registered for session', 'success')
-                .then(function () {
-                  window.location.href = '#/list';
-                });
-            }
-          });
+          ProfilesPoints.collection.insert({ profile, session, points },
+            (err) => {
+              if (err) {
+                swal('Error', err.message, 'error');
+              } else {
+                swal('Success', 'Successfully registered for session', 'success');
+              }
+            });
         }
       });
   }
@@ -59,22 +57,22 @@ class RegisterSession extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
-    console.log(this.props.doc._id);
+    // console.log(this.props.doc._id);
     return (
-      <div className='registersession-background' id='register-session-page'>
+      <div className='registersession-background'>
         <Grid container centered columns={2}>
           <Grid.Column color={'yellow'}>
             <Header as="h2" inverted textAlign="center">Register for Session</Header>
             <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
-                <TextField id='topic' name='topic' readOnly={true}/>
-                <TextField id='course' name='course' readOnly={true}/>
-                <TextField id='location' name='location' readOnly={true}/>
-                <DateField id='sessionDate' name='sessionDate' readOnly={true}/>
-                <TextField id='sessionNotes' name='sessionNotes' readOnly={true}/>
-                <TextField id='createdBy' label='Created by' name='owner' readOnly={true}/>
-                <TextField id='response' name='response'/>
-                <SubmitField id='submit' value='Submit'/>
+                <TextField name='topic' readOnly={true}/>
+                <TextField name='course' readOnly={true}/>
+                <TextField name='location' readOnly={true}/>
+                <DateField name='sessionDate' readOnly={true}/>
+                <TextField name='sessionNotes' readOnly={true}/>
+                <TextField label='Created by' name='owner' readOnly={true}/>
+                <TextField name='response'/>
+                <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>
             </AutoForm>
@@ -85,7 +83,7 @@ class RegisterSession extends React.Component {
   }
 }
 
-// Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
+// Require the presence of a Sessions document in the props object. Uniforms adds 'model' to the props, which we use.
 RegisterSession.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
@@ -96,7 +94,7 @@ RegisterSession.propTypes = {
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
-  // Get access to Stuff documents.
+  // Get access to SessionsCourses documents.
   const subscription = Meteor.subscribe(SessionsCourses.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
