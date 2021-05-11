@@ -44,6 +44,7 @@ class UserProfilePage {
     await testController.click(cSelector);
 
     await testController.click('#submit');
+    await testController.click(Selector('.swal-button--confirm'));
   }
 
   async editCourse(testController) {
@@ -62,6 +63,7 @@ class UserProfilePage {
     await testController.pressKey('esc');
 
     await testController.click('#submit');
+    await testController.click(Selector('.swal-button--confirm'));
   }
 
 }

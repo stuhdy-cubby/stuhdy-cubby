@@ -97,11 +97,11 @@ test('Test View Profiles page', async (testController) => {
   await viewprofilesPage.clickViewProfile(testController);
 });
 
-test.only('Test User Profile page', async (testController) => {
+test('Test User Profile page', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoUserProfilePage(testController);
   await userprofilePage.isDisplayed(testController);
-  //await userprofilePage.editProfile(testController);
+  await userprofilePage.editProfile(testController);
   await userprofilePage.editCourse(testController);
 });

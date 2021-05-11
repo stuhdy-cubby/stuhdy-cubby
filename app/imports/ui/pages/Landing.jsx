@@ -22,7 +22,7 @@ class Landing extends React.Component {
 
           <Divider hidden/>
         </div>
-        <Container verticalAlign='middle'>
+        <Container verticalAlign='middle' id='landing-page'>
           <Divider hidden/>
           <Divider hidden/>
           <Grid columns='two'>
