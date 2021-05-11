@@ -56,7 +56,7 @@ test('Test List Sessions page', async (testController) => {
   await listsessionPage.hasCard(testController);
 });
 
-test.only('Test Register Sessions page', async (testController) => {
+test('Test Register Sessions page', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoListSessionPage(testController);
