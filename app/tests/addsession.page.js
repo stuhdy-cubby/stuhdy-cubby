@@ -20,8 +20,8 @@ class AddsessionPage {
     const courseSelector = Selector('#course');
     const courseOption = courseSelector.find('option');
     await testController.click(courseSelector);
-    await testController.click(courseOption.withText('ICS 314'));
-    await testController.expect(courseSelector.value).eql('ICS 314');
+    await testController.click(courseOption.withText('ICS 111'));
+    await testController.expect(courseSelector.value).eql('ICS 111');
 
     const notes = 'Team meet up';
     await testController.typeText('#sessionNotes', notes);
