@@ -20,6 +20,7 @@ class SignupPage {
     await testController.click('#signup-form-submit');
     await navBar.isLoggedIn(testController, username);
   }
+
 }
 
 export const signupPage = new SignupPage();

@@ -10,6 +10,8 @@ import { leaderboardPage } from './leaderboard.page';
 import { courselistPage } from './courseslist.page';
 import { viewprofilesPage } from './viewprofiles.page';
 import { userprofilePage } from './userprofile.page';
+import { signupPage } from './signup.page';
+import { userinfoPage } from './userinfo.page';
 
 /* global fixture:false, test:false */
 
@@ -29,6 +31,13 @@ test('Test that signin and signout work', async (testController) => {
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
+});
+
+test('Test Sign up and Register user', async (testController) => {
+  await navBar.gotoSignupPage(testController);
+  await signupPage.isDisplayed(testController);
+  await signupPage.signupUser(testController, 'sally@foo.com', 'changeme');
+  await userinfoPage.createProfile(testController, 'sally@fooo.com');
 });
 
 test('Test Add Session page', async (testController) => {
