@@ -1,5 +1,4 @@
-name: ci-meteor-application-template-react
-
+name: stuhdy-cubby
 on:
   push:
     branches:
