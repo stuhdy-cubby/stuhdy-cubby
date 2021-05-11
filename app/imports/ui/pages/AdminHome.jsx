@@ -24,12 +24,12 @@ class AdminHome extends React.Component {
     const userData = SessionsCourses.collection.find({ owner: user }).fetch();
     console.log(userData);
     return (
-      <Container>
+      <Container id='adminhome'>
         <Divider hidden />
         <Header as="h1">My Sessions</Header>
         <p>List of all your current and past sessions.</p>
         <Button as={NavLink} activeClassName="active" exact to="/addsession" key='list' color='blue'>Add Session</Button>
-        <Table striped selectable color='blue'>
+        <Table striped selectable color='blue' id='mysessionstable'>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Course</Table.HeaderCell>
@@ -49,7 +49,7 @@ class AdminHome extends React.Component {
 
         <Header as="h1">All Sessions</Header>
         <p>List of all current and past sessions.</p>
-        <Table striped selectable color='brown'>
+        <Table striped selectable color='brown' id='allsessionstable'>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Course</Table.HeaderCell>

@@ -12,6 +12,7 @@ import { viewprofilesPage } from './viewprofiles.page';
 import { userprofilePage } from './userprofile.page';
 import { signupPage } from './signup.page';
 import { userinfoPage } from './userinfo.page';
+import { adminhomePage } from './adminhome.page';
 
 /* global fixture:false, test:false */
 
@@ -114,4 +115,13 @@ test('Test User Profile page', async (testController) => {
   await userprofilePage.isDisplayed(testController);
   await userprofilePage.editProfile(testController);
   await userprofilePage.editCourse(testController);
+});
+
+test('Test Admin Home page', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, 'admin@foo.com', 'changeme');
+  await navBar.gotoAdminPage(testController);
+  await adminhomePage.isDisplayed(testController);
+  await adminhomePage.hasMySessionsTable(testController);
+  await adminhomePage.hasAllSessionsTable(testController);
 });

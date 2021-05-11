@@ -61,6 +61,10 @@ class NavBar {
     await testController.click('#navbar-viewprofiles');
   }
 
+  async gotoAdminPage(testController) {
+    await testController.click('#navbar-admin');
+  }
+
   async gotoUserProfilePage(testController) {
     await testController.click('#navbar-current-user');
     await testController.click('#user-profile');
