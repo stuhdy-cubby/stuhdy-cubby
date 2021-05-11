@@ -5,18 +5,15 @@ import { Container, Divider, Icon } from 'semantic-ui-react';
 class NotFound extends React.Component {
   render() {
     return (
-      <Container id='landing-page' verticalAlign='middle' textAlign='center'>
-
-        <Divider hidden/>
-
-        <Icon name='thumbs down' size='huge' />
-
+      <Container id='not-found' verticalAlign='middle' textAlign='center'>
+        <Divider hidden />
+        <Divider hidden />
+        <Icon name='frown outline' size='massive'/>
         <h1>404</h1>
-
-        <Divider hidden/>
-
-        <p>Whoops! Page not found.</p>
-
+        <h2>Whoops! Page not found.</h2>
+        <Divider hidden />
+        <p>Looks like you broke the internet (just kidding). The page you are trying to access does not exist.</p>
+        <Divider hidden />
       </Container>
     );
   }

@@ -1,14 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Icon, Segment } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import Leaderboard from '../components/Leaderboard';
-import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesPoints } from '../../api/profiles/ProfilesPoints';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+/** Renders a table containing all of the profiles points documents. Use <Leaderboard> to render each row. */
 class LeaderboardPage extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -30,25 +29,30 @@ class LeaderboardPage extends React.Component {
       return { profile: s, points: personObj[s] };
     }), 'points').reverse();
     return (
-      <Container>
-        <Header as="h2" textAlign="center">Leaderboard</Header>
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Points</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {profilePoints.map((leaderboard) => <Leaderboard key={leaderboard.profile} leaderboard={leaderboard}/>)}
-          </Table.Body>
-        </Table>
-      </Container>
+      <div className="leaderboard">
+        <Container>
+          <Header as="h1" textAlign="center" block>Leaderboard
+            <Icon name="trophy"/>
+          </Header>
+          <Segment textAlign="center" size="large" inverted color='olive'>Climb up to the top of the leaderboard to win rewards! Register for a study session today!</Segment>
+          <Table className="ui green table">
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Profile</Table.HeaderCell>
+                <Table.HeaderCell>Points</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {profilePoints.map((leaderboard) => <Leaderboard key={leaderboard.profile} leaderboard={leaderboard}/>)}
+            </Table.Body>
+          </Table>
+        </Container>
+      </div>
     );
   }
 }
 
-/** Require an array of Stuff documents in the props. */
+/** Require an array of Profiles documents in the props. */
 LeaderboardPage.propTypes = {
   profiles: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
@@ -56,7 +60,7 @@ LeaderboardPage.propTypes = {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to ProfilesPoints documents.
   const subscription = Meteor.subscribe(ProfilesPoints.userPublicationName);
   return {
     /** get collection and sort by points */

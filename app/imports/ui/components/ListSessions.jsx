@@ -2,34 +2,43 @@ import React from 'react';
 import { Card, Button, Feed, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
+import moment from 'moment';
 import SessionsProfiles from './SessionsProfiles';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a single row in the List Sessions table. See pages/ListSessionsPage.jsx. */
 class ListSessions extends React.Component {
   render() {
+    const curDateTime = new Date();
+    // console.log(curDateTime);
+    const sd = moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY hh:mm A');
+    // console.log(moment(curDateTime).isBefore(sd));
     return (
       <Card>
         <Card.Content>
           <Card.Header>{this.props.sessions.topic}</Card.Header>
           <Card.Meta>{this.props.sessions.course}</Card.Meta>
           <Card.Meta>{this.props.sessions.location}</Card.Meta>
+          <Card.Meta>
+            {moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY hh:mm A')}
+
+          </Card.Meta>
           <Card.Description>{this.props.sessions.sessionNotes}</Card.Description>
         </Card.Content>
         <Card.Content extra>
           <Header as={'h5'}>
-                Session created by: {this.props.sessions.owner}
+              Session created by: {this.props.sessions.owner}
           </Header>
         </Card.Content>
         <Card.Content extra>
-              Participants
+            Participants
           <Feed>
             {this.props.sessionsProfiles.map((p, index) => <SessionsProfiles key={index} sessionsProfiles={p} />)}
           </Feed>
         </Card.Content>
         <Card.Content extra>
-          <Button basic color='green'>
+          {moment(curDateTime).isBefore(sd) ? <Button basic color='green'>
             <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
-          </Button>
+          </Button> : ''}
         </Card.Content>
       </Card>
     );

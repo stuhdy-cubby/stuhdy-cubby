@@ -21,7 +21,7 @@ class UserProfile extends React.Component {
     console.log(user);
     const userData = Profiles.collection.find({ email: user }).fetch();
     return (
-      <Container id="user-profile">
+      <Container>
         <Divider hidden />
         {_.map(userData, (profiles) => <ProfileInfo key={profiles._id} profiles={profiles} sessions={this.props.sessions.filter(s => (s.owner === profiles.email))}/>)}
       </Container>
@@ -29,7 +29,7 @@ class UserProfile extends React.Component {
   }
 }
 
-// Require an array of Stuff documents in the props.
+// Require an array of Profiles documents in the props.
 UserProfile.propTypes = {
   profiles: PropTypes.array.isRequired,
   sessions: PropTypes.array.isRequired,
@@ -39,13 +39,13 @@ UserProfile.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to documents.
   const subscription1 = Meteor.subscribe(Profiles.userPublicationName);
   const subscription2 = Meteor.subscribe(SessionsCourses.userPublicationName);
   // Determine if the subscription is ready
   const ready1 = subscription1.ready();
   const ready2 = subscription2.ready();
-  // Get the Stuff documents
+  // Get the documents
   const profiles = Profiles.collection.find({}).fetch();
   const sessions = SessionsCourses.collection.find({}).fetch();
   return {

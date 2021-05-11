@@ -4,7 +4,7 @@ import { Button, Card, Container, Divider, Grid, Header, Image } from 'semantic-
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a single row in the List Profiles table. See pages/ViewProfiles.jsx. */
 class ProfileInfo extends React.Component {
   render() {
     return (
@@ -15,7 +15,7 @@ class ProfileInfo extends React.Component {
             <Header as='h2'>{this.props.profiles.firstName} {this.props.profiles.lastName}</Header>
             <p>{this.props.profiles.email}</p>
 
-            <Button as={NavLink} activeClassName="active" exact to="/edit/:_id" key='edit' color='gray' fluid basic>Edit Profile</Button>
+            <Button as={NavLink} activeClassName="active" exact to={`/edit/${this.props.profiles._id}`} key='edit' color='teal' fluid basic>Edit Profile</Button>
 
             <Divider clearing />
 
@@ -31,26 +31,29 @@ class ProfileInfo extends React.Component {
             <Card.Group>
               <Card fluid>
                 <Card.Content>
-                  <Card.Header>Enrolled Courses</Card.Header>
-                  <Card.Description></Card.Description>
+                  <Card.Header>Courses</Card.Header>
+                  <Card.Description>
+                    <Button as={NavLink} activeClassName="active"
+                      exact to={`/profilecourses/${this.props.profiles._id}`} key='profilecourses'
+                      color='gray' fluid>Edit Courses</Button>
+                  </Card.Description>
                 </Card.Content>
               </Card>
               <Card fluid>
                 <Card.Content>
-                  <Card.Header>Previously Taken Courses</Card.Header>
-                  <Card.Description></Card.Description>
+                  <Card.Header>Sensei Courses</Card.Header>
+                  <Card.Description>
+                    {_.map(this.props.profiles.senseicourses, (c) => <p>{c}</p>)}
+                    <Divider clearing />
+                    <Header>Grasshopper Courses</Header>
+                    {_.map(this.props.profiles.grasshoppercourses, (g) => <p>{g}</p>)}
+                  </Card.Description>
                 </Card.Content>
               </Card>
               <Card fluid>
                 <Card.Content>
                   <Card.Header>Skills</Card.Header>
-                  <Card.Description>{this.props.profiles.skills}</Card.Description>
-                </Card.Content>
-              </Card>
-              <Card fluid>
-                <Card.Content>
-                  <Card.Header>Needs Help With</Card.Header>
-                  <Card.Description></Card.Description>
+                  <Card.Description>{_.map(this.props.profiles.skills, (s) => <p>{s}</p>)}</Card.Description>
                 </Card.Content>
               </Card>
             </Card.Group>
@@ -58,16 +61,16 @@ class ProfileInfo extends React.Component {
 
           <Grid.Column width={3}>
             <h3>Interests</h3>
-            <p>{this.props.profiles.interests}</p>
-
             <Divider clearing />
+            {_.map(this.props.profiles.interests, (i) => <p>{i}</p>)}
 
             <h3>Sessions</h3>
-            {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}</p>)}
-            {_.map(this.props.sessions, (s) => <p id={s}><strong>Course: </strong>{s.course}</p>)}
-            {_.map(this.props.sessions, (s) => <p id={s}><strong>Location: </strong>{s.location}</p>)}
             <Divider clearing />
-
+            {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}<br/>
+              <strong>Course: </strong>{s.course}<br/>
+              <strong>Location: </strong>{s.location}
+              <hr style={{ width: '10em' }}/>
+            </p>)}
           </Grid.Column>
         </Grid>
       </Container>
@@ -88,6 +91,8 @@ ProfileInfo.propTypes = {
     picture: PropTypes.object,
     interests: PropTypes.string,
     skills: PropTypes.string,
+    senseicourses: PropTypes.string,
+    grasshoppercourses: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
   sessions: PropTypes.array.isRequired,

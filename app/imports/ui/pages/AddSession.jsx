@@ -42,7 +42,7 @@ class AddSession extends React.Component {
   submit(data, formRef) {
     const { topic, description, course, location, sessionDate, sessionNotes } = data;
     const emailList = _.pluck(Profiles.collection.find().fetch(), 'email');
-    console.log(emailList);
+    // console.log(emailList);
     const subjectLine = `New session for: ${topic}`;
     const owner = Meteor.user().username;
     const profile = Meteor.user().username;
@@ -64,11 +64,11 @@ class AddSession extends React.Component {
             <b>Notes:</b> ${sessionNotes}<br/>
             <a href="https://stuhdy-cubby.xyz/#/registersession/${docsInserted}">Register for this session</a>`;
           swal('Success', 'stUHdy session added successfully', 'success');
-          console.log(docsInserted);
+          // console.log(docsInserted);
           /** Email registered users of new session */
 
           _.each(emailList, function (n) {
-            console.log(n);
+            // console.log(n);
             Meteor.call(
               'sendEmail',
               n,
@@ -86,9 +86,11 @@ class AddSession extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
+    const email = Meteor.user().username;
     const descrip = this.state.description;
-    const allCourses = _.pluck(Courses.collection.find().fetch(), 'name');
     const allSessions = _.pluck(Sessions.collection.find().fetch(), 'topic');
+    const userCourses = _.pluck(Profiles.collection.find({ email: email }).fetch(), 'grasshoppercourses');
+    const allCourses = userCourses[0];
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth()).padStart(2, '0');

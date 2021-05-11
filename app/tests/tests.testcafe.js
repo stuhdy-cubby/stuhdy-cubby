@@ -3,6 +3,7 @@ import { signinPage } from './signin.page';
 import { signoutPage } from './signout.page';
 import { navBar } from './navbar.component';
 import { listsessionPage } from './listsession.page';
+import { registersessionPage } from './registersession.page';
 import { addsessionPage } from './addsession.page';
 
 /* global fixture:false, test:false */
@@ -39,4 +40,12 @@ test.only('Test Add Session page', async (testController) => {
   await navBar.gotoAddSessionPage(testController);
   await addsessionPage.isDisplayed(testController);
   await addsessionPage.addSession(testController);
+});
+
+test.only('Test Register Sessions page', async (testController) => {
+  await navBar.gotoSigninPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoListSessionPage(testController);
+  await registersessionPage.isDisplayed(testController);
+  await registersessionPage.registerSession(testController);
 });
