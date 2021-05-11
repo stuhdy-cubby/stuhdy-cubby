@@ -20,6 +20,7 @@ class Calendar extends React.Component {
   renderPage() {
     // const allEvents = this.props.sessions.map((s) => [{ title: s.topic, start: '2021-04-10', allDay: false }]);
     const k = this.props.sessions;
+    const curDateTime = new Date();
     const allEvents = _.map(_.keys(k), function (keys) {
       return {
         title: `${k[keys].topic}\n${k[keys].course}`,
@@ -50,8 +51,11 @@ class Calendar extends React.Component {
                   },
                 })
                 .then((value) => {
-                  if (value === 'register' && info.event.url) {
+                  if (value === 'register' && info.event.url && moment(curDateTime).isBefore(info.event.start)) {
                     window.location.href = `#${info.event.url}`;
+                  }
+                  if (value === 'register' && info.event.url && moment(curDateTime).isAfter(info.event.start)) {
+                    swal('Error', 'Session is no longer accepting registrations', 'error');
                   }
                 });
             }}

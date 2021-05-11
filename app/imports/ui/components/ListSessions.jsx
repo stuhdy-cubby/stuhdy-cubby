@@ -9,7 +9,9 @@ import SessionsProfiles from './SessionsProfiles';
 class ListSessions extends React.Component {
   render() {
     const curDateTime = new Date();
-    console.log(curDateTime);
+    // console.log(curDateTime);
+    const sd = moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY hh:mm A');
+    // console.log(moment(curDateTime).isBefore(sd));
     return (
       <Card>
         <Card.Content>
@@ -34,10 +36,9 @@ class ListSessions extends React.Component {
           </Feed>
         </Card.Content>
         <Card.Content extra>
-          {curDateTime > this.props.sessions.sessionDate ? <Button basic color='green'>
+          {moment(curDateTime).isBefore(sd) ? <Button basic color='green'>
             <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
-          </Button> : '' }
-
+          </Button> : ''}
         </Card.Content>
       </Card>
     );
