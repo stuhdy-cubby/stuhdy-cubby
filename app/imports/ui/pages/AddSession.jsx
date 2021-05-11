@@ -92,7 +92,7 @@ class AddSession extends React.Component {
     const userCourses = _.pluck(Profiles.collection.find({ email: email }).fetch(), 'grasshoppercourses');
     const allCourses = userCourses[0];
     const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
+    const dd = String(today.getDate() + 1).padStart(2, '0');
     const mm = String(today.getMonth()).padStart(2, '0');
     const yyyy = today.getFullYear();
     const formSchema = makeSchema(allCourses);
@@ -121,7 +121,9 @@ class AddSession extends React.Component {
                 <Form.Group widths={'equal'}>
                   <SelectField id='course' name='course' showInlineError={true} placeholder='Course'/>
                   <TextField id='location' name='location' showInlineError={true} placeholder='Location'/>
-                  <DateField name='sessionDate' showInlineError={true} min={new Date(yyyy, mm, dd)}/>
+                  <DateField id='sessionDate' name='sessionDate' showInlineError={true} min={new Date(yyyy, mm, dd)}
+                    value={new Date(yyyy, mm, dd)}
+                  />
                 </Form.Group>
                 <LongTextField id='sessionNotes' name='sessionNotes' placeholder='Session notes'/>
                 <SubmitField id='submit' value='Submit'/>
