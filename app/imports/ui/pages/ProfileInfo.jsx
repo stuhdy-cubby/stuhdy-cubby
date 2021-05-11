@@ -15,7 +15,7 @@ class ProfileInfo extends React.Component {
             <Header as='h2'>{this.props.profiles.firstName} {this.props.profiles.lastName}</Header>
             <p>{this.props.profiles.email}</p>
 
-            <Button as={NavLink} activeClassName="active" exact to={`/edit/${this.props.profiles._id}`} key='edit' color='teal' fluid basic>Edit Profile</Button>
+            <Button as={NavLink} id='editprofile' activeClassName="active" exact to={`/edit/${this.props.profiles._id}`} key='edit' color='teal' fluid basic>Edit Profile</Button>
 
             <Divider clearing />
 
@@ -33,7 +33,7 @@ class ProfileInfo extends React.Component {
                 <Card.Content>
                   <Card.Header>Courses</Card.Header>
                   <Card.Description>
-                    <Button as={NavLink} activeClassName="active"
+                    <Button as={NavLink} id='editcourses' activeClassName="active"
                       exact to={`/profilecourses/${this.props.profiles._id}`} key='profilecourses'
                       color='gray' fluid>Edit Courses</Button>
                   </Card.Description>

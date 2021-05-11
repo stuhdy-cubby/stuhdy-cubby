@@ -1,8 +1,8 @@
 import { Selector } from 'testcafe';
 
-class ListsessionPage {
+class CourseslistPage {
   constructor() {
-    this.pageId = '#navbar-list-session';
+    this.pageId = '#navbar-list-courses';
     this.pageSelector = Selector(this.pageId);
   }
 
@@ -13,13 +13,10 @@ class ListsessionPage {
 
   /** Checks that the page has at least a card. */
   async hasCard(testController) {
-    const hasCard = Selector('#sessions-card').exists;
+    const hasCard = Selector('#course-list').exists;
     await testController.expect(hasCard).ok();
   }
 
-  async clickRegister(testController) {
-    await testController.click('#register-form-button');
-  }
 }
 
-export const listsessionPage = new ListsessionPage();
+export const courselistPage = new CourseslistPage();

@@ -44,6 +44,27 @@ class NavBar {
   async gotoAddSessionPage(testController) {
     await testController.click('#navbar-add-session');
   }
+
+  async gotoCalendarPage(testController) {
+    await testController.click('#navbar-calendar');
+  }
+
+  async gotoLeaderboardPage(testController) {
+    await testController.click('#navbar-leaderboard');
+  }
+
+  async gotoCoursesListPage(testController) {
+    await testController.click('#navbar-list-courses');
+  }
+
+  async gotoViewProfilesPage(testController) {
+    await testController.click('#navbar-viewprofiles');
+  }
+
+  async gotoUserProfilePage(testController) {
+    await testController.click('#navbar-current-user');
+    await testController.click('#user-profile');
+  }
 }
 
 export const navBar = new NavBar();

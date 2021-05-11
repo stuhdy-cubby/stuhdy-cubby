@@ -36,7 +36,7 @@ class ListSessions extends React.Component {
           </Feed>
         </Card.Content>
         <Card.Content extra>
-          {moment(curDateTime).isBefore(sd) ? <Button basic color='green'>
+          {moment(curDateTime).isBefore(sd) ? <Button basic color='green' id='register-form-button'>
             <Link to={`/registersession/${this.props.sessions._id}`}>Register</Link>
           </Button> : ''}
         </Card.Content>

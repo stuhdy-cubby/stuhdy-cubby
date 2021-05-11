@@ -27,6 +27,7 @@ const MakeCard = (props) => (
         {props.profile.bio}
         <Divider hidden />
         <Modal
+          id='viewprofilemodal'
           closeIcon
           image
           scrolling
@@ -34,7 +35,7 @@ const MakeCard = (props) => (
           trigger={
             <Grid>
               <Grid.Column textAlign="center">
-                <Button basic color='teal'>View Profile</Button>
+                <Button basic color='teal' id='view-profile-button'>View Profile</Button>
               </Grid.Column>
             </Grid>
           }
@@ -112,7 +113,7 @@ MakeCard.propTypes = {
 };
 
 /** Renders the Profile Collection as a set of Cards. */
-class UserProfile extends React.Component {
+class ViewProfiles extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
@@ -126,7 +127,7 @@ class UserProfile extends React.Component {
     return (
       <Container id="profiles-page">
         <Divider hidden/>
-        <Card.Group>
+        <Card.Group id='profile-cards'>
           {_.map(profileData, (profile, index) => <MakeCard key={index} profile={profile}/>)}
         </Card.Group>
       </Container>
@@ -134,7 +135,7 @@ class UserProfile extends React.Component {
   }
 }
 
-UserProfile.propTypes = {
+ViewProfiles.propTypes = {
   ready: PropTypes.bool.isRequired,
 };
 
@@ -145,4 +146,4 @@ export default withTracker(() => {
   return {
     ready: sub.ready(),
   };
-})(UserProfile);
+})(ViewProfiles);

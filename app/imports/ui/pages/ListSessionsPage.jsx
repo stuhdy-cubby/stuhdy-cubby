@@ -19,13 +19,13 @@ class ListSessionsPage extends React.Component {
   renderPage() {
     return (
       <div className='listsessions-background'>
-        <Container id="sessions list">
+        <Container id="sessions-list">
           <Segment>
             <Header as='h1' textAlign="center" color='green'>
               Register for a Session!
             </Header>
           </Segment>
-          <Card.Group centered>
+          <Card.Group centered id='sessions-card'>
             {this.props.sessions.map((sessions) => <ListSessions key={sessions._id} sessions={sessions} sessionsProfiles={this.props.sessionsProfiles.filter(p => (p.topic === sessions._id))} />)}
           </Card.Group>
         </Container>

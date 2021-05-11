@@ -19,13 +19,13 @@ class ListCoursesPage extends React.Component {
   renderPage() {
     return (
       <div className='listcourses-background'>
-        <Container id="course-list">
+        <Container>
           <Segment>
             <Header as='h1' textAlign="center" color='yellow'>
               Courses
             </Header>
           </Segment>
-          <Card.Group itemsPerRow={6}>
+          <Card.Group id='course-list' itemsPerRow={6}>
             {_.map(this.props.courses, (c) => <Card key={c._id}>
               <Card.Content>
                 <Card.Header>{c.name}</Card.Header>

@@ -1,8 +1,8 @@
 import { Selector } from 'testcafe';
 
-class ListsessionPage {
+class ViewProfilesPage {
   constructor() {
-    this.pageId = '#navbar-list-session';
+    this.pageId = '#navbar-viewprofiles';
     this.pageSelector = Selector(this.pageId);
   }
 
@@ -13,13 +13,14 @@ class ListsessionPage {
 
   /** Checks that the page has at least a card. */
   async hasCard(testController) {
-    const hasCard = Selector('#sessions-card').exists;
+    const hasCard = Selector('#profile-cards').exists;
     await testController.expect(hasCard).ok();
   }
 
-  async clickRegister(testController) {
-    await testController.click('#register-form-button');
+  async clickViewProfile(testController) {
+    await testController.click('#view-profile-button');
+    await testController.click(Selector('.ui.modal').find('.close'));
   }
 }
 
-export const listsessionPage = new ListsessionPage();
+export const viewprofilesPage = new ViewProfilesPage();

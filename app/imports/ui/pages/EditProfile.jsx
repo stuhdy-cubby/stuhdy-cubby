@@ -88,9 +88,9 @@ class EditProfile extends React.Component {
               <TextField name='firstName'/>
               <TextField name='lastName' />
               <TextField name='email' />
-              <SelectField name='institution'/>
-              <SelectField name='major'/>
-              <SelectField name='standing'/>
+              <SelectField id='institution' name='institution'/>
+              <SelectField id='major' name='major'/>
+              <SelectField id='standing' name='standing'/>
               <TextField name='bio' />
 
               <Divider hidden />
@@ -102,28 +102,28 @@ class EditProfile extends React.Component {
               <Grid columns='three'>
                 <Grid.Row>
                   <Grid.Column width={3}>
-                    <Checkbox label={<label>Art</label>} onChange={this.handleCheckInterest('Art')}
+                    <Checkbox id='art' label={<label>Art</label>} onChange={this.handleCheckInterest('Art')}
                       checked={checkedInterests.includes('Art')} />
                     <Divider hidden />
-                    <Checkbox label={<label>Culinary Arts</label>} onChange={this.handleCheckInterest('Culinary Arts')}
+                    <Checkbox id='culinary' label={<label>Culinary Arts</label>} onChange={this.handleCheckInterest('Culinary Arts')}
                       checked={checkedInterests.includes('Culinary Arts')} />
                   </Grid.Column>
                   <Grid.Column width={3}>
-                    <Checkbox label={<label>Music</label>} onChange={this.handleCheckInterest('Music')}
+                    <Checkbox id='music' label={<label>Music</label>} onChange={this.handleCheckInterest('Music')}
                       checked={checkedInterests.includes('Music')}/>
                     <Divider hidden />
-                    <Checkbox label={<label>Athletics</label>} onChange={this.handleCheckInterest('Athletics')}
+                    <Checkbox id='athletics' label={<label>Athletics</label>} onChange={this.handleCheckInterest('Athletics')}
                       checked={checkedInterests.includes('Athletics')} />
                   </Grid.Column>
                   <Grid.Column width={3}>
-                    <Checkbox label={<label>Creative Media</label>} onChange={this.handleCheckInterest('Creative Media')}
+                    <Checkbox id='creativemedia' label={<label>Creative Media</label>} onChange={this.handleCheckInterest('Creative Media')}
                       checked={checkedInterests.includes('Creative Media')} />
                     <Divider hidden />
-                    <Checkbox label={<label>Technology</label>} onChange={this.handleCheckInterest('Technology')}
+                    <Checkbox id='technology' label={<label>Technology</label>} onChange={this.handleCheckInterest('Technology')}
                       checked={checkedInterests.includes('Technology')} />
                   </Grid.Column>
                   <Grid.Column width={3}>
-                    <Checkbox label={<label>Other</label>} onChange={this.handleCheckInterest('Other')}
+                    <Checkbox id='interestother' label={<label>Other</label>} onChange={this.handleCheckInterest('Other')}
                       checked={checkedInterests.includes('Other')} />
                   </Grid.Column>
                 </Grid.Row>
@@ -138,28 +138,28 @@ class EditProfile extends React.Component {
               <Grid columns='three'>
                 <Grid.Row>
                   <Grid.Column width={2}>
-                    <Checkbox label={<label>Javascript</label>} onChange={this.handleCheckSkills('Javascript')}
+                    <Checkbox id='javascript' label={<label>Javascript</label>} onChange={this.handleCheckSkills('Javascript')}
                       checked={checkedSkills.includes('Javascript')} />
                     <Divider hidden />
-                    <Checkbox label={<label>Java</label>} onChange={this.handleCheckSkills('Java')}
+                    <Checkbox id='java' label={<label>Java</label>} onChange={this.handleCheckSkills('Java')}
                       checked={checkedSkills.includes('Java')}/>
                   </Grid.Column>
                   <Grid.Column width={2}>
-                    <Checkbox label={<label>HTML</label>} onChange={this.handleCheckSkills('HTML')}
+                    <Checkbox id='html' label={<label>HTML</label>} onChange={this.handleCheckSkills('HTML')}
                       checked={checkedSkills.includes('HTML')} />
                     <Divider hidden />
-                    <Checkbox label={<label>CSS</label>} onChange={this.handleCheckSkills('CSS')}
+                    <Checkbox id='css' label={<label>CSS</label>} onChange={this.handleCheckSkills('CSS')}
                       checked={checkedSkills.includes('CSS')}/>
                   </Grid.Column>
                   <Grid.Column width={2}>
-                    <Checkbox label={<label>C</label>} onChange={this.handleCheckSkills('C')}
+                    <Checkbox id='c' label={<label>C</label>} onChange={this.handleCheckSkills('C')}
                       checked={checkedSkills.includes('C')}/>
                     <Divider hidden />
-                    <Checkbox label={<label>C++</label>} onChange={this.handleCheckSkills('C++')}
+                    <Checkbox id='c++' label={<label>C++</label>} onChange={this.handleCheckSkills('C++')}
                       checked={checkedSkills.includes('C++')}/>
                   </Grid.Column>
                   <Grid.Column width={2}>
-                    <Checkbox label={<label>Other</label>} onChange={this.handleCheckSkills('Other')}
+                    <Checkbox id='skillsother' label={<label>Other</label>} onChange={this.handleCheckSkills('Other')}
                       checked={checkedSkills.includes('Other')}/>
                   </Grid.Column>
                 </Grid.Row>
@@ -168,7 +168,7 @@ class EditProfile extends React.Component {
               <Divider hidden />
               <Divider hidden />
 
-              <SubmitField value='Submit'/>
+              <SubmitField id='submit' value='Submit'/>
               <ErrorsField/>
             </Segment>
           </AutoForm>

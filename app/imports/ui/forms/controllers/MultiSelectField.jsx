@@ -32,7 +32,7 @@ import { _ } from 'meteor/underscore';
  */
 
 /* eslint react/prop-types: 0 */
-const renderDropdown = ({ allowedValues, disabled, placeholder, onChange, transform, value }) => {
+const renderDropdown = ({ allowedValues, disabled, placeholder, onChange, transform, value,id }) => {
   // console.log('renderMultiSelect value=%o allowedValues=%o', value, allowedValues);
   const options = _.map(allowedValues, (val, index) => ({
     key: index,
@@ -41,7 +41,7 @@ const renderDropdown = ({ allowedValues, disabled, placeholder, onChange, transf
   }));
   return (
     <Dropdown fluid={true} multiple={true} placeholder={placeholder} selection={true} disabled={disabled}
-      options={options} onChange={(event, data) => onChange(data.value)} value={value}/>
+      options={options} onChange={(event, data) => onChange(data.value)} value={value} id={id}/>
   );
 };
 

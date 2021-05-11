@@ -30,7 +30,7 @@ class LeaderboardPage extends React.Component {
     }), 'points').reverse();
     return (
       <div className="leaderboard">
-        <Container>
+        <Container id='leaderboard'>
           <Header as="h1" textAlign="center" block>Leaderboard
             <Icon name="trophy"/>
           </Header>

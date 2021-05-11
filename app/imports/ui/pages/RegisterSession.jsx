@@ -59,7 +59,7 @@ class RegisterSession extends React.Component {
   renderPage() {
     // console.log(this.props.doc._id);
     return (
-      <div className='registersession-background'>
+      <div className='registersession-background' id='register-session-page'>
         <Grid container centered columns={2}>
           <Grid.Column color={'yellow'}>
             <Header as="h2" inverted textAlign="center">Register for Session</Header>
@@ -71,8 +71,8 @@ class RegisterSession extends React.Component {
                 <DateField name='sessionDate' readOnly={true}/>
                 <TextField name='sessionNotes' readOnly={true}/>
                 <TextField label='Created by' name='owner' readOnly={true}/>
-                <TextField name='response'/>
-                <SubmitField value='Submit'/>
+                <TextField id='response' name='response'/>
+                <SubmitField id='submit' value='Submit'/>
                 <ErrorsField/>
               </Segment>
             </AutoForm>
