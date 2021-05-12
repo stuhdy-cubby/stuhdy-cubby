@@ -59,7 +59,7 @@ test('Test List Sessions page', async (testController) => {
 
 test('Test Register Sessions page', async (testController) => {
   await navBar.gotoSigninPage(testController);
-  await signinPage.signin(testController, credentials.username, credentials.password);
+  await signinPage.signin(testController, 'sally@foo.com', 'changeme');
   await navBar.gotoListSessionPage(testController);
   await listsessionPage.clickRegister(testController);
   await listsessionPage.isDisplayed(testController);

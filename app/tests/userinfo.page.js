@@ -30,7 +30,7 @@ class UserinfoPage {
     await testController.expect(standingSelector.value).eql('Sophomore');
 
     await testController.typeText('#picurl', 'https://react.semantic-ui.com/images/avatar/large/jenny.jpg');
-    await testController.typeText('#bio', 'I am Sally, a junior.');
+    await testController.typeText('#bio', 'I am Sally, a sophomore.');
 
     const athleticSelector = Selector('#athletics');
     await testController.click(athleticSelector);
