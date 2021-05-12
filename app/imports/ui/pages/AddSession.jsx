@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment, Header, Form, Input } from 'semantic-ui-react';
+import { Grid, Segment, Header, Form, Input, Message, Button, Icon } from 'semantic-ui-react';
 import { AutoForm, TextField, DateField, SelectField, LongTextField,
   HiddenField, SubmitField, ErrorsField } from 'uniforms-semantic';
 import swal from 'sweetalert';
@@ -9,6 +9,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { Profiles } from '../../api/profiles/Profiles';
 import { Courses } from '../../api/courses/Courses';
 import { Sessions } from '../../api/sessions/Sessions';
@@ -88,6 +89,8 @@ class AddSession extends React.Component {
     let fRef = null;
     const email = Meteor.user().username;
     const descrip = this.state.description;
+    const profile = _.pluck(Profiles.collection.find({ email: email }).fetch(), '_id');
+    const profileId = profile[0];
     const allSessions = _.pluck(Sessions.collection.find().fetch(), 'topic');
     const userCourses = _.pluck(Profiles.collection.find({ email: email }).fetch(), 'grasshoppercourses');
     const allCourses = userCourses[0];
@@ -103,6 +106,17 @@ class AddSession extends React.Component {
           <Grid.Column color={'green'}>
             <Header as="h2" inverted textAlign="center">Add Session</Header>
             <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
+              {(_.size(allCourses) === 0) ?
+                <Message icon>
+                  <Icon name='frown outline'/>
+                  <Message.Content>
+                    <Message.Header>Oops!</Message.Header>
+                      It looks like you do not have any Grasshopper Courses.
+                  </Message.Content>
+                  <Button as={NavLink} id='editcourses' activeClassName="active"
+                    exact to={`/profilecourses/${profileId}`} key='profilecourses'
+                    color='green' fluid>Please Add Courses</Button>
+                </Message> : ''}
               <Segment>
                 <Input size='large' list='topics'
                   label={{
