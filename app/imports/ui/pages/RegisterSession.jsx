@@ -5,6 +5,7 @@ import { AutoForm, ErrorsField, DateField, SubmitField, TextField } from 'unifor
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -63,6 +64,10 @@ class RegisterSession extends React.Component {
   renderPage() {
     // console.log(this.props.doc._id);
     const userRegistered = _.pluck(SessionsProfiles.collection.find({ topic: this.props.doc._id }).fetch(), 'profile');
+    const curDateTime = new Date();
+    // console.log(curDateTime);
+    const sd = moment.utc(this.props.doc.sessionDate).format('MM-DD-YYYY hh:mm A');
+    // console.log(sd);
     // console.log(userRegistered);
     // console.log(Meteor.user().username);
     // console.log(userRegistered.includes(Meteor.user().username));
@@ -80,10 +85,10 @@ class RegisterSession extends React.Component {
                 <DateField name='sessionDate' readOnly={true} disabled={true}/>
                 <TextField name='sessionNotes' readOnly={true} disabled={true}/>
                 <TextField label='Created by' name='owner' readOnly={true} disabled={true}/>
-                {userRegistered.includes(Meteor.user().username) ?
+                {userRegistered.includes(Meteor.user().username) || moment(curDateTime).isAfter(sd) ?
                   <Message icon='pencil alternate' negative
                     header='Unable to register'
-                    content='You are already registered for this session'
+                    content='You are already registered for this session or the session has past'
                   /> :
                   <Segment><TextField id='response' name='response'/>
                     <SubmitField id='submit' value='Submit'/>
