@@ -1,9 +1,10 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Message } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, DateField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
+import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -43,7 +44,10 @@ class RegisterSession extends React.Component {
               if (err) {
                 swal('Error', err.message, 'error');
               } else {
-                swal('Success', 'Successfully registered for session', 'success');
+                swal('Success', 'Successfully registered for session', 'success')
+                  .then(() => {
+                    window.location.href = '#/list';
+                  });
               }
             });
         }
@@ -58,6 +62,11 @@ class RegisterSession extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     // console.log(this.props.doc._id);
+    const userRegistered = _.pluck(SessionsProfiles.collection.find({ topic: this.props.doc._id }).fetch(), 'profile');
+    // console.log(userRegistered);
+    // console.log(Meteor.user().username);
+    // console.log(userRegistered.includes(Meteor.user().username));
+
     return (
       <div className='registersession-background' id='register-session-page'>
         <Grid container centered columns={2}>
@@ -65,14 +74,21 @@ class RegisterSession extends React.Component {
             <Header as="h2" inverted textAlign="center">Register for Session</Header>
             <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
-                <TextField name='topic' readOnly={true}/>
-                <TextField name='course' readOnly={true}/>
-                <TextField name='location' readOnly={true}/>
-                <DateField name='sessionDate' readOnly={true}/>
-                <TextField name='sessionNotes' readOnly={true}/>
-                <TextField label='Created by' name='owner' readOnly={true}/>
-                <TextField id='response' name='response'/>
-                <SubmitField id='submit' value='Submit'/>
+                <TextField name='topic' readOnly={true} disabled={true}/>
+                <TextField name='course' readOnly={true} disabled={true}/>
+                <TextField name='location' readOnly={true} disabled={true}/>
+                <DateField name='sessionDate' readOnly={true} disabled={true}/>
+                <TextField name='sessionNotes' readOnly={true} disabled={true}/>
+                <TextField label='Created by' name='owner' readOnly={true} disabled={true}/>
+                {userRegistered.includes(Meteor.user().username) ?
+                  <Message icon='pencil alternate' negative
+                    header='Unable to register'
+                    content='You are already registered for this session'
+                  /> :
+                  <Segment><TextField id='response' name='response'/>
+                    <SubmitField id='submit' value='Submit'/>
+                  </Segment>
+                }
                 <ErrorsField/>
               </Segment>
             </AutoForm>
@@ -96,8 +112,9 @@ export default withTracker(({ match }) => {
   const documentId = match.params._id;
   // Get access to SessionsCourses documents.
   const subscription = Meteor.subscribe(SessionsCourses.userPublicationName);
+  const sub2 = Meteor.subscribe(SessionsProfiles.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && sub2.ready();
   // Get the document
   const doc = SessionsCourses.collection.findOne(documentId);
   return {
