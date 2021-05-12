@@ -23,6 +23,12 @@ class AddsessionPage {
     await testController.click(courseOption.withText('ICS 111'));
     await testController.expect(courseSelector.value).eql('ICS 111');
 
+    // Session Date
+    const datetime = Selector('input[type=datetime-local]');
+    await testController.pressKey('enter');
+    await testController.typeText(datetime, '2021-05-13T13:00');
+    await testController.expect(datetime.value).eql('2021-05-13T13:00');
+
     const notes = 'Team meet up';
     await testController.typeText('#sessionNotes', notes);
 
