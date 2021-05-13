@@ -3,6 +3,7 @@ import { _ } from 'meteor/underscore';
 import { Button, Card, Container, Divider, Grid, Header, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 /** Renders a single row in the List Profiles table. See pages/ViewProfiles.jsx. */
 class ProfileInfo extends React.Component {
@@ -67,10 +68,11 @@ class ProfileInfo extends React.Component {
             <Divider clearing />
             {_.map(this.props.profiles.interests, (i) => <p>{i}</p>)}
 
-            <h3>Sessions</h3>
+            <h3>My Sessions</h3>
             <Divider clearing />
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}<br/>
               <strong>Course: </strong>{s.course}<br/>
+              <strong>Date: </strong>{moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY hh:mm A')}<br/>
               <strong>Location: </strong>{s.location}
               <hr style={{ width: '10em' }}/>
             </p>)}
