@@ -60,8 +60,6 @@ class ProfileInfo extends React.Component {
 
             <Divider hidden />
 
-            <Button as={NavLink} id='deactivate' activeClassName="active" exact to='/deactivate' color='red' basic >Deactivate Account</Button>
-
           </Grid.Column>
 
           <Grid.Column width={3}>
