@@ -1,8 +1,22 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { Button, Card, Container, Divider, Grid, Header, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
+
+Meteor.methods({
+  selfDelete() {
+    if (!Meteor.isServer) return;
+
+    try {
+      Meteor.users.remove(this._id);
+    } catch (e) {
+      // handle this however you want
+      throw new Meteor.Error('self-delete', 'Failed to remove yourself');
+    }
+  },
+});
 
 /** Renders a single row in the List Profiles table. See pages/ViewProfiles.jsx. */
 class ProfileInfo extends React.Component {
@@ -16,7 +30,6 @@ class ProfileInfo extends React.Component {
             <p>{this.props.profiles.email}</p>
 
             <Button as={NavLink} id='editprofile' activeClassName="active" exact to={`/edit/${this.props.profiles._id}`} key='edit' color='teal' fluid basic>Edit Profile</Button>
-
             <Divider clearing />
 
             <p><strong>Institution: </strong>{this.props.profiles.institution}</p>
@@ -57,6 +70,11 @@ class ProfileInfo extends React.Component {
                 </Card.Content>
               </Card>
             </Card.Group>
+
+            <Divider hidden />
+
+            <Button as={NavLink} id='deactivate' activeClassName="active" exact to='/deactivate' color='red' basic>Deactivate Account</Button>
+
           </Grid.Column>
 
           <Grid.Column width={3}>
@@ -71,6 +89,7 @@ class ProfileInfo extends React.Component {
               <strong>Location: </strong>{s.location}
               <hr style={{ width: '10em' }}/>
             </p>)}
+
           </Grid.Column>
         </Grid>
       </Container>

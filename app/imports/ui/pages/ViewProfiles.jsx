@@ -126,7 +126,9 @@ class ViewProfiles extends React.Component {
     const profileData = emails.map(email => getProfileData(email));
     return (
       <Container id="profiles-page">
-        <Divider hidden/>
+        <Divider hidden />
+        <Header as={'h1'} textAlign='center'>User Profiles</Header>
+        <Divider hidden />
         <Card.Group id='profile-cards'>
           {_.map(profileData, (profile, index) => <MakeCard key={index} profile={profile}/>)}
         </Card.Group>
