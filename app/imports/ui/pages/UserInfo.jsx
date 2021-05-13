@@ -135,10 +135,6 @@ class UserInfo extends React.Component {
                     <Checkbox id='technology' label={<label>Technology</label>} onChange={this.handleCheckInterest('Technology')}
                       checked={checkedInterests.includes('Technology')} />
                   </Grid.Column>
-                  <Grid.Column width={3}>
-                    <Checkbox id='interestother' label={<label>Other</label>} onChange={this.handleCheckInterest('Other')}
-                      checked={checkedInterests.includes('Other')} />
-                  </Grid.Column>
                 </Grid.Row>
               </Grid>
 
@@ -170,10 +166,6 @@ class UserInfo extends React.Component {
                     <Divider hidden />
                     <Checkbox id ='c++' label={<label>C++</label>} onChange={this.handleCheckSkills('C++')}
                       checked={checkedSkills.includes('C++')}/>
-                  </Grid.Column>
-                  <Grid.Column width={2}>
-                    <Checkbox id='skillsother' label={<label>Other</label>} onChange={this.handleCheckSkills('Other')}
-                      checked={checkedSkills.includes('Other')}/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
