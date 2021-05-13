@@ -68,7 +68,7 @@ class ProfileInfo extends React.Component {
             <Divider clearing />
             {_.map(this.props.profiles.interests, (i) => <p>{i}</p>)}
 
-            <h3>My Sessions</h3>
+            <h3>Created Sessions</h3>
             <Divider clearing />
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}<br/>
               <strong>Course: </strong>{s.course}<br/>
