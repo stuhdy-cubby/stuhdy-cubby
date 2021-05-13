@@ -3,9 +3,11 @@ import { _ } from 'meteor/underscore';
 import { Button, Card, Container, Divider, Grid, Header, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 /** Renders a single row in the List Profiles table. See pages/ViewProfiles.jsx. */
 class ProfileInfo extends React.Component {
+
   render() {
     return (
       <Container id="user-profile">
@@ -16,7 +18,6 @@ class ProfileInfo extends React.Component {
             <p>{this.props.profiles.email}</p>
 
             <Button as={NavLink} id='editprofile' activeClassName="active" exact to={`/edit/${this.props.profiles._id}`} key='edit' color='teal' fluid basic>Edit Profile</Button>
-
             <Divider clearing />
 
             <p><strong>Institution: </strong>{this.props.profiles.institution}</p>
@@ -57,6 +58,9 @@ class ProfileInfo extends React.Component {
                 </Card.Content>
               </Card>
             </Card.Group>
+
+            <Divider hidden />
+
           </Grid.Column>
 
           <Grid.Column width={3}>
@@ -64,13 +68,15 @@ class ProfileInfo extends React.Component {
             <Divider clearing />
             {_.map(this.props.profiles.interests, (i) => <p>{i}</p>)}
 
-            <h3>Sessions</h3>
+            <h3>Created Sessions</h3>
             <Divider clearing />
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}<br/>
               <strong>Course: </strong>{s.course}<br/>
+              <strong>Date/Time: </strong>{moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY hh:mm A')}<br/>
               <strong>Location: </strong>{s.location}
               <hr style={{ width: '10em' }}/>
             </p>)}
+
           </Grid.Column>
         </Grid>
       </Container>
