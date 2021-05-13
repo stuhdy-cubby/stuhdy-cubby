@@ -85,13 +85,14 @@ class EditProfile extends React.Component {
           <Divider hidden />
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Segment>
-              <TextField name='firstName'/>
-              <TextField name='lastName' />
-              <TextField name='email' />
+              <TextField id='firstName' name='firstName'/>
+              <TextField id='lastName' name='lastName' />
+              <TextField id='email' name='email' />
               <SelectField id='institution' name='institution'/>
               <SelectField id='major' name='major'/>
               <SelectField id='standing' name='standing'/>
-              <TextField name='bio' />
+              <TextField id='picurl' name='picture' placeholder='URL to your picture' />
+              <TextField id='bio' name='bio' />
 
               <Divider hidden />
               <Divider clearing />
@@ -122,10 +123,6 @@ class EditProfile extends React.Component {
                     <Checkbox id='technology' label={<label>Technology</label>} onChange={this.handleCheckInterest('Technology')}
                       checked={checkedInterests.includes('Technology')} />
                   </Grid.Column>
-                  <Grid.Column width={3}>
-                    <Checkbox id='interestother' label={<label>Other</label>} onChange={this.handleCheckInterest('Other')}
-                      checked={checkedInterests.includes('Other')} />
-                  </Grid.Column>
                 </Grid.Row>
               </Grid>
 
@@ -155,12 +152,8 @@ class EditProfile extends React.Component {
                     <Checkbox id='c' label={<label>C</label>} onChange={this.handleCheckSkills('C')}
                       checked={checkedSkills.includes('C')}/>
                     <Divider hidden />
-                    <Checkbox id='c++' label={<label>C++</label>} onChange={this.handleCheckSkills('C++')}
+                    <Checkbox id ='c++' label={<label>C++</label>} onChange={this.handleCheckSkills('C++')}
                       checked={checkedSkills.includes('C++')}/>
-                  </Grid.Column>
-                  <Grid.Column width={2}>
-                    <Checkbox id='skillsother' label={<label>Other</label>} onChange={this.handleCheckSkills('Other')}
-                      checked={checkedSkills.includes('Other')}/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>

@@ -23,6 +23,7 @@ import RegisterSession from '../pages/RegisterSession';
 import ViewProfiles from '../pages/ViewProfiles';
 import ProfileCourses from '../pages/ProfileCourses';
 import ListCourses from '../pages/ListCoursesPage';
+import Deactivate from '../pages/Deactivate';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -36,6 +37,7 @@ class App extends React.Component {
             <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
+            <Route path="/deactivate" component={Deactivate}/>
             <ProtectedRoute path="/list" component={ListSessions}/>
             <ProtectedRoute path="/createprofile" component={UserInfo}/>
             <ProtectedRoute path="/calendar" component={Calendar}/>
