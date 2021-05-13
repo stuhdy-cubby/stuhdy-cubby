@@ -85,13 +85,14 @@ class EditProfile extends React.Component {
           <Divider hidden />
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Segment>
-              <TextField name='firstName'/>
-              <TextField name='lastName' />
-              <TextField name='email' />
+              <TextField id='firstName' name='firstName'/>
+              <TextField id='lastName' name='lastName' />
+              <TextField id='email' name='email' />
               <SelectField id='institution' name='institution'/>
               <SelectField id='major' name='major'/>
               <SelectField id='standing' name='standing'/>
-              <TextField name='bio' />
+              <TextField id='picurl' name='picture' placeholder='URL to your picture' />
+              <TextField id='bio' name='bio' />
 
               <Divider hidden />
               <Divider clearing />
@@ -155,7 +156,7 @@ class EditProfile extends React.Component {
                     <Checkbox id='c' label={<label>C</label>} onChange={this.handleCheckSkills('C')}
                       checked={checkedSkills.includes('C')}/>
                     <Divider hidden />
-                    <Checkbox id='c++' label={<label>C++</label>} onChange={this.handleCheckSkills('C++')}
+                    <Checkbox id ='c++' label={<label>C++</label>} onChange={this.handleCheckSkills('C++')}
                       checked={checkedSkills.includes('C++')}/>
                   </Grid.Column>
                   <Grid.Column width={2}>
