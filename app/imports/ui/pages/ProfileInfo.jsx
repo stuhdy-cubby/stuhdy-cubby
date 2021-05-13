@@ -1,25 +1,12 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { Button, Card, Container, Divider, Grid, Header, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 
-Meteor.methods({
-  selfDelete() {
-    if (!Meteor.isServer) return;
-
-    try {
-      Meteor.users.remove(this._id);
-    } catch (e) {
-      // handle this however you want
-      throw new Meteor.Error('self-delete', 'Failed to remove yourself');
-    }
-  },
-});
-
 /** Renders a single row in the List Profiles table. See pages/ViewProfiles.jsx. */
 class ProfileInfo extends React.Component {
+
   render() {
     return (
       <Container id="user-profile">
@@ -73,7 +60,7 @@ class ProfileInfo extends React.Component {
 
             <Divider hidden />
 
-            <Button as={NavLink} id='deactivate' activeClassName="active" exact to='/deactivate' color='red' basic>Deactivate Account</Button>
+            <Button as={NavLink} id='deactivate' activeClassName="active" exact to='/deactivate' color='red' basic >Deactivate Account</Button>
 
           </Grid.Column>
 
