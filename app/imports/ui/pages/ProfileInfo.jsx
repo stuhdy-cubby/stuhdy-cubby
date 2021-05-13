@@ -72,7 +72,7 @@ class ProfileInfo extends React.Component {
             <Divider clearing />
             {_.map(this.props.sessions, (s) => <p id={s}><strong>Topic: </strong>{s.topic}<br/>
               <strong>Course: </strong>{s.course}<br/>
-              <strong>Date: </strong>{moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY hh:mm A')}<br/>
+              <strong>Date/Time: </strong>{moment.utc(this.props.sessions.sessionDate).format('MM-DD-YYYY hh:mm A')}<br/>
               <strong>Location: </strong>{s.location}
               <hr style={{ width: '10em' }}/>
             </p>)}

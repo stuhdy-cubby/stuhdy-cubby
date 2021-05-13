@@ -34,6 +34,7 @@ class AdminHome extends React.Component {
             <Table.Row>
               <Table.HeaderCell>Course</Table.HeaderCell>
               <Table.HeaderCell>Topic</Table.HeaderCell>
+              <Table.HeaderCell>Date/Time</Table.HeaderCell>
               <Table.HeaderCell>Location</Table.HeaderCell>
               <Table.HeaderCell>Owner</Table.HeaderCell>
             </Table.Row>
@@ -54,6 +55,7 @@ class AdminHome extends React.Component {
             <Table.Row>
               <Table.HeaderCell>Course</Table.HeaderCell>
               <Table.HeaderCell>Topic</Table.HeaderCell>
+              <Table.HeaderCell>Date/Time</Table.HeaderCell>
               <Table.HeaderCell>Location</Table.HeaderCell>
               <Table.HeaderCell>Owner</Table.HeaderCell>
             </Table.Row>
