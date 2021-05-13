@@ -18,7 +18,7 @@ function getProfileData(email) {
 const MakeCard = (props) => (
   <Card color='teal'>
     <Card.Content>
-      <Image floated='right' circular src={props.profile.picture} />
+      <Image floated='right' size='medium' circular src={props.profile.picture} />
       <Card.Header>{props.profile.firstName} {props.profile.lastName}</Card.Header>
       <Card.Meta>
         <span>{props.profile.email}</span>
@@ -126,7 +126,9 @@ class ViewProfiles extends React.Component {
     const profileData = emails.map(email => getProfileData(email));
     return (
       <Container id="profiles-page">
-        <Divider hidden/>
+        <Divider hidden />
+        <Header as={'h1'} textAlign='center'>User Profiles</Header>
+        <Divider hidden />
         <Card.Group id='profile-cards'>
           {_.map(profileData, (profile, index) => <MakeCard key={index} profile={profile}/>)}
         </Card.Group>
